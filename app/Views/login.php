@@ -22,25 +22,34 @@
 
 </head>
 
-<body class="bg-gradient-primary d-flex" style="height: 100vh;">
+<body class="bg-gradient-primary d-flex" style="min-height: 100vh;">
 
     <div class="d-flex container">
 
         <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center d-flex align-items-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
                 <br/>
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card o-hidden border-0 shadow-lg my-5" style="background: rgb(255, 255, 255, 0.5); backdrop-filter: blur(200px);">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block"><img src="<?php echo base_url('/img/chu.jpg');?>" alt="Logo CHU Cocody" title="Logo CHU Cocody" style="width:100%; height:100%"/></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
+                        <div class="row d-flex flex-row-reverse">
+                            <div class="col-lg-5 p-0">
+                                <article class="bg-white text-dark d-flex flex-column justify-content-center h-100 w-100 p-5">
+                                    <h3 class="text-center text-dark" style="font-weight: bold;">Bienvenue sur le</br>portail RH du CHU de Cocody</h3>
+                                    <div class="d-none d-lg-block">
+                                        <p>Votre portail pour une expérience de travail transparente, efficace et engageante.</p>
+                                        <p>Notre objectif est de fournir une plateforme intégrée qui améliore votre expérience et vous donne un accès facile aux outils et informations essentiels.</p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-lg-7 p-0 d-flex align-items-center justify-content-center">
+                                <div class=" py-0 px-5">
                                     <div class="text-center">
                                         <br/>
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenue sur le <br>Portail RH du CHU de Cocody</h1>
+                                        <h3 class="text-dark" style="font-weight: bold;">Connexion à votre compte</h3>
+                                        <hr class="hr hr-blurry" />
                                         
                                     </div>
                                     
@@ -77,7 +86,7 @@
                                             <br/>
                                         </div>
                                         
-                                        <button type="submit" class="btn btn-primary" name="go" value="go"  style="width:100%">Valider numéro</button>
+                                        <button type="submit" class="btn btn-primary mb-3" name="go" value="go"  style="width:100%">Valider numéro</button>
                                         <br/>
                                         
                                         <?php  
