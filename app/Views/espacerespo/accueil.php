@@ -52,9 +52,12 @@ for($i=0;$i<6;$i++) {
     <div class="col-xl-8 col-md-6 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body">
+          <div class="card-header pt-0 px-0 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Rapport sur les congés annuels</h6>
+          </div>
           <div class="row no-gutters align-items-center">
-            <div class="col-2 m-3 pl-1">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Année</div>
+            <div class="col-6 col-md-6 col-xl-3 my-3 pl-1">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Année</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 <?php
                   $db = \Config\Database::connect();
@@ -64,14 +67,14 @@ for($i=0;$i<6;$i++) {
                 ?>
               </div>
             </div>
-            <div class="col-2 m-3 pl-1">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Acquis</div>
+            <div class="col-6 col-md-6 col-xl-3 my-3 pl-1">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Acquis</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 30 jours
               </div>
             </div>
-            <div class="col-2 m-3 pl-1">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Pris à ce jour</div>
+            <div class="col-6 col-md-6 col-xl-3 my-3 pl-1">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Pris à ce jour</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 <?php
                   $query1   = $db->query('SELECT * FROM congeannuel where validationagent = 1 and Idagent='.$_SESSION['cnxid']);
@@ -88,8 +91,8 @@ for($i=0;$i<6;$i++) {
               </div>
                <div class="col-auto"> </div>
             </div>
-            <div class="col-2 m-3 pl-1">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Solde à ce jour</div>
+            <div class="col-6 col-md-6 col-xl-3 my-3 pl-1">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Solde à ce jour</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 <?php
                  $remainjours=30-$TotalLeaves;
@@ -103,12 +106,12 @@ for($i=0;$i<6;$i++) {
       </div>
     </div>
     <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-xl-4 col-md-6 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Validations en attente</div>
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Validations en attente</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 <?php
                   $queryValidate   = $db->query('SELECT count(*) as nbr1 FROM congeannuel where validationagent = 0 and IDagent='.$_SESSION['cnxid']);
