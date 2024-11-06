@@ -132,7 +132,16 @@
                     
                 </div>
             </li>
-            
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="fas fa-award"></i>
+                    <span>Récompenses</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="fas fa-highlighter"></i>
+                    <span>Évaluation</span></a>
+            </li>
              <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFor"
