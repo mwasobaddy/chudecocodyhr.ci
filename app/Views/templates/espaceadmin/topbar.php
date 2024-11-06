@@ -11,7 +11,7 @@ if(!isset($_SESSION['cnxid'])) {
 
             <!-- Main Content -->
             <div id="content">
-            <img src="<?php echo base_url('img/banner.png');?>" style="width:100%" />
+            <!-- <img src="<?php echo base_url('img/banner.png');?>" style="width:100%" /> -->
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
