@@ -10677,6 +10677,15 @@ button.bg-dark:hover {
 .text-lowercase {
     text-transform: lowercase !important
 }
+.sidebar-heading {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #4263eb;
+    padding: 1rem 0;
+    margin: 0;
+}
 
 .dropdown .dropdown-menu .dropdown-header,
 .sidebar .sidebar-heading,
@@ -11483,7 +11492,7 @@ a:focus {
 
 /* Base Sidebar */
 .sidebar {
-    width: 16rem;
+    width: 23rem !important;
     min-height: 100vh;
     background: #ffffff;
     box-shadow: 0 0 20px rgba(0,0,0,0.05);
@@ -11492,12 +11501,25 @@ a:focus {
 
 /* Brand Section */
 .sidebar-brand {
-    background: #4263eb;
     height: 4.5rem;
-    padding: 1.5rem;
+    background: url('../img/CHU-logo.jpg') no-repeat center center;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
+    background-size: contain;
+
+}
+.sidebar-brand-icon {
+    height: 3.5rem;
+    width: 3.5rem;
+    background: url('../img/CHU-logo.png') no-repeat center center;
+    background-size: contain;
+    margin-right: 0.5rem;
+}
+.sidebar .sidebar-brand .sidebar-brand-icon i {
+    font-size: 2rem;
+    color: #fff;
 }
 
 .sidebar-brand-text {
@@ -11551,17 +11573,23 @@ a:focus {
 }
 
 /* Hover & Active States */
-.nav-item:hover .nav-link {
+.nav-item:hover .nav-link,
+.collapse-item:hover {
     background: rgba(66, 99, 235, 0.05);
     color: #4263eb;
+    transform: translateX(4px);
 }
 
-.nav-item.active .nav-link {
+.nav-item.active .nav-link,
+.collapse-item.active {
     background: #4263eb;
     color: #fff;
 }
-
-.nav-item.active .nav-link i {
+i{
+    margin-right: 5px;
+}
+.nav-item.active .nav-link i,
+.collapse-item.active i {
     color: #fff;
 }
 
@@ -11569,14 +11597,20 @@ a:focus {
 .collapse, .collapsing {
     margin: 0.25rem 0;
 }
-
 .collapse-inner {
+    padding: 0.5rem;
+    margin: 0 1rem;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+/* .collapse-inner {
     background: #f8fafc;
     border-radius: 8px;
     padding: 1rem;
     margin: 0.5rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
+} */
 
 .collapse-header {
     color: #94a3b8;
@@ -11587,25 +11621,15 @@ a:focus {
 }
 
 .collapse-item {
-    display: block;
-    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
     margin: 0.25rem 0;
-    color: #555;
     border-radius: 6px;
+    color: #555;
     transition: all 0.2s;
 }
 
-.collapse-item:hover {
-    background: rgba(66, 99, 235, 0.05);
-    color: #4263eb;
-    transform: translateX(4px);
-}
-
-.collapse-item.active {
-    background: rgba(66, 99, 235, 0.1);
-    color: #4263eb;
-    font-weight: 500;
-}
 
 /* Dividers */
 .sidebar-divider {
