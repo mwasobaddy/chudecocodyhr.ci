@@ -5088,6 +5088,13 @@ a.badge-dark:focus, a.badge-dark.focus {
   color: #574516;
 }
 
+.errors ul li{
+  list-style: none;
+  color: red;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
 .alert-danger {
   color: #78261f;
   background-color: #fadbd8;
@@ -9865,10 +9872,8 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background: linear-gradient(45deg, #48c6ef, #6f86d6);
-  /* background-image: linear-gradient(45deg, #48c6ef, #6f86d6); */
   background: linear-gradient(45deg, #ab80a6, #6ec1e4);
-
+  background-image: linear-gradient(45deg, #ab80a6, #6ec1e4);
   background-size: cover;
 }
 

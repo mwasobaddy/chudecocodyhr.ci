@@ -18,32 +18,51 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?php echo base_url('css/sb-admin-2.min.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url('css/sb-admin-2.css');?>" rel="stylesheet">
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary d-flex" style="min-height: 100vh;">
 
-    <div class="container">
+    <div class="d-flex container">
 
         <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center d-flex align-items-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
                 <br/>
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card o-hidden border-0 shadow-lg my-5" style="background: rgb(255, 255, 255, 0.5); backdrop-filter: blur(200px);">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block"><img src="<?php echo base_url('/img/chu.jpg');?>" alt="Logo CHU Cocody" title="Logo CHU Cocody" style="width:100%; height:100%"/></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                    <br/>
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenue sur le <br>Portail RH du CHU de Cocody</h1>
+                        <div class="row d-flex flex-row-reverse">
+                            <div class="col-lg-5 p-0">
+                                <article class="bg-white text-dark d-flex flex-column justify-content-center align-items-center h-100 w-100 p-5">
+                                    <div class="logo d-flex d-lg-none" style="height: 200px;  width: 200px;">
+                                        <img src="<?php echo base_url('/img/CHU-logo.jpg');?>" alt="Logo CHU Cocody" title="Logo CHU Cocody" style="width:100%; height:100%"/>
+                                    </div>
+                                    <div class="text-center d-flex flex-column align-items-center">
+                                        <h3 class="text-center text-dark" style="font-weight: bold;">Bienvenue sur le</br>portail RH du CHU de Cocody</h3>
+                                        <hr class="hr d-none d-lg-flex bg-dark rounded-circle m-0 w-50 mb-3" style="height: 0.5px;" />
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <p>Votre portail pour une expérience de travail transparente, efficace et engageante.</p>
+                                        <p>Notre objectif est de fournir une plateforme intégrée qui améliore votre expérience et vous donne un accès facile aux outils et informations essentiels.</p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-lg-7 p-0 d-flex align-items-center justify-content-center">
+                                <div class=" py-0 px-5">
+                                    <div class="text-center d-flex flex-column align-items-center">
+                                        <div class="logo rounded-circle overflow-hidden d-none d-lg-flex mt-4 p-3" style="height: 200px;  width: 200px; border: 2px solid black; background-color: #ffffff;">
+                                            <img src="<?php echo base_url('/img/CHU-logo.jpg');?>" alt="Logo CHU Cocody" title="Logo CHU Cocody" style="width:100%; height:100%"/>
+                                        </div>
+                                        <h3 class="text-dark mt-4" style="font-weight: bold;">Connexion à votre compte</h3>
+                                        <hr class="hr bg-dark rounded-circle m-0 w-50" style="height: 0.5px;" />
+                                        
                                         
                                     </div>
-                                      <?php
+                                    
+                                        <?php
                                             if (isset($toast) && isset($_POST['go']) && !empty($_POST['go'])) {
                                             echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert">  
                                                 '.$toast.' 
@@ -64,29 +83,21 @@
                                         echo form_open('home/loginsuper');
                                         
                                     ?>
-                                        <div class="form-group"><br/>
-                                         <label for="mobile">Saisissez votre numéro de téléphone précédé de +225</label>
+                                        <div class="form-group mb-4">
+                                            <label for="mobile mb-3">Saisissez votre numéro de téléphone précédé de +225</label>
                                             <input type="mobile" class="form-control form-control-user"
-                                                id="mobile" name="mobile" aria-describedby="mobile"
-                                                placeholder="+2250505050505">
-                                        </div>
-                                       
-                                        <div class="form-group">
-                                            <br/>
+                                                id="mobile" name="mobile" aria-describedby="mobile" 
+                                                placeholder="+2250505050505" required
+                                            />
                                         </div>
                                         
-                                        <button type="submit" class="btn btn-primary" name="go" value="go" style="width:100%">Valider numéro</button>
-                                        <br/>
+                                        <button type="submit" class="btn btn-primary mb-3" name="go" value="go" style="width:100%">Valider numéro</button>
                                         
                                         <?php  
 										
 										//var_dump($cnxerror);
 										
 										?>
-                                        
-                                      
-                                        
-                                        <br/>
                                         
                                        <?= \Config\Services::validation()->listErrors(); ?>
                                     </form>
