@@ -144,17 +144,20 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Validations en attente</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                <?php
-                  //$db = \Config\Database::connect();
-                  $query2   = $db->query('SELECT count(*) as pend2 FROM congeannuel where validationagent = 0 and Idagent='.$idag);
-                  $roww2   = $query2->getRow();
-                  echo $roww2->pend2; 
-                ?>
+              <div class="card-header pt-0 px-0 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Validations en cours</h6>
               </div>
             </div>
             <div class="col-auto"> <i class="fas fa-comments fa-2x text-gray-300"></i> </div>
+          </div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800 h-75 d-flex align-items-center justify-content-center">
+            TOTAL:
+            <?php
+              //$db = \Config\Database::connect();
+              $query2   = $db->query('SELECT count(*) as pend2 FROM congeannuel where validationagent = 0 and Idagent='.$idag);
+              $roww2   = $query2->getRow();
+              echo $roww2->pend2; 
+            ?>
           </div>
         </div>
       </div>
@@ -167,7 +170,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
         <!-- Dropdown Card Example -->
 
         <!-- Card Header - Dropdown -->
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche agent</h6>
           <div class="dropdown no-arrow"> <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> </a>
            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
