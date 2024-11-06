@@ -36,8 +36,14 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row d-flex flex-row-reverse">
                             <div class="col-lg-5 p-0">
-                                <article class="bg-white text-dark d-flex flex-column justify-content-center h-100 w-100 p-5">
-                                    <h3 class="text-center text-dark" style="font-weight: bold;">Bienvenue sur le</br>portail RH du CHU de Cocody</h3>
+                                <article class="bg-white text-dark d-flex flex-column justify-content-center align-items-center h-100 w-100 p-5">
+                                    <div class="logo d-flex d-lg-none" style="height: 200px;  width: 200px;">
+                                        <img src="<?php echo base_url('/img/CHU-logo.jpg');?>" alt="Logo CHU Cocody" title="Logo CHU Cocody" style="width:100%; height:100%"/>
+                                    </div>
+                                    <div class="text-center d-flex flex-column align-items-center">
+                                        <h3 class="text-center text-dark" style="font-weight: bold;">Bienvenue sur le</br>portail RH du CHU de Cocody</h3>
+                                        <hr class="hr d-none d-lg-flex bg-dark rounded-circle m-0 w-50 mb-3" style="height: 0.5px;" />
+                                    </div>
                                     <div class="d-none d-lg-block">
                                         <p>Votre portail pour une expérience de travail transparente, efficace et engageante.</p>
                                         <p>Notre objectif est de fournir une plateforme intégrée qui améliore votre expérience et vous donne un accès facile aux outils et informations essentiels.</p>
@@ -46,10 +52,13 @@
                             </div>
                             <div class="col-lg-7 p-0 d-flex align-items-center justify-content-center">
                                 <div class=" py-0 px-5">
-                                    <div class="text-center">
-                                        <br/>
-                                        <h3 class="text-dark" style="font-weight: bold;">Connexion à votre compte</h3>
-                                        <hr class="hr hr-blurry" />
+                                    <div class="text-center d-flex flex-column align-items-center">
+                                        <div class="logo rounded-circle overflow-hidden d-none d-lg-flex mt-4 p-3" style="height: 200px;  width: 200px; border: 2px solid black; background-color: #ffffff;">
+                                            <img src="<?php echo base_url('/img/CHU-logo.jpg');?>" alt="Logo CHU Cocody" title="Logo CHU Cocody" style="width:100%; height:100%"/>
+                                        </div>
+                                        <h3 class="text-dark mt-4" style="font-weight: bold;">Connexion à votre compte</h3>
+                                        <hr class="hr bg-dark rounded-circle m-0 w-50" style="height: 0.5px;" />
+                                        
                                         
                                     </div>
                                     
@@ -75,15 +84,12 @@
                                             
                                         ?>
 
-                                        <div class="form-group"><br/>
-                                         <label for="mobile">Saisissez votre numéro de téléphone précédé de +225</label>
+                                        <div class="form-group mb-4">
+                                            <label for="mobile mb-3">Saisissez votre numéro de téléphone précédé de +225</label>
                                             <input type="text" class="form-control form-control-user"
                                                 id="mobile" name="mobile" aria-describedby="mobile" 
-                                                placeholder="+2250505050505" required>
-                                        </div>
-                                       
-                                        <div class="form-group">
-                                            <br/>
+                                                placeholder="+2250505050505" required
+                                            />
                                         </div>
                                         
                                         <button type="submit" class="btn btn-primary mb-3" name="go" value="go"  style="width:100%">Valider numéro</button>
