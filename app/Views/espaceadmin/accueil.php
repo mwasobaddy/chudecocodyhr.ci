@@ -113,18 +113,21 @@ for($i=0;$i<6;$i++) {
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Validations en attente</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                <?php
-                  //$db = \Config\Database::connect();
-                  $queryValidate   = $db->query('SELECT count(*) as nbr1 FROM congeannuel where validationagent = 0 and IDagent='.$_SESSION['cnxid']);
-                 $pendind   = $queryValidate->getRow();
-                  echo $pendind->nbr1;
-                      
-                ?>
+              <div class="card-header pt-0 px-0 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Validations en cours</h6>
               </div>
             </div>
             <div class="col-auto"> <i class="fas fa-comments fa-2x text-gray-300"></i> </div>
+          </div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800 h-75 d-flex align-items-center justify-content-center">
+            TOTAL:
+            <?php
+              //$db = \Config\Database::connect();
+              $queryValidate   = $db->query('SELECT count(*) as nbr1 FROM congeannuel where validationagent = 0 and IDagent='.$_SESSION['cnxid']);
+              $pendind   = $queryValidate->getRow();
+              echo $pendind->nbr1;
+                  
+            ?>
           </div>
         </div>
       </div>
@@ -139,10 +142,8 @@ for($i=0;$i<6;$i++) {
     <div class="col-xl-12 col-lg-12">
       <div class="card shadow mb-4"> 
         <!-- Card Header - Dropdown -->
-        <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Planning du mois</h6>
-          
         </div>
         <!-- Card Body -->
         <div class="card-body">
@@ -214,22 +215,19 @@ echo form_open('espaceadmin/afficher/accueil')
 
 ?>
          <!---- <form> ----->
-            <div class="form-row">
-              <div class="form-group col-md-9"> 
+            <div class="form-row flex-column align-items-center">
+              <div class="form-group">
                 <label for="IDservice">Choisissez un service et validez</label>
-                <select id="IDservice" name="IDservice" class="form-control">
+                <select id="IDservice" name="IDservice" class="form-control mb-2">
                   <option value="">Choisir...</option>
                     <?php if (! empty($lservice) && is_array($lservice)) : ?>
                 <?php foreach ($lservice as $info): ?>
                 <?php echo ' <option value="'.$info['IDservice'].'">'.$info['libelle'].'</option>';?>           
                 <?php endforeach; ?>
-              <?php endif ?>
+                <?php endif ?>
                 </select>
               </div>
- 
-              
-             
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-3 mb-3">
                 <button type="submit" class="btn btn-primary" style="width:100%; height:100%">Valider</button>
               </div>
             </div>
@@ -242,8 +240,8 @@ echo form_open('espaceadmin/afficher/accueil')
          
     <?php 
          if($libplan=='') {
-           $libplan = 'Aucun planning actif trouvé pour ce mois';
-           echo $libplan;
+          $libplan = 'Aucun planning actif trouvé pour ce mois';
+          echo '<p class="mb-0 mt-2 text-danger">'.$libplan.'</p>';
           // exit;
          } else {
          
@@ -446,16 +444,16 @@ echo '</tr>';
     </div>
     
     <!-- Pie Chart -->
-    <div class="col-xl-3 col-lg-4">
+    <div class="col-12">
       <div class="card shadow mb-4"> 
         <!-- Card Header - Dropdown -->
-        <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Date congés</h6>
-          <div class="dropdown no-arrow"> <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
+          <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
               <div class="dropdown-header">Dropdown Header:</div>
               <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a>
               <div class="dropdown-divider"></div>
@@ -465,36 +463,25 @@ echo '</tr>';
         <!-- Card Body -->
         <div class="card-body" align="center">
           <?php
-                      //$db = \Config\Database::connect();
-                      $query   = $db->query('SELECT * FROM congeannuel where validationagent = 1 and Idagent='.$_SESSION['cnxid']);
-$row   = $query->getRow();
-if($row->datedepart=='') {
-  
-  //$ddd = "1986-12-15";
-
-
-//$debut = substr($row->datedepart, -2).' - '.substr($row->datedepart, 5,2).' - '.substr($row->datedepart, 0,4);
-
-
-//$debut = substr($ddd, -2).' - '.substr($ddd, 5,2).' - '.substr($ddd, 0,4);
-
-
-//echo $debut;
-  
-  
-  echo '<br/><br/><p style="font-size:18px; color:red">Aucun congé trouvé</p><br/>';
-} else {
-//echo $row->nbr;
-
-
-echo '<p style="font-size:18px; color:#03C">Départ : '.substr($row->datedepart, -2).' - '.substr($row->datedepart, 5,2).' - '.substr($row->datedepart, 0,4);
-
-echo '</p><br/>';
-echo '<p style="font-size:18px; color:#03C">Reprise : '.substr($row->datereprise, -2).' - '.substr($row->datereprise, 5,2).' - '.substr($row->datereprise, 0,4);
-      echo '</p>';  }             
-                      ?>
-          <div><br/>
-            </div>
+            //$db = \Config\Database::connect();
+            $query   = $db->query('SELECT * FROM congeannuel where validationagent = 1 and Idagent='.$_SESSION['cnxid']);
+            $row   = $query->getRow();
+            if($row->datedepart=='') {
+              echo '<p class="w-50 btn" style="color: #fff; background-color: #ffb7b0; border-color: #e74a3b;">Aucun congé trouvé</p>';
+            }
+            else {
+              echo '<div style="display: flex; justify-content: center; gap: 30%; flex-wrap: wrap;">';
+                echo '<p>
+                        <span class="btn btn-success" style="font-weight: bold;">Départ</span>
+                        <span class="text-dark" style="font-weight: bold;"> : '.substr($row->datedepart, -2).' - '.substr($row->datedepart, 5,2).' - '.substr($row->datedepart, 0,4).'</span>
+                      </p>';
+                echo '<p>
+                        <span class="btn btn-danger" style="font-weight: bold;">Reprise</span>
+                        <span class="text-dark" style="font-weight: bold;"> : '.substr($row->datereprise, -2).' - '.substr($row->datereprise, 5,2).' - '.substr($row->datereprise, 0,4).'</span>
+                      </p>'; 
+              echo '</div>';
+            }             
+          ?>
         </div>
       </div>
     </div>

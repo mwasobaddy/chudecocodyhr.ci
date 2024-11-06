@@ -51,7 +51,7 @@ for($i=0;$i<6;$i++) {
     
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-8 col-md-6 mb-4">
-      <div class="card">
+      <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body">
           <div class="card-header pt-0 px-0 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Rapport sur les congés annuels</h6>
@@ -115,18 +115,21 @@ for($i=0;$i<6;$i++) {
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Validations en attente</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                <?php
-									//$db = \Config\Database::connect();
-									$query   = $db->query('SELECT count(*) as nbr FROM congeannuel where validationagent = 0 and IDagent='.$_SESSION['cnxid']);
-                 $row   = $query->getRow();
-                  echo $row->nbr;
-											
-								?>
+              <div class="card-header pt-0 px-0 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Validations en cours</h6>
               </div>
             </div>
             <div class="col-auto"> <i class="fas fa-comments fa-2x text-gray-300"></i> </div>
+          </div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800 h-75 d-flex align-items-center justify-content-center">
+            TOTAL:
+            <?php
+              //$db = \Config\Database::connect();
+              $query   = $db->query('SELECT count(*) as nbr FROM congeannuel where validationagent = 0 and IDagent='.$_SESSION['cnxid']);
+              $row   = $query->getRow();
+              echo $row->nbr;
+                  
+            ?>
           </div>
         </div>
       </div>
@@ -141,10 +144,8 @@ for($i=0;$i<6;$i++) {
     <div class="col-xl-12 col-lg-12">
       <div class="card shadow mb-4"> 
         <!-- Card Header - Dropdown -->
-        <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Mon planning du mois</h6>
-          
         </div>
         <!-- Card Body -->
         <div class="card-body">
@@ -255,7 +256,7 @@ echo '</tr>';
     <div class="col-xl-6 col-lg-7">
       <div class="card shadow mb-5"> 
         <!-- Card Header - Dropdown -->
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Dates de congés approuvés</h6>
           <div class="dropdown no-arrow"> 
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> </a>
