@@ -102,11 +102,11 @@ class Home extends BaseController
 					// 	$pwd = "";
 
 					// 	//$authotp = $this->testsms($num);
-					// 	$_SESSION['toast'] = 'Veuillez saisir votre mot de passe pour accéder au Portail RH.';
+					// 	$_SESSION['toast'] = 'Le numéro de mobile a été vérifié avec succès. Veuillez saisir votre mot de passe pour continuer.';
 					// }
 					$firstc = 0;
 					$pwd = "";
-					$_SESSION['toast'] = 'Veuillez saisir votre mot de passe pour accéder au Portail RH.';
+					$_SESSION['toast'] = 'Le numéro de mobile a été vérifié avec succès. Veuillez saisir votre mot de passe pour continuer.';
 
 					$data = [
 						'idd' => $row->IDdroitaccess,
@@ -195,7 +195,7 @@ class Home extends BaseController
 						$pwd = "";
 
 						//$authotp = $this->testsms($num);
-						$_SESSION['toast'] = 'Veuillez saisir votre mot de passe pour accéder au Portail RH.';
+						$_SESSION['toast'] = 'Le numéro de mobile a été vérifié avec succès. Veuillez saisir votre mot de passe pour continuer.';
 					}
 
 
