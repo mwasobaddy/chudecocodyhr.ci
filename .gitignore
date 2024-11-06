@@ -130,3 +130,4 @@ nb-configuration.xml
 ## Iginore user upload files
 
 public/agents/
+.env
