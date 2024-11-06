@@ -5073,9 +5073,11 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .alert-warning {
-  color: #806520;
-  background-color: #fdf3d8;
-  border-color: #fceec9;
+  margin-top: 20px;
+  color: #ffffff;
+  background-color: #ff6464;
+  border-color: #a73131;
+  padding: 0.75rem 1.25rem;
 }
 
 .alert-warning hr {
