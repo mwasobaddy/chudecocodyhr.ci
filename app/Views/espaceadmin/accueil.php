@@ -216,7 +216,7 @@ echo form_open('espaceadmin/afficher/accueil')
 ?>
          <!---- <form> ----->
             <div class="form-row flex-column align-items-center">
-              <div class="form-group">
+              <div class="form-group col-12">
                 <label for="IDservice">Choisissez un service et validez</label>
                 <select id="IDservice" name="IDservice" class="form-control mb-2">
                   <option value="">Choisir...</option>
