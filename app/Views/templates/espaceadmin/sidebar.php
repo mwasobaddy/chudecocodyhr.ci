@@ -135,7 +135,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="">
                     <i class="fas fa-award"></i>
-                    <span>Récompenses</span></a>
+                    <span>Bonus</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">
