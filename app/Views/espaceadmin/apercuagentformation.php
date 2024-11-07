@@ -74,7 +74,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
                     {
                 
                 if($roww->datereprise < date('Y-m-d')) {
-                  echo '<tr style="background-color:red; color:#FFF !important;">';
+                  echo '<tr style="background-color:red !important; color:#FFF !important;">';
                 } else {
                   echo '<tr>';
                 }
