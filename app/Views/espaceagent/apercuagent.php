@@ -42,25 +42,24 @@
           <tbody>
             <?php if (! empty($agent) && is_array($agent)) : ?>
             <?php foreach ($agent as $info): ?>
-            <?php 
-		
-		
-										echo '<tr>
-                                            <td>'.$info['matricule'].'</td>
-                                            <td>'.$info['nom'].'</td>
-                                            <td>'.$info['mobile'].'</td>
-                                            <td>'.$info['emploi'].'</td>
-											
-                                            <td>'.$info['service'].'</td>
-                                            <td style="text-align:center;">
-										'.anchor('espaceadmin/delagent/'.$info['idagent'],'<i class="fas fa-info-circle" title="Voir fiche"></i>').'	&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delagent/'.$info['idagent'],'<i class="fas fa-user-edit" title="Modifier fiche"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delagent/'.$info['idagent'],'<i class="fas fa-trash" title="Supprimer agent"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delagent/'.$info['idagent'],'<i class="fas fa-times" title="Désactiver agent"></i>').'</td>
-                                        </tr>
-											';
-		
-										?>
+            <?php
+              echo '
+                <tr>
+                  <td>'.$info['matricule'].'</td>
+                  <td>'.$info['nom'].'</td>
+                  <td>'.$info['mobile'].'</td>
+                  <td>'.$info['emploi'].'</td>
+
+                  <td>'.$info['service'].'</td>
+                  <td style="text-align:center;">
+										'.anchor('espaceadmin/delagent/'.$info['idagent'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Voir fiche"></i></span>').'
+                    '.anchor('espaceadmin/delagent/'.$info['idagent'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier fiche"></i></span>').'
+                    '.anchor('espaceadmin/delagent/'.$info['idagent'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer agent"></i></span>').'
+                    '.anchor('espaceadmin/delagent/'.$info['idagent'],'<span class="btn btn-warning mb-2"><i class="m-0 fas fa-times" title="Désactiver agent"></i></span>').'
+                  </td>
+                </tr>
+							';
+            ?>
             <?php endforeach; ?>
             <?php else : ?>
           <h3>Rien à afficher</h3>
