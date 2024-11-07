@@ -76,8 +76,8 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
 
                   <td>'.$info['llservice'].'</td>
                   <td style="text-align:center;">
-                    '.anchor('espaceadmin/ficheagent/'.$info['idagent'],'<i class="fas fa-info-circle" title="Voir fiche"></i>').'	&nbsp;&nbsp;&nbsp;
-                    '.anchor('espaceadmin/delagent/'.$info['idagent'],'<i class="fas fa-trash" title="Désactiver agent"></i>').'
+                    '.anchor('espaceadmin/ficheagent/'.$info['idagent'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Voir fiche"></i></span>').'
+                    '.anchor('espaceadmin/delagent/'.$info['idagent'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Désactiver agent"></i></span>').'
                   </td>
                 </tr>
 							';

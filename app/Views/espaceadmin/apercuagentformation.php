@@ -64,55 +64,50 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
             <?php foreach ($agent as $info): ?>
             <?php 
 		
-		$forma = ($info['enformation']==1)?('OUI'):('NON');
-		
-		if($info['enformation']==1) {
-			$queryy = $db->query('SELECT * from enformation where Idagent='.$info['Idagent'].' and (datereprise=NULL or datereprise=\'0000-00-00\')'); 
-			$resultss = $queryy->getResult();
-			
-			foreach ($resultss as $roww)
-					{
-			
-			if($roww->datereprise < date('Y-m-d')) {
-				echo '<tr style="background-color:red; color:#FFF">';
-			} else {
-				echo '<tr>';
-			}
-					}
-			
-		} else {
-			echo '<tr>';
-		}
-										echo '
-                                            <td>'.$info['matricule'].'</td>
-                                            <td>'.$info['nom'].'</td>
-                                            
-                                            <td>'.$info['llemploi'].'</td>
-											
-                                            <td>'.$info['llservice'].'</td>
-											
-											<td>'.$forma.'</td>
-                                            <td style="text-align:center;">';
-											
-											if($info['enformation']==1){
-												echo '
-											
-									'.anchor('espaceadmin/retourformation/'.$info['idagent'],'<i class="fas fa-trash" title="Retour formation"></i>').' '
-                                                .anchor('espaceadmin/prolongerformation/'.$info['idagent'],'<i class="fas fa-redo-alt" title="Prolonger la formation"></i>');
-											} else {
-												echo '
-											'.anchor('espaceadmin/enformation/'.$info['idagent'],'<i class="fas fa-info-circle" title="Depart formation"></i>').'	';
-											}
-											
-											
-									
-									echo '</td>
-                                        </tr>
-											';
-											
-								
-		
-										?>
+              $forma = ($info['enformation']==1)?('OUI'):('NON');
+              
+              if($info['enformation']==1) {
+                $queryy = $db->query('SELECT * from enformation where Idagent='.$info['Idagent'].' and (datereprise=NULL or datereprise=\'0000-00-00\')'); 
+                $resultss = $queryy->getResult();
+                
+                foreach ($resultss as $roww)
+                    {
+                
+                if($roww->datereprise < date('Y-m-d')) {
+                  echo '<tr style="background-color:red; color:#FFF">';
+                } else {
+                  echo '<tr>';
+                }
+                    }
+                
+              } else {
+                echo '<tr>';
+              }
+              echo '
+                <td>'.$info['matricule'].'</td>
+                <td>'.$info['nom'].'</td>
+                
+                <td>'.$info['llemploi'].'</td>
+
+                <td>'.$info['llservice'].'</td>
+                            
+                <td>'.$forma.'</td>
+                                      <td style="text-align:center;">';
+                
+                if($info['enformation']==1){
+                  echo '
+                
+                  '.anchor('espaceadmin/retourformation/'.$info['idagent'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Retour formation"></i></span>').'
+                  '.anchor('espaceadmin/prolongerformation/'.$info['idagent'],'<span class="btn btn-secondary mb-2"><i class="m-0 fas fa-redo-alt" title="Prolonger la formation"></i></span>');
+                } else {
+                  echo '
+                  '.anchor('espaceadmin/enformation/'.$info['idagent'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Depart formation"></i></span>').'	';
+                }
+                echo '
+                  </td>
+                  </tr>
+              ';
+            ?>
             <?php endforeach; ?>
             <?php else : ?>
           <h3>Rien à afficher</h3>

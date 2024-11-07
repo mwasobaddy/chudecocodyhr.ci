@@ -462,53 +462,74 @@ echo form_open('espacerespo/monprofil')
         <div class="card-body"> 
         
              
-           <?php
-$dir    = 'agents/'.$row->matricule.'/';
-//echo $dir;
-$files1 = scandir($dir);
-//print_r($files1);
-$opt = "";
+          <?php
+            $dir    = 'agents/'.$row->matricule.'/';
+            //echo $dir;
+            $files1 = scandir($dir);
+            //print_r($files1);
+            $opt = "";
 
-foreach ($files1 as $value) {
-  if($value!='.' && $value!='..'){
-	  if(is_dir($dir.$value)){
-		  $opt = $opt.'<option value="'.$dir.$value.'">'.$value.'</option>';
-		  
-	  }
-  }
-}
-		  
-	//print_r($opt);	  
+            foreach ($files1 as $value) {
+              if($value!='.' && $value!='..'){
+                if(is_dir($dir.$value)){
+                  $opt = $opt.'<option value="'.$dir.$value.'">'.$value.'</option>';
+                  
+                }
+              }
+            }
+                  
+              //print_r($opt);	  
 
-//print_r($files1);
-echo '<table style="width:100%" border="1">
-<tr><td colspan="3" style="text-align:center; font-size:24px; color: blue;">CONTENU DU DOSSIER</td></tr>';
+            //print_r($files1);
+            echo '
+              <table style="width:100%" border="1">
+                <tr>
+                  <td colspan="3" style="text-align:center; font-size:24px; color: blue;">CONTENU DU DOSSIER</td>
+                </tr>
+            ';
 
- $db = \Config\Database::connect();
-				  	$query = $db->query('SELECT * from acte where idagent='.$_SESSION['cnxid'].' order by categorie'); 
-					$acte   = $query->getResultArray();
-					$lastcat ="";
-					foreach ($acte as $info) {
-						
-						$atts = array(
-              'target' => '_new'              
-            );
-						
-						if($lastcat == $info['categorie']) {
-							echo '<tr><td colspan="2">'.$info['titre'].'</td><td style="text-align:center">'.anchor(base_url($info['lien']),'<i class="fas fa-eye" title="Visualiser"></i>',$atts).'</td></tr>';
-						} else {
-							
-							$lastcat = $info['categorie'];
-							echo '<tr><td colspan="3" style="text-align:left; font-size:18px; color: red;">'.$info['categorie'].'</td></tr><tr><td colspan="2">'.$info['titre'].'</td><td style="text-align:center">'.anchor(base_url($info['lien']),'<i class="fas fa-eye" title="Visualiser"></i>',$atts).'</td></tr>';
-							
-						}
-						
-						
-					}
-					
+            $db = \Config\Database::connect();
+            $query = $db->query('SELECT * from acte where idagent='.$_SESSION['cnxid'].' order by categorie'); 
+            $acte   = $query->getResultArray();
+            $lastcat ="";
+            foreach ($acte as $info) {
+              
+              $atts = array(
+                'target' => '_new'              
+              );
+              
+              if($lastcat == $info['categorie']) {
+                echo '
+                  <tr>
+                    <td colspan="2">'.$info['titre'].'</td>
+                    <td style="text-align:center">
+                      '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
+                    </td>
+                  </tr>
+                ';
+              } else {
+                
+                $lastcat = $info['categorie'];
+                echo '
+                  <tr>
+                    <td colspan="3" style="text-align:left; font-size:18px; color: red;">'.$info['categorie'].'</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">'.$info['titre'].'</td>
+                    <td style="text-align:center">
+                      '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
+                    </td>
+                  </tr>
+                ';
+                
+              }
+              
+              
+            }
+                      
 
-echo '</table>';
- ?>
+            echo '</table>';
+          ?>
 
         </div>
       </div>

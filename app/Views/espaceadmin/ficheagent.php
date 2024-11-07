@@ -563,53 +563,74 @@ echo form_open('espaceadmin/ficheagent/'.$idag, 'enctype="multipart/form-data"')
           <h6 class="m-0 font-weight-bold text-primary">Liste des documents du dossier</h6>
         </div>
         <div class="card-body">
-<?php
-$dir    = 'agents/'.$row->matricule.'/';
-//echo $dir;
-$files1 = scandir($dir);
+        <?php
+          $dir    = 'agents/'.$row->matricule.'/';
+          //echo $dir;
+          $files1 = scandir($dir);
 
-$opt = "";
+          $opt = "";
 
-foreach ($files1 as $value) {
-  if($value!='.' && $value!='..'){
-	  if(is_dir($dir.$value)){
-		  $opt = $opt.'<option value="'.$dir.$value.'">'.$value.'</option>';
-		  
-	  }
-  }
-}
-		  
-		  
+          foreach ($files1 as $value) {
+            if($value!='.' && $value!='..'){
+              if(is_dir($dir.$value)){
+                $opt = $opt.'<option value="'.$dir.$value.'">'.$value.'</option>';
+                
+              }
+            }
+          }
+          
+          //print_r($files1);
+          echo '
+            <table style="width:100%" border="1">
+              <tr>
+                <td colspan="3" style="text-align:center; font-size:24px; color: blue;">CONTENU DU DOSSIER</td>
+              </tr>
+          ';
 
-//print_r($files1);
-echo '<table style="width:100%" border="1">
-<tr><td colspan="3" style="text-align:center; font-size:24px; color: blue;">CONTENU DU DOSSIER</td></tr>';
-
- $db = \Config\Database::connect();
-				  	$query = $db->query('SELECT * from acte where idagent='.$idag.' order by categorie'); 
-					$acte   = $query->getResultArray();
-					$lastcat ="";
-					foreach ($acte as $info) {
-						
-						$atts = array(
+          $db = \Config\Database::connect();
+          $query = $db->query('SELECT * from acte where idagent='.$idag.' order by categorie'); 
+          $acte   = $query->getResultArray();
+          $lastcat ="";
+          foreach ($acte as $info) {
+            
+            $atts = array(
               'target' => '_new'              
             );
-						
-						if($lastcat == $info['categorie']) {
-							echo '<tr><td colspan="2">'.$info['titre'].'</td><td style="text-align:center">'.anchor(base_url($info['lien']),'<i class="fas fa-eye" title="Visualiser"></i>',$atts).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.anchor('espaceadmin/delacte/'.$info['idacte'],'<i class="fas fa-trash" title="Supprimer"></i>').'</td></tr>';
-						} else {
-							
-							$lastcat = $info['categorie'];
-							echo '<tr><td colspan="3" style="text-align:left; font-size:18px; color: red;">'.$info['categorie'].'</td></tr><tr><td colspan="2">'.$info['titre'].'</td><td style="text-align:center">'.anchor(base_url($info['lien']),'<i class="fas fa-eye" title="Visualiser"></i>',$atts).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.anchor('espaceadmin/delacte/'.$info['idacte'],'<i class="fas fa-trash" title="Supprimer"></i>').'</td></tr>';
-							
-						}
-						
-						
-					}
+            
+            if($lastcat == $info['categorie']) {
+              echo '
+                <tr>
+                  <td colspan="2">'.$info['titre'].'</td>
+                  <td style="text-align:center">
+                    '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
+                    '.anchor('espaceadmin/delacte/'.$info['idacte'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
+                  </td>
+                </tr>
+              ';
+            } else {
+              
+              $lastcat = $info['categorie'];
+              echo '
+                <tr>
+                  <td colspan="3" style="text-align:left; font-size:18px; color: red;">'.$info['categorie'].'</td>
+                </tr>
+                <tr>
+                  <td colspan="2">'.$info['titre'].'</td>
+                  <td style="text-align:center">
+                    '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
+                    '.anchor('espaceadmin/delacte/'.$info['idacte'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
+                  </td>
+                </tr>
+              ';
+              
+            }
+            
+            
+          }
 					
 
-echo '</table>';
- ?>
+          echo '</table>';
+        ?>
 
 
         </div>
