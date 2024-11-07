@@ -37,6 +37,7 @@ $routes->get('/', 'Espaceagent::index');
 $routes->get('/', 'Espaceadmin::index');
 $routes->get('/', 'Espacesuperadmin::index');
 $routes->get('/', 'PdfController::index');
+$routes->get('/evaluation/index', 'EvaluationController::index');
 
 /*
  * --------------------------------------------------------------------
