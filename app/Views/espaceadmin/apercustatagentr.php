@@ -2,63 +2,57 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Module employés -> liste des agents</h1>
+  <h1 class="h3 mb-2 text-primary">Module employés > liste des agents</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier agent.</p>
     <?php
-echo view('toast');
- ?>
+      echo view('toast');
+    ?>
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
       <?php
 
-helper('form');
+        helper('form');
 
-	echo form_open('espaceadmin/statagentr');
+        echo form_open('espaceadmin/statagentr');
 
 
-?>
+      ?>
     <div class="form-row">
-            <div class="form-group col-md-4">
-  
-    Année de départ : <select name="deb">
-    <?php
-	$ann = date('Y');
-	for($i=-2; $i<=10; $i++) {
-		echo '<option>'.($ann+$i).'</option>';
-	}
-	
-	
-	?>
-    
-    </select>
+      <div class="form-group col-md-4">Année de départ : 
+        <select name="deb">
+          <?php
+            $ann = date('Y');
+            for($i=-2; $i<=10; $i++) {
+              echo '<option>'.($ann+$i).'</option>';
+            }
+          ?>
+        </select>
+      </div>
+      <div class="form-group col-md-4">Année de fin : 
+        <select name="fin">
+          <?php
+            $ann = date('Y');
+            for($i=-2; $i<=10; $i++) {
+              echo '<option>'.($ann+$i).'</option>';
+            }
+            
+            
+          ?>
+        </select>
+        </form>
+      </div>
+      <div class="form-group col-md-4">
+        <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider</button>
+      </div>
     </div>
-     <div class="form-group col-md-4">
-     Année de fin : <select name="fin">
-    <?php
-	$ann = date('Y');
-	for($i=-2; $i<=10; $i++) {
-		echo '<option>'.($ann+$i).'</option>';
-	}
-	
-	
-	?>
-    
-    </select>
-    
-    </form>
-    </div>
-     <div class="form-group col-md-4">
-              <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider</button>
-            </div>
-          </div>
-      <table style="width:100%">
-        <tr>
-          <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des agents</h6></td>
-          <td></td>
-        </tr>
-      </table>
+    <table style="width:100%">
+      <tr>
+        <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des agents</h6></td>
+        <td></td>
+      </tr>
+    </table>
     </div>
     <div class="card-body">
       <div class="table-responsive">

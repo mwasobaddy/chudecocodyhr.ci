@@ -11,7 +11,7 @@ $agentplanpermanence = $query->getResultArray();
 <div class="container-fluid"> 
   
   <!-- Page Heading 
-  <h1 class="h3 mb-2 text-gray-800">Module employés -> liste des agents</h1>
+  <h1 class="h3 mb-2 text-primary">Module employés > liste des agents</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier agent.</p>-->
   
   <!-- DataTales Example -->

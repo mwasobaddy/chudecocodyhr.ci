@@ -62,7 +62,7 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Fiche agent</h1>
+  <h1 class="h3 mb-2 text-primary">Fiche agent</h1>
   <p class="mb-4">Visualisez toutes les données relatives à votre fiche agent.</p>
    <?php
 if (isset($toast) && isset($_POST['go']) && !empty($_POST['go'])) {
@@ -82,7 +82,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
     
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-8 col-md-6 mb-4">
-      <div class="card">
+      <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body">
           <div class="card-header pt-0 px-0 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Rapport sur les congés annuels</h6>

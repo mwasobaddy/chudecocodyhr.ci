@@ -14,7 +14,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Module employés -> liste des agents</h1>
+  <h1 class="h3 mb-2 text-primary">Module employés > liste des agents</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier agent.</p>
   <?php
 if (isset($toast) && isset($_POST['go']) && !empty($_POST['go'])) {
@@ -32,7 +32,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
       <table style="width:100%">
         <tr>
           <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des agents</h6></td>
@@ -66,22 +66,21 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
           <tbody>
             <?php if (! empty($agent) && is_array($agent)) : ?>
             <?php foreach ($agent as $info): ?>
-            <?php 
-		
-		
-										echo '<tr>
-                                            <td>'.$info['matricule'].'</td>
-                                            <td>'.$info['nom'].'</td>
-                                            <td>'.$info['mobile'].'</td>
-                                            <td>'.$info['llemploi'].'</td>
-											
-                                            <td>'.$info['llservice'].'</td>
-                                            <td style="text-align:center;">
-											
-											'.anchor('espaceadmin/ficheagent/'.$info['idagent'],'<i class="fas fa-info-circle" title="Voir fiche"></i>').'	&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delagent/'.$info['idagent'],'<i class="fas fa-trash" title="Désactiver agent"></i>').'</td>
-                                        </tr>
-											';
+            <?php
+              echo '
+                <tr>
+                  <td>'.$info['matricule'].'</td>
+                  <td>'.$info['nom'].'</td>
+                  <td>'.$info['mobile'].'</td>
+                  <td>'.$info['llemploi'].'</td>
+
+                  <td>'.$info['llservice'].'</td>
+                  <td style="text-align:center;">
+                    '.anchor('espaceadmin/ficheagent/'.$info['idagent'],'<i class="fas fa-info-circle" title="Voir fiche"></i>').'	&nbsp;&nbsp;&nbsp;
+                    '.anchor('espaceadmin/delagent/'.$info['idagent'],'<i class="fas fa-trash" title="Désactiver agent"></i>').'
+                  </td>
+                </tr>
+							';
 											
 								
 		

@@ -12,7 +12,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Codification des postes -> Poste<->Sous-Direction</h1>
+  <h1 class="h3 mb-2 text-primary">Codification des postes > Poste<->Sous-Direction</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier Poste_Sous-Direction.
    
   </p>

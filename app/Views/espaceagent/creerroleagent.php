@@ -3,7 +3,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Configuration -> Rôle-Agent</h1>
+  <h1 class="h3 mb-2 text-primary">Configuration > Rôle-Agent</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier Rôle-Agent.
     <?= \Config\Services::validation()->listErrors(); ?>
   </p>

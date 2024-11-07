@@ -5606,9 +5606,9 @@ a.badge-dark:focus {
 }
 
 .alert-warning {
-    color: #806520;
-    background-color: #fdf3d8;
-    border-color: #fceec9
+    color: #ffffff;
+    background-color: #ff6464;
+    border-color: #a73131;
 }
 
 .alert-warning hr {
