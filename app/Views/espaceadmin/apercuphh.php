@@ -70,7 +70,7 @@ $permissionhh = $query->getResultArray();
 		
 		
 										if($info['heurearrivee'] < date('H:i:s')) {
-			echo '<tr style="background-color:red; color:#FFF">';
+			echo '<tr style="background-color:red !important; color:#FFF !important;">';
 		} else {
 			echo '<tr>';
 		}

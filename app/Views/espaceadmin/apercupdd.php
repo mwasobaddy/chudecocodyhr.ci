@@ -74,7 +74,7 @@ $permissiondd = $query->getResultArray();
 		
 										
 										if($info['jourarrivee'] < date('Y-m-d')) {
-			echo '<tr style="background-color:red; color:#FFF">';
+			echo '<tr style="background-color:red !important; color:#FFF !important;">';
 		} else {
 			echo '<tr>';
 		}

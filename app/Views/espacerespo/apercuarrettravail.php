@@ -83,7 +83,7 @@
 		
 		
 									if(($info['datereprise'] < date('Y-m-d')) && $info['etat'] != 'TERMINE' ) {
-			echo '<tr style="background-color:red; color:#FFF">';
+			echo '<tr style="background-color:red !important; color:#FFF !important;">';
 		} else {
 			echo '<tr>';
 		}
