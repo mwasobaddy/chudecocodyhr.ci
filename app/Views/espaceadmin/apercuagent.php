@@ -14,7 +14,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Module employés -> liste des agents</h1>
+  <h1 class="h3 mb-2 text-primary">Module employés > liste des agents</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier agent.</p>
   <?php
 if (isset($toast) && isset($_POST['go']) && !empty($_POST['go'])) {
@@ -72,7 +72,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
   </style>
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
       <table style="width:100%">
         <tr>
           <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des agents</h6></td>
@@ -107,27 +107,22 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
             <?php if (! empty($agent) && is_array($agent)) : ?>
             <?php foreach ($agent as $info): ?>
             <?php 
-		
-		
-										echo '<tr>
-                                            <td>'.$info['matricule'].'</td>
-                                            <td>'.$info['nom'].'</td>
-                                            <td>'.$info['mobile'].'</td>
-                                            <td>'.$info['llemploi'].'</td>
-											
-                                            <td>'.$info['llservice'].'</td>
-                                            <td style="text-align:center;">
-											
-											'.anchor('espaceadmin/ficheagent/'.$info['idagent'],'<i class="fas fa-info-circle" title="Voir fiche"></i>').'	&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delagent/'.$info['idagent'],'<i class="fas fa-trash" title="Désactiver agent"></i>').' &nbsp;&nbsp;&nbsp;
-                  '.'<a href="JavaScript:;" data-val="'.$info['idagent'].'" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-shield-alt" title="Créer un mot de passe"></i></a>'.'</td>
-                                        </tr>
-											';
-                      
-											
-								
-		
-										?>
+              echo '
+                <tr>
+                  <td>'.$info['matricule'].'</td>
+                  <td>'.$info['nom'].'</td>
+                  <td>'.$info['mobile'].'</td>
+                  <td>'.$info['llemploi'].'</td>
+
+                  <td>'.$info['llservice'].'</td>
+                  <td style="text-align:center;">
+                    '.anchor('espaceadmin/ficheagent/'.$info['idagent'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Voir fiche"></i></span>').'
+                    '.anchor('espaceadmin/delagent/'.$info['idagent'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Désactiver agent"></i></span>').'
+                    '.'<a href="JavaScript:;" data-val="'.$info['idagent'].'" data-toggle="modal" data-target="#passwordModal"><span class="btn btn-primary"><i class="m-0 fas fa-pencil-alt" title="Créer un mot de passe"></i></span></a>'.'
+                  </td>
+                </tr>
+							';
+            ?>
             <?php endforeach; ?>
             <?php else : ?>
           <h3>Rien à afficher</h3>

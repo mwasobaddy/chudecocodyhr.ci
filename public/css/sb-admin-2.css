@@ -10619,6 +10619,55 @@ i{
   }
 }
 
+
+
+.dt-buttons .dt-button{
+  display: inline-block;
+  font-weight: 400;
+  color: #858796;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.35rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.dt-buttons .buttons-copy{
+  background-color: #00BFFF;
+  color: #ffffff;
+  border: #00BFFF;
+}
+
+.dt-buttons .buttons-csv{
+  background-color: #28A745 ;
+  color: #ffffff;
+  border: #28A745 ;
+}
+
+.dt-buttons .buttons-excel{
+  background-color: #217346 ;
+  color: #ffffff;
+  border: #217346 ;
+}
+
+.dt-buttons .buttons-pdf{
+  background-color: #D32F2F;
+  color: #ffffff;
+  border: #D32F2F;
+}
+
+.dt-buttons .buttons-print{
+  background-color: #1976D2;
+  color: #ffffff;
+  border: #1976D2;
+}
+
 .bg-login-image {
   background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
   background-position: center;

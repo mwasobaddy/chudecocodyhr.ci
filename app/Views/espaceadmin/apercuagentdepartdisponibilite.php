@@ -14,7 +14,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Employés -> Mise en disponibilité</h1>
+  <h1 class="h3 mb-2 text-primary">Employés > Mise en disponibilité</h1>
   <p class="mb-4">Manipulez toutes les données relatives à la disponibilité.
    
   </p>
@@ -28,7 +28,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
  ?>
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
       <table style="width:100%">
         <tr>
           <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des agents</h6></td>

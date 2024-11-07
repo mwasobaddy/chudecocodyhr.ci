@@ -5,7 +5,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Employés -> Mot de passe</h1>
+  <h1 class="h3 mb-2 text-primary">Employés > Mot de passe</h1>
   <p class="mb-4">Modifier votre mot de passe
    
   </p>

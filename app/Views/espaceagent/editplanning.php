@@ -13,7 +13,7 @@ $leplan   = $query->getRow();
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-   <h1 class="h3 mb-2 text-gray-800">Planification -> Planning agent</h1>
+   <h1 class="h3 mb-2 text-primary">Planification > Planning agent</h1>
   <p class="mb-4">Manipulez toutes les données relatives au Planning agent.
    
   </p>

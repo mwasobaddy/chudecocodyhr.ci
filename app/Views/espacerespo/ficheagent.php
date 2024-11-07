@@ -67,7 +67,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Fiche agent</h1>
+  <h1 class="h3 mb-2 text-primary">Fiche agent</h1>
   <p class="mb-4">Visualisez toutes les données relatives à votre fiche agent.</p>
   <?php
 echo view('toast');

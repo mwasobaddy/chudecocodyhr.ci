@@ -10,7 +10,7 @@ if (isset($lidconge)) {
 
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Permissions -> Permission heure à heure</h1>
+    <h1 class="h3 mb-2 text-primary">Permissions > Permission heure à heure</h1>
     <p class="mb-4">Rejeter une permission heure à heure
     </p>
     <?php
