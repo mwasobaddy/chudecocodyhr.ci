@@ -23,7 +23,8 @@ if (isset($toast) && isset($_POST['go']) && !empty($_POST['go'])) {
 }
 
 if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
-   echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color:#4877f4; color:#fff">  
+   echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert" style="color: #0f6848; background-color: #d2f4e8; border-color: #bff0de;
+">  
 	   '.$_SESSION['toast'].' 
     </div>';
 	unset($_SESSION['toast']);
@@ -32,7 +33,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Emploi</h6>
         </div>
         <div class="card-body">
@@ -54,7 +55,7 @@ if(isset($lidemploi)) {
               <input type="text" class="form-control" id="libelle" name="libelle"  placeholder="Nom de l'emploi" required="required" <?php   if(isset($lidemploi)) {echo 'value="'.$emploi->libelle.'"';} ?>>
             </div>
             <div class="form-group col-md-2">
-               <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>
+               <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>
             </div>
           </div>
         </div>

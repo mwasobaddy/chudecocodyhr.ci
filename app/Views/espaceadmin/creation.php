@@ -16,7 +16,7 @@ echo form_open('espaceadmin/creation');
 <label for="pschu">Prise de service au CHU</label><br />
 <input type="date" name="pschu" /><br /><br /><br />
 
- <button type="submit" class="btn btn-primary" style="width:100%">Valider formulaire</button>
+ <button type="submit" class="btn btn-primary">Valider formulaire</button>
 </form>
 
 

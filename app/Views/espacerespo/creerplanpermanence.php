@@ -37,7 +37,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche planning des permanences</h6> <i style="font-size:12px; color:#999">(*) Champs obligatoires</i>
         </div>
         <div class="card-body">

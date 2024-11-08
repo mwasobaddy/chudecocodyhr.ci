@@ -24,7 +24,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Permission jour à jour</h6>
         </div>
         <div class="card-body">
@@ -40,46 +40,43 @@ if(isset($lidpermissiondd)) {
          
                    <!---- <form> ----->
       
-       <div class="form-row">
-            <div class="form-group col-md-9">
-            <input type="hidden" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
-            
-             <label for="IDagent">Agent</label>
-                <select id="Idagent" name="Idagent" class="form-control">
-               
-                  <?php 
-				 
-				  	$query = $db->query('SELECT idagent, matricule, nom from agent'); 
-					$results = $query->getResult();
+      <div class="form-row">
+        <div class="form-group col-md-9">
+          <input type="hidden" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
+          
+          <label for="IDagent">Agent</label>
+          <select id="Idagent" name="Idagent" class="form-control">
+            <?php 
+        
+              $query = $db->query('SELECT idagent, matricule, nom from agent'); 
+              $results = $query->getResult();
 
-					foreach ($results as $row)
-					{
+              foreach ($results as $row)
+              {
 
-			
-			
-			if(isset($lidpermissiondd)) {
-	if($permissiondd->Idagent == $row->idagent) {
-echo ' <option value="'.$row->idagent.'" selected>'.$row->matricule.' - '.$row->nom.'</option>';				
-	} else { 
-echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';		
-		 }
+      
+      
+                if(isset($lidpermissiondd)) {
+                  if($permissiondd->Idagent == $row->idagent) {
+                    echo ' <option value="'.$row->idagent.'" selected>'.$row->matricule.' - '.$row->nom.'</option>';				
+                  } else { 
+                    echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';		
+                  }
 
-} else {
-			echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';						
-}
-				
-					}
-					
-					?>
-            		
-                </select>
-            </div>
-            <div class="form-group col-md-3">
-             <label for="datesortie">Date demande</label>
-              <input type="date" class="form-control" id="datesortie" name="datesortie" required="required" placeholder="datesortie" <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->datesortie.'"';} ?>>
-            </div>
-           
-          </div>
+                } else {
+                      echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';						
+                }
+              }
+            ?>
+              
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="datesortie">Date demande</label>
+          <input type="date" class="form-control" id="datesortie" name="datesortie" required="required" placeholder="datesortie" <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->datesortie.'"';} ?>>
+        </div>
+          
+      </div>
          
          
     <div class="form-row">
@@ -122,8 +119,8 @@ echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</op
               <label for="justificatif">Justificatif</label>
               <input type="file" class="form-control-file" id="justificatif" required="required" name="justificatif">
             </div>
-            <div class="form-group col-md-8">
-             <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>
+            <div class="form-group col-md-12 d-flex justify-content-center">
+             <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>
             </div>
           </div>
           

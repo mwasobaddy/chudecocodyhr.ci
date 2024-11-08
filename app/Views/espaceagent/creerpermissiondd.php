@@ -24,7 +24,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Permission jour à jour</h6>
         </div>
         <div class="card-body">
@@ -40,43 +40,36 @@ if(isset($lidpermissiondd)) {
                    <!---- <form> ----->
       
        <div class="form-row">
-            <div class="form-group col-md-9">
-            <input type="hidden" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
-            
-             <label for="Idagent">Agent</label>
-                <select id="Idagent" name="Idagent" class="form-control">
-                 
-                  <?php 
-         
-          
+        <div class="form-group col-md-9">
+          <input type="hidden" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
+          <label for="Idagent">Agent</label>
+          <select id="Idagent" name="Idagent" class="form-control">
+            <?php
               $query = $db->query('SELECT idagent, matricule, nom from agent where Idagent='.$_SESSION['cnxid']); 
-          $results = $query->getResult();
+              $results = $query->getResult();
 
-          foreach ($results as $row)
-          {
+              foreach ($results as $row)
+              {
 
-      if(isset($lidpermissiondd)) {
-  if($permissiondd->Idagent == $row->idagent) {
-echo ' <option value="'.$row->idagent.'" selected>'.$row->matricule.' - '.$row->nom.'</option>';        
-  } else { 
-echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';   
-     }
-
-} else {
-      echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';           
-}   
-          }
-          
-          ?>
-                
-                </select>
-            </div>
-            <div class="form-group col-md-3">
-             <label for="datesortie">Date demande</label>
-              <input type="date" class="form-control" id="datesortie" name="datesortie" required="required" placeholder="datesortie" <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->datesortie.'"';} ?>>
-            </div>
+                if(isset($lidpermissiondd)) {
+                  if($permissiondd->Idagent == $row->idagent) {
+                    echo ' <option value="'.$row->idagent.'" selected>'.$row->matricule.' - '.$row->nom.'</option>';        
+                  } else { 
+                    echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';   
+                  }
+                } else {
+                  echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';           
+                }
+              }
+            ?>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="datesortie">Date demande</label>
+          <input type="date" class="form-control" id="datesortie" name="datesortie" required="required" placeholder="datesortie" <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->datesortie.'"';} ?>>
+        </div>
            
-          </div>
+      </div>
          
          
     <div class="form-row">

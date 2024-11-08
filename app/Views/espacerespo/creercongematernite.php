@@ -24,7 +24,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Congé de maternité</h6>
         </div>
         <div class="card-body">
@@ -119,7 +119,7 @@ echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</op
     <input type="file" class="form-control-file" id="justificatif3" name="justificatif3" <?php   if(isset($lidcongematernite)) {echo 'value="'.$congematernite->justificatif3.'"';} ?>>
             </div>
              <div class="form-group col-md-3">
-              <button type="submit" class="btn btn-primary" style="width:100%">Valider formulaire</button>          </div>
+              <button type="submit" class="btn btn-primary">Valider formulaire</button>          </div>
           </div>
       
       

@@ -4127,11 +4127,6 @@ input[type="button"].btn-block {
   list-style: none;
 }
 
-.navbar-nav .nav-link {
-  padding-right: 0;
-  padding-left: 0;
-}
-
 .navbar-nav .dropdown-menu {
   position: static;
   float: none;
@@ -5074,9 +5069,9 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .alert-warning {
   margin-top: 20px;
-  color: #ffffff;
-  background-color: #ff6464;
-  border-color: #a73131;
+  color: #664d03;
+  background-color: #fff3cd;
+  border-color: #ffecb5;
   padding: 0.75rem 1.25rem;
 }
 
@@ -9522,6 +9517,7 @@ button.bg-dark:focus {
 
 .text-uppercase, .dropdown .dropdown-menu .dropdown-header, .sidebar .sidebar-heading {
   text-transform: uppercase !important;
+  text-align: center;
 }
 
 .text-capitalize {
@@ -9750,7 +9746,9 @@ html {
 }
 
 body {
-  height: 100%;
+  position: relative;
+  top: 0;
+  left: auto;
 }
 
 a:focus {
@@ -9759,6 +9757,9 @@ a:focus {
 
 #wrapper {
   display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 #wrapper #content-wrapper {
@@ -10289,15 +10290,18 @@ a:focus {
 /* Base Sidebar */
 .sidebar {
   width: 23rem !important;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: #ffffff;
   box-shadow: 0 0 20px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
+  transition: all 0.3s ease;    top: 0;
+  position: sticky;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 /* Brand Section */
 .sidebar-brand {
-  height: 4.5rem;
+  height: 7rem;
   background: url('../img/CHU-logo.jpg') no-repeat center center;
   display: flex;
   align-items: center;
@@ -10378,15 +10382,15 @@ a:focus {
 
 .nav-item.active .nav-link,
 .collapse-item.active {
-  background: #4263eb;
-  color: #fff;
+  background: rgba(66, 99, 235, 0.05);
+  color: #273675;
 }
 i{
   margin-right: 5px;
 }
 .nav-item.active .nav-link i,
 .collapse-item.active i {
-  color: #fff;
+  color: #273675;
 }
 
 /* Submenu Styling */
@@ -10414,6 +10418,7 @@ i{
   font-weight: 600;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  padding: 0rem 1rem;
 }
 
 .collapse-item {

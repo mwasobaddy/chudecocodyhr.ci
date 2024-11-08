@@ -22,7 +22,7 @@ if(isset($lidagentplanpermanence)) {
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche planning agent</h6>
         </div>
         <div class="card-body">
@@ -80,8 +80,8 @@ echo ' <option value="'.$row->IDplanpermanence.'">'.$row->libelle.'</option>';
           
          <div class="form-row">
            
-            <div class="form-group col-md-12">
-              <button type="submit" class="btn btn-primary" style="width:100%">Valider formulaire</button>
+            <div class="form-group col-md-12 d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary">Valider formulaire</button>
             </div>
             
             

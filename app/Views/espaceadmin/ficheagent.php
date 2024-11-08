@@ -72,7 +72,8 @@ if (isset($toast) && isset($_POST['go']) && !empty($_POST['go'])) {
 }
 
 if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
-   echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color:#4877f4; color:#fff">
+   echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert" style="color: #0f6848; background-color: #d2f4e8; border-color: #bff0de;
+">
 	   '.$_SESSION['toast'].'
     </div>';
 	unset($_SESSION['toast']);
@@ -543,8 +544,9 @@ echo form_open('espaceadmin/ficheagent/'.$idag, 'enctype="multipart/form-data"')
             
             
              <div class="form-row">
-              <div class="form-group col-md-12">
-               <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>
+
+              <div class="form-group col-md-12 d-flex justify-content-center">
+               <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>
               </div>
               </div>
           </form>

@@ -2,6 +2,7 @@
 
 <div class="container-fluid"> 
   <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-primary">Planification &gt; planning du mois</h1>
   
      <?php
 				 $db = \Config\Database::connect();
@@ -73,7 +74,7 @@ echo form_open('espaceadmin/afficherplanpermanence')
 ?>
          <!---- <form> ----->
             <div class="form-row">
-              <div class="form-group col-md-9"> 
+              <div class="form-group col-md-12"> 
                 <label for="IDservice">Choisissez un service et validez</label>
                 <select id="IDservice" name="IDservice" class="form-control">
                   <option value="">Choisir...</option>
@@ -87,8 +88,8 @@ echo form_open('espaceadmin/afficherplanpermanence')
  
               
              
-              <div class="form-group col-md-3">
-                <button type="submit" class="btn btn-primary" style="width:100%; height:100%">Valider</button>
+              <div class="form-group col-md-12 d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" style="width: 200px; height :100%">Valider</button>
               </div>
             </div>
             

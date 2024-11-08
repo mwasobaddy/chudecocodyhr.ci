@@ -8,7 +8,7 @@
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
       <table style="width:100%">
         <tr>
           <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des Equipes</h6></td>
@@ -36,33 +36,28 @@
             </tr>
           </tfoot>
           <tbody>
-            <?php 
-			
-			
-			
-			$i = 1;
-			if (! empty($agentequipe) && is_array($agentequipe)) {
-			
-			
-			//print_r($agentequipe);
-			foreach ($agentequipe as $info) {		
-		
-										echo '<tr>
-                                            <td>'.($i++).'</td>
-                                            <td>'.$agentequipe[($i-2)]->equipe.'</td>
-											 <td>'.$agentequipe[($i-2)]->agent.'</td>
-                                            
-                                            <td style="text-align:center;">
-										'.anchor('espaceadmin/delagentequipe/'.$agentequipe[($i-2)]->idagentequipe,'<i class="fas fa-trash" title="Supprimer"></i>').'
-									</td>
-                                        </tr>
-											';
-		
-										
-			}
-            } 
+            <?php
+              $i = 1;
+              if (! empty($agentequipe) && is_array($agentequipe)) {
             
-             ?>
+            
+                //print_r($agentequipe);
+                foreach ($agentequipe as $info) {		
+
+                  echo '
+                    <tr>
+                      <td>'.($i++).'</td>
+                      <td>'.$agentequipe[($i-2)]->equipe.'</td>
+                      <td>'.$agentequipe[($i-2)]->agent.'</td>
+                      <td style="text-align:center;">
+                        '.anchor('espaceadmin/delagentequipe/'.$agentequipe[($i-2)]->idagentequipe,'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
+                      </td>
+                    </tr>
+                  ';
+                }
+              } 
+            
+            ?>
           </tbody>
           
         </table>
