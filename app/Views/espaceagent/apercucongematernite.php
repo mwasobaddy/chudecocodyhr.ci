@@ -96,8 +96,8 @@ foreach ($results as $info)
                        
                       } else { //pdfcongeagentpays
 											///espaceagent/pdfcongeagentpays/'.$info['IDconge'].'
-												echo anchor('espaceagent/editcongematernite/'.$info['IDconge'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-											'.anchor('espaceagent/delcongematernite/'.$info['IDconge'],'<i class="fas fa-trash" title="Supprimer"></i>');
+												echo anchor('espaceagent/editcongematernite/'.$info['IDconge'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+											'.anchor('espaceagent/delcongematernite/'.$info['IDconge'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
                      
                   
 											}
@@ -108,9 +108,9 @@ foreach ($results as $info)
                     echo '<td style="text-align:center;">';
                     if($info['validationcs']==1 && $info['validationsus']==1) {}else{
                     $lieu = './agents/'.$row->matricule.'/4-CONGES/';
-                      echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 1"></i></a>'; 
-                      echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 2"></i></a>'; 
-                      echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 3"></i></a>'; 
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 1"></i></a>'; 
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 2"></i></a>'; 
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 3"></i></a>'; 
                     }
                     echo '</td>';
                                         echo '</tr>

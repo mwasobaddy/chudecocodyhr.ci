@@ -79,11 +79,11 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
 											
 											if($info['quitterchu']==1){
 												echo '
-									'.anchor('espaceadmin/retourchu/'.$info['idagent'],'<i class="fas fa-angle-double-left" title="Retour au CHU"></i>').'<br/><a href="">Acte 1</a><br/>
+									'.anchor('espaceadmin/retourchu/'.$info['idagent'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-left" title="Retour au CHU"></i></span>').'<br/><a href="">Acte 1</a><br/>
 											<a href="">Acte 2</a>';
 											} else {
 												echo '
-											'.anchor('espaceadmin/departchu/'.$info['idagent'],'<i class="fas fa-angle-double-right" title="Quitter le CHU"></i>').'	';
+											'.anchor('espaceadmin/departchu/'.$info['idagent'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-right" title="Quitter le CHU"></i></span>').'	';
 											}
 											
 											

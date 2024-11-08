@@ -94,11 +94,11 @@ foreach ($results as $info)
                        echo '</td><td>';
                       } else { //pdfcongeagentpays
 											///espaceagent/pdfcongeagentpays/'.$info['IDconge'].'
-												echo anchor('espaceagent/editpermissionhh/'.$info['IDpermission'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;'.anchor('espaceagent/delpermissionhh/'.$info['IDpermission'],'<i class="fas fa-trash" title="Supprimer"></i>');
+												echo anchor('espaceagent/editpermissionhh/'.$info['IDpermission'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').''.anchor('espaceagent/delpermissionhh/'.$info['IDpermission'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
                         echo '</td><td>';
                         if($info['justificatif']){
                         $lieu = './agents/'.$row->matricule.'/4-CONGES/';
-                          echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif']).'"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';	
+                          echo '<a target="new" href="'.base_url($lieu.$info['justificatif']).'"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';	
                         }
 										
 											}

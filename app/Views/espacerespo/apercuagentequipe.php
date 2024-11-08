@@ -53,7 +53,7 @@
 											 <td>'.$agentequipe[($i-2)]->agent.'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espacerespo/delagentequipe/'.$agentequipe[($i-2)]->idagentequipe,'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espacerespo/delagentequipe/'.$agentequipe[($i-2)]->idagentequipe,'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

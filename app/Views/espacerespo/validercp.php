@@ -105,7 +105,8 @@ echo view('toast');
 										
 										
 						
-											echo anchor('espacerespo/acceptercp/'.$info['idagentplanpermanence'],'<i class="fas fa-check-double" title="Valider modification"></i>').'&nbsp;&nbsp;&nbsp;'.anchor('espacerespo/refusercp/'.$info['idagentplanpermanence'],'<i class="fas fa-trash" title="Refuser modification"></i>');
+											echo anchor('espacerespo/acceptercp/'.$info['idagentplanpermanence'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider modification"></i></span>').'
+                         '.anchor('espacerespo/refusercp/'.$info['idagentplanpermanence'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Refuser modification"></i></span>');
 									
 									echo '
 									</td>

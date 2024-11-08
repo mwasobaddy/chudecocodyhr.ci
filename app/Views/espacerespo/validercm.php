@@ -88,8 +88,8 @@ echo view('toast');
 											<td>'.$info['etat'].'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espacerespo/editcongematernite/'.$info['IDconge'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espacerespo/delcongematernite/'.$info['IDconge'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espacerespo/editcongematernite/'.$info['IDconge'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espacerespo/delcongematernite/'.$info['IDconge'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

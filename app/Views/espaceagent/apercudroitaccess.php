@@ -47,8 +47,8 @@
                                             <td>'.$info['libelle'].'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/editdroitaccess/'.$info['IDdroitaccess'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/deldroitaccess/'.$info['IDdroitaccess'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/editdroitaccess/'.$info['IDdroitaccess'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espaceadmin/deldroitaccess/'.$info['IDdroitaccess'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

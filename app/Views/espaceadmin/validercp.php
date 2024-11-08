@@ -62,46 +62,33 @@ $agentplanpermanence = $query->getResultArray();
 			if (! empty($agentplanpermanence) && is_array($agentplanpermanence)) : 
 			?>
             <?php foreach ($agentplanpermanence as $info): ?>
-            <?php 
-		
-		
-										echo '<tr>
-                                            <td>'.($i++).' </td>';
-                                            
-											
-
-	$query = $db->query('SELECT idagent, matricule, nom, IDservice from agent where IDagent='.$info['Idagent']);
-											$row   = $query->getRow();
-								echo '<td>'.$row->matricule.'</td>';
-								echo '<td>'.$row->nom.'</td>';
-								$leservice = $row->IDservice;
-								
-								$query = $db->query('SELECT libelle from planpermanence where IDplanpermanence='.$info['IDplanpermanence']);
-											$row   = $query->getRow();
-								echo '<td>'.$row->libelle.'</td>';
-								
-								$query = $db->query('SELECT * from jourplan where IDjourplan='.$info['IDjourplan']);
-											$row   = $query->getRow();
-											
-											if($row->jour < 10)
-						$jjj = '0'.$row->jour;
-						else
-						$jjj = $row->jour;
-											
-								echo '<td>'.$jjj.' / '.$row->mois.' / '.$row->annee.' ('.$row->libelle.')</td>';
-								
-								
-									echo '<td>'.$info['justificatif'].'</td>';
-				
-											echo '
-											
-                                            
-                                            <td style="text-align:center;">';
-										
-										
-										
-						
-											echo anchor('espaceadmin/acceptercp/'.$info['idagentplanpermanence'],'<i class="fas fa-check-double" title="Valider modification"></i>').'&nbsp;&nbsp;&nbsp;'.anchor('espaceadmin/refusercp/'.$info['idagentplanpermanence'],'<i class="fas fa-trash" title="Refuser modification"></i>');
+            <?php
+              echo '
+                <tr>
+                  <td>'.($i++).' </td>';
+                  $query = $db->query('SELECT idagent, matricule, nom, IDservice from agent where IDagent='.$info['Idagent']);
+									$row   = $query->getRow();
+                  echo '<td>'.$row->matricule.'</td>';
+                  echo '<td>'.$row->nom.'</td>';
+                  $leservice = $row->IDservice;
+                
+                  $query = $db->query('SELECT libelle from planpermanence where IDplanpermanence='.$info['IDplanpermanence']);
+									$row   = $query->getRow();
+                  echo '<td>'.$row->libelle.'</td>';
+                  $query = $db->query('SELECT * from jourplan where IDjourplan='.$info['IDjourplan']);
+                  $row   = $query->getRow();
+                  
+                  if($row->jour < 10)
+                  $jjj = '0'.$row->jour;
+                  else
+                  $jjj = $row->jour;
+                
+                  echo '<td>'.$jjj.' / '.$row->mois.' / '.$row->annee.' ('.$row->libelle.')</td>';
+                  echo '<td>'.$info['justificatif'].'</td>';
+                  echo '
+                    <td style="text-align:center;">';
+                      echo anchor('espaceadmin/acceptercp/'.$info['idagentplanpermanence'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider modification"></i></span>').'
+                         '.anchor('espaceadmin/refusercp/'.$info['idagentplanpermanence'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Refuser modification"></i></span>');
 									
 									echo '
 									</td>

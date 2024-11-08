@@ -81,8 +81,8 @@
 											echo '</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espacerespo/editservice/'.$info['IDservice'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espacerespo/delservice/'.$info['IDservice'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espacerespo/editservice/'.$info['IDservice'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espacerespo/delservice/'.$info['IDservice'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

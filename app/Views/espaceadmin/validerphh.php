@@ -85,8 +85,8 @@ $permissionhh = $query->getResultArray();
 											<td>'.$info['etat'].'</td>
 											
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/editpermission/'.$info['IDpermissionhh'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delpermissionhh/'.$info['IDpermission'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/editpermission/'.$info['IDpermissionhh'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espaceadmin/delpermissionhh/'.$info['IDpermission'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

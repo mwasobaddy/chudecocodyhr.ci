@@ -101,9 +101,9 @@ foreach ($results as $info)
 												//echo '<img src="'.base_url('/img/okok.jpg').'" alt="DEJA VALIDE" />';
 												echo '<a target="new" href="'.base_url('/espaceagent/pdfcongeagent/'.$info['IDconge'].'').'"><i class="fas fa-file-alt" title="TELECHARGER ATTESTATION"></i></a>';
                         if($info['horspays']==1 || $info['horspays']=='1') {
-                          echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url('/espaceagent/pdfcongecertificatagent/'.$info['IDconge'].'').'"><i class="fas fa-file-alt" title="TELECHARGER DECISION"></i></a>';
+                          echo '<a target="new" href="'.base_url('/espaceagent/pdfcongecertificatagent/'.$info['IDconge'].'').'"><i class="fas fa-file-alt" title="TELECHARGER DECISION"></i></a>';
                         }
-                        echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url('/espaceagent/pdfrepriseconge/'.$info['IDconge'].'').'"><i class="fas fa-hiking" title="Certificat de reprise"></i></a>';	
+                        echo '<a target="new" href="'.base_url('/espaceagent/pdfrepriseconge/'.$info['IDconge'].'').'"><i class="fas fa-hiking" title="Certificat de reprise"></i></a>';	
 										
                       } else { //pdfcongeagentpays
 											///espaceagent/pdfcongeagentpays/'.$info['IDconge'].'
@@ -118,10 +118,10 @@ foreach ($results as $info)
 				if($delai > 11) {
 					
 					if($info['validationcs'] != 1) {
-						echo ''.anchor('espaceagent/editcongeannuel/'.$info['IDconge'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;';
+						echo ''.anchor('espaceagent/editcongeannuel/'.$info['IDconge'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'';
 										
 										
-										echo anchor('espaceagent/delcongeannuel/'.$info['IDconge'],'<i class="fas fa-trash" title="Supprimer"></i>').'';
+										echo anchor('espaceagent/delcongeannuel/'.$info['IDconge'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'';
 					} else {
 						echo 'Modification impossible!';
 					}

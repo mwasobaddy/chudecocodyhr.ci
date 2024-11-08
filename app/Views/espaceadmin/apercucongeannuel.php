@@ -101,14 +101,14 @@
                   if ($info['validationcs'] == 1 && $info['validationsdrh'] == 1) {
                     echo '<a target="new" href="' . base_url('/espaceadmin/pdfcongerespo/' . $info['IDconge'] . '') . '"><i class="fas fa-file-alt" title="TELECHARGER ATTESTATION"></i></a>';
                     if ($info['horspays'] == 1 || $info['horspays'] == '1') {
-                      echo '&nbsp;&nbsp;&nbsp;<a target="new" href="' . base_url('/espaceagent/pdfcongecertificatrespo/' . $info['IDconge'] . '') . '"><i class="fas fa-file-alt" title="TELECHARGER DECISION"></i></a>';
+                      echo '<a target="new" href="' . base_url('/espaceagent/pdfcongecertificatrespo/' . $info['IDconge'] . '') . '"><i class="fas fa-file-alt" title="TELECHARGER DECISION"></i></a>';
                     }
-                    echo '&nbsp;&nbsp;&nbsp;
-									' . anchor('espaceadmin/delcongeannuel/' . $info['IDconge'], '<i class="fas fa-trash" title="Supprimer"></i>');
-                    echo '&nbsp;&nbsp;&nbsp;<a target="new" href="' . base_url('/espaceadmin/pdfrepriseconge/' . $info['IDconge'] . '') . '"><i class="fas fa-hiking" title="Certificat de reprise"></i></a>';
+                    echo '
+									' . anchor('espaceadmin/delcongeannuel/' . $info['IDconge'], '<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
+                    echo '<a target="new" href="' . base_url('/espaceadmin/pdfrepriseconge/' . $info['IDconge'] . '') . '"><i class="fas fa-hiking" title="Certificat de reprise"></i></a>';
                   } else {
-                    echo anchor('espaceadmin/editcongeannuel/' . $info['IDconge'], '<i class="fas fa-user-edit" title="Modifier"></i>') . '&nbsp;&nbsp;&nbsp;
-									' . anchor('espaceadmin/delcongeannuel/' . $info['IDconge'], '<i class="fas fa-trash" title="Supprimer"></i>');
+                    echo anchor('espaceadmin/editcongeannuel/' . $info['IDconge'], '<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>') . '
+									' . anchor('espaceadmin/delcongeannuel/' . $info['IDconge'], '<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
                   }
 
                   echo '</td>

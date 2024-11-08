@@ -93,7 +93,7 @@ $agentplanpermanence = $query->getResultArray();
                                             <td style="text-align:center;">';
 										
 										
-											echo anchor('espacerespo/editagentplanpermanence/'.$info['idagentplanpermanence'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;'.anchor('espacerespo/delagentplanpermanence/'.$info['idagentplanpermanence'],'<i class="fas fa-trash" title="Supprimer"></i>');
+											echo anchor('espacerespo/editagentplanpermanence/'.$info['idagentplanpermanence'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').''.anchor('espacerespo/delagentplanpermanence/'.$info['idagentplanpermanence'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
 										
 									
 									
