@@ -37,8 +37,24 @@ $routes->get('/', 'Espaceagent::index');
 $routes->get('/', 'Espaceadmin::index');
 $routes->get('/', 'Espacesuperadmin::index');
 $routes->get('/', 'PdfController::index');
-$routes->get('/evaluation/index', 'EvaluationController::index');
+$routes->group('espaceagent', function($routes) {
+    $routes->get('evaluation', 'EvaluationController::index');
+    $routes->post('evaluation/start', 'EvaluationController::startEvaluation');
+});
 
+$routes->group('espaceadmin', function($routes) {
+    $routes->get('evaluation', 'EvaluationController::index');
+});
+
+$routes->group('espacerespo', function($routes) {
+    $routes->get('evaluation', 'EvaluationController::index');
+    $routes->post('evaluation/submit-objectives', 'EvaluationController::submitObjectives');
+});
+
+$routes->post('/evaluation/start', 'EvaluationController::startEvaluation');
+$routes->post('/evaluation/submit-objectives', 'EvaluationController::submitObjectives');
+$routes->post('/evaluation/submit-agreement', 'EvaluationController::submitAgreement');
+$routes->post('/evaluation/sign-off', 'EvaluationController::signOff');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

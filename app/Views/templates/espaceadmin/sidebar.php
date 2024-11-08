@@ -146,7 +146,7 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="<?php echo base_url('/evaluation/index');?>">Objectives setting</a>
+                        <a class="collapse-item" href="<?php echo base_url('/espaceadmin/evaluation');?>">Objectives setting</a>
                     
                         <a class="collapse-item" href="<?php echo base_url('');?>">Annual Performance Review</a>
                     

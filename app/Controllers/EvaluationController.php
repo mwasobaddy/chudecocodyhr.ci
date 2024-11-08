@@ -14,16 +14,103 @@ class EvaluationController extends Controller {
 
     public function index() {
         $session = session();
-        $agent_id = $session->get('idagent');
-        $role = $this->determineRole($agent_id);
-
+        $agent_id = $session->get('cnxid');
+        $userAccess = $session->get('idd');
+    
+        // Debugging statements
+        echo "<script>console.log('Agent ID: " . $agent_id . "');</script>";
+        echo "<script>console.log('User Access: " . $userAccess . "');</script>";
+    
+        // Get current evaluation data
+        $current_evaluation = $this->getCurrentEvaluation($agent_id);
+        $objectives = [];
+        if ($current_evaluation) {
+            $objectives = $this->getObjectives($current_evaluation['idevaluation']);
+        }
+        // Prepare common data
         $data = [
-            'role' => $role,
-            'evaluations' => $this->getEvaluationsForAgent($agent_id, $role)
+            'agent_id' => $agent_id,
         ];
-
-        return view('evaluation/index', $data);
+    
+        // Route to appropriate view based on user access level
+        if ($userAccess == 1) { // Employee
+            $data['current_evaluation'] = $this->getCurrentEvaluation($agent_id);
+            $data['objectives'] = $this->getObjectives($data['current_evaluation']['idevaluation'] ?? null);
+            echo view('templates/espaceagent/entete', $data);
+            echo view('templates/espaceagent/sidebar', $data);
+            echo view('templates/espaceagent/topbar', $data);
+            echo view('templates/espaceagent/evaluation', $data);
+            echo view('templates/espaceagent/pied', $data);
+        } 
+        elseif ($userAccess == 2) { // Line Manager
+            $data['pending_evaluations'] = $this->getPendingEvaluations($agent_id);
+            $data['completed_evaluations'] = $this->getCompletedEvaluations($agent_id);
+            echo view('templates/espacerespo/entete', $data);
+            echo view('templates/espacerespo/sidebar', $data);
+            echo view('templates/espacerespo/topbar', $data);
+            echo view('templates/espacerespo/evaluation', $data);
+            echo view('templates/espacerespo/pied', $data);
+        } 
+        else { // Admin
+            $data['evaluations'] = $this->getAllEvaluations();
+            echo view('templates/espaceadmin/entete', $data);
+            echo view('templates/espaceadmin/sidebar', $data);
+            echo view('templates/espaceadmin/topbar', $data);
+            echo view('templates/espaceadmin/evaluation', $data);
+            echo view('templates/espaceadmin/pied', $data);            
+        }
     }
+
+    private function getAllEvaluations() {
+        return $this->db->table('evaluations')
+            ->select('evaluations.*, 
+                     e.nom as employee_name,
+                     m1.nom as manager_n1_name,
+                     m2.nom as manager_n2_name')
+            ->join('agent e', 'e.idagent = evaluations.employee_id')
+            ->join('agent m1', 'm1.idagent = evaluations.line_manager_n1_id')
+            ->join('agent m2', 'm2.idagent = evaluations.line_manager_n2_id', 'left')
+            ->get()
+            ->getResultArray();
+    }
+
+    private function getPendingEvaluations($manager_id) {
+        return $this->db->table('evaluations')
+            ->select('evaluations.*, agent.nom as employee_name')
+            ->join('agent', 'agent.idagent = evaluations.employee_id')
+            ->where('line_manager_n1_id', $manager_id)
+            ->where('status', 'Started')
+            ->get()
+            ->getResultArray();
+    }
+
+    private function getCompletedEvaluations($manager_id) {
+        return $this->db->table('evaluations')
+            ->select('evaluations.*, agent.nom as employee_name')
+            ->join('agent', 'agent.idagent = evaluations.employee_id')
+            ->where('line_manager_n1_id', $manager_id)
+            ->where('status', 'Completed')
+            ->get()
+            ->getResultArray();
+    }
+
+    private function getCurrentEvaluation($employee_id) {
+        return $this->db->table('evaluations')
+            ->where('employee_id', $employee_id)
+            ->orderBy('started_at', 'DESC')
+            ->get()
+            ->getRowArray();
+    }
+
+    private function getObjectives($evaluation_id) {
+        if (!$evaluation_id) return [];
+        
+        return $this->db->table('objectives')
+            ->where('evaluation_id', $evaluation_id)
+            ->get()
+            ->getResultArray();
+    }
+
 
     public function startEvaluation() {
         $session = session();
@@ -47,20 +134,25 @@ class EvaluationController extends Controller {
         $session = session();
         $evaluation_id = $this->request->getPost('evaluation_id');
         $objectives = $this->request->getPost('objectives');
-
+        
+        // Debugging statements
+        log_message('debug', 'Evaluation ID: ' . $evaluation_id);
+        log_message('debug', 'Objectives: ' . print_r($objectives, true));
+    
         // Validate total weight = 100%
         $total_weight = 0;
         foreach ($objectives as $objective) {
             $total_weight += floatval($objective['weight']);
         }
-
+    
         if ($total_weight != 100) {
+            log_message('error', 'Total weight must equal 100%. Current total: ' . $total_weight);
             return redirect()->back()->with('error', 'Total weight must equal 100%');
         }
-
+    
         // Insert objectives
         foreach ($objectives as $objective) {
-            $this->db->table('objectives')->insert([
+            $insertData = [
                 'evaluation_id' => $evaluation_id,
                 'title' => $objective['title'],
                 'description' => $objective['description'],
@@ -73,11 +165,20 @@ class EvaluationController extends Controller {
                 'potential_challenges' => $objective['potential_challenges'],
                 'support_needed' => $objective['support_needed'],
                 'weight' => $objective['weight']
-            ]);
+            ];
+    
+            $result = $this->db->table('objectives')->insert($insertData);
+            if (!$result) {
+                log_message('error', 'Failed to insert objective: ' . print_r($insertData, true));
+                log_message('error', 'DB Error: ' . $this->db->error());
+            } else {
+                log_message('debug', 'Successfully inserted objective: ' . print_r($insertData, true));
+            }
         }
-
-        return redirect()->to('/evaluation');
+    
+        return redirect()->to('/espacerespo/evaluation');
     }
+    
 
     public function submitAgreement() {
         $objective_id = $this->request->getPost('objective_id');
