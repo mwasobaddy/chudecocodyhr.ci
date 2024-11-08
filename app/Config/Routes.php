@@ -40,6 +40,7 @@ $routes->get('/', 'PdfController::index');
 $routes->group('espaceagent', function($routes) {
     $routes->get('evaluation', 'EvaluationController::index');
     $routes->post('evaluation/start', 'EvaluationController::startEvaluation');
+    $routes->post('evaluation/agree-objective', 'EvaluationController::agreeObjective');
 });
 
 $routes->group('espaceadmin', function($routes) {
@@ -51,10 +52,10 @@ $routes->group('espacerespo', function($routes) {
     $routes->get('evaluation/set-objectives/(:num)', 'EvaluationController::setObjectives/$1');
     $routes->post('evaluation/submit-objectives', 'EvaluationController::submitObjectives');
 });
-$routes->post('/evaluation/start', 'EvaluationController::startEvaluation');
-$routes->post('/evaluation/submit-objectives', 'EvaluationController::submitObjectives');
-$routes->post('/evaluation/submit-agreement', 'EvaluationController::submitAgreement');
-$routes->post('/evaluation/sign-off', 'EvaluationController::signOff');
+// $routes->post('/evaluation/start', 'EvaluationController::startEvaluation');
+// $routes->post('/evaluation/submit-objectives', 'EvaluationController::submitObjectives');
+// $routes->post('/evaluation/submit-agreement', 'EvaluationController::submitAgreement');
+// $routes->post('/evaluation/sign-off', 'EvaluationController::signOff');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
