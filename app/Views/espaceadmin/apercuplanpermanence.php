@@ -68,7 +68,7 @@
 											<td>'.(($info['publier']=='1')?('OUI'):('NON')).'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/editplanpermanence/'.$info['IDplanpermanence'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;'.anchor('espaceadmin/delplanpermanence/'.$info['IDplanpermanence'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/editplanpermanence/'.$info['IDplanpermanence'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').''.anchor('espaceadmin/delplanpermanence/'.$info['IDplanpermanence'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

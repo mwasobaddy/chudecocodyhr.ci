@@ -81,10 +81,10 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
 											
 											if($info['disponibilite']==1){
 												echo '
-									'.anchor('espaceadmin/retourdisponibilite/'.$info['idagent'],'<i class="fas fa-angle-double-left" title="Retour disponibilité"></i>').'<br/>';
+									'.anchor('espaceadmin/retourdisponibilite/'.$info['idagent'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-left" title="Retour disponibilité"></i></span>').'';
 											} else {
 												echo '
-											'.anchor('espaceadmin/departdisponibilite/'.$info['idagent'],'<i class="fas fa-angle-double-right" title="Départ disponibilité"></i>').'	';
+											'.anchor('espaceadmin/departdisponibilite/'.$info['idagent'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-right" title="Départ disponibilité"></i></span>').'	';
 											}
 											
 											

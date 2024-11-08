@@ -76,8 +76,8 @@
 											if($info['etat']=='ACCEPTEE' || $info['etat']=='REFUSEE') {
 												echo 'DEMANDE TERMINEE';
 											} else {
-												 echo anchor('espacerespo/editbesoinservice/'.$info['IDbesoinservice'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espacerespo/delbesoinservice/'.$info['IDbesoinservice'],'<i class="fas fa-trash" title="Supprimer"></i>');
+												 echo anchor('espacerespo/editbesoinservice/'.$info['IDbesoinservice'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espacerespo/delbesoinservice/'.$info['IDbesoinservice'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
 											}
                                             
                                            

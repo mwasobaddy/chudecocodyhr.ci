@@ -78,7 +78,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
 											
 											if($info['alaretraite']==1){
 												echo '
-											'.anchor('espaceadmin/retourretraite/'.$info['idagent'],'<i class="fas fa-angle-double-left" title="Réintegrer agent à la retraite"></i>').'	';
+											'.anchor('espaceadmin/retourretraite/'.$info['idagent'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-left" title="Réintegrer agent à la retraite"></i></span>').'	';
 											} else {
 												echo '
 												';

@@ -10,13 +10,14 @@ class EvaluationController extends Controller {
     public function __construct() {
         $this->agentModel = new AgentModel();
         $this->db = \Config\Database::connect();
+
     }
 
     public function index() {
         $session = session();
         $agent_id = $session->get('cnxid');
         $userAccess = $session->get('idd');
-    
+        
         // Debugging statements
         echo "<script>console.log('Agent ID: " . $agent_id . "');</script>";
         echo "<script>console.log('User Access: " . $userAccess . "');</script>";
@@ -34,6 +35,9 @@ class EvaluationController extends Controller {
     
         // Route to appropriate view based on user access level
         if ($userAccess == 1) { // Employee
+            if($this->db){
+                echo "<script>console.log('Database connected');</script>";
+            }
             $data['current_evaluation'] = $this->getCurrentEvaluation($agent_id);
             $data['objectives'] = $this->getObjectives($data['current_evaluation']['idevaluation'] ?? null);
             echo view('templates/espaceagent/entete', $data);
@@ -60,6 +64,39 @@ class EvaluationController extends Controller {
             echo view('templates/espaceadmin/pied', $data);            
         }
     }
+
+    public function setObjectives($evaluation_id)
+{
+    $session = session();
+    $agent_id = $session->get('cnxid');
+    $userAccess = $session->get('idd');
+
+    if ($userAccess != 2) {
+        return redirect()->back()->with('error', 'Access denied.');
+    }
+
+    $evaluation = $this->db->table('evaluations')
+        ->select('evaluations.*, agent.nom as employee_name')
+        ->join('agent', 'agent.idagent = evaluations.employee_id')
+        ->where('idevaluation', $evaluation_id)
+        ->get()
+        ->getRowArray();
+
+    if (!$evaluation) {
+        return redirect()->back()->with('error', 'Evaluation not found.');
+    }
+
+    $data = [
+        'evaluation' => $evaluation,
+        'agent_id' => $agent_id,
+    ];
+
+    echo view('templates/espacerespo/entete', $data);
+    echo view('templates/espacerespo/sidebar', $data);
+    echo view('templates/espacerespo/topbar', $data);
+    echo view('templates/espacerespo/set_objectives', $data);
+    echo view('templates/espacerespo/pied', $data);
+}
 
     private function getAllEvaluations() {
         return $this->db->table('evaluations')
@@ -114,7 +151,7 @@ class EvaluationController extends Controller {
 
     public function startEvaluation() {
         $session = session();
-        $employee_id = $session->get('idagent');
+        $employee_id = $session->get('cnxid');
         
         $agent = $this->agentModel->find($employee_id);
         
@@ -127,26 +164,20 @@ class EvaluationController extends Controller {
         ];
 
         $this->db->table('evaluations')->insert($data);
-        return redirect()->to('/evaluation');
+        return redirect()->to('/espaceagent/evaluation');
     }
 
     public function submitObjectives() {
-        $session = session();
         $evaluation_id = $this->request->getPost('evaluation_id');
         $objectives = $this->request->getPost('objectives');
-        
-        // Debugging statements
-        log_message('debug', 'Evaluation ID: ' . $evaluation_id);
-        log_message('debug', 'Objectives: ' . print_r($objectives, true));
     
-        // Validate total weight = 100%
+        // Validate total weight
         $total_weight = 0;
         foreach ($objectives as $objective) {
             $total_weight += floatval($objective['weight']);
         }
     
         if ($total_weight != 100) {
-            log_message('error', 'Total weight must equal 100%. Current total: ' . $total_weight);
             return redirect()->back()->with('error', 'Total weight must equal 100%');
         }
     
@@ -156,27 +187,21 @@ class EvaluationController extends Controller {
                 'evaluation_id' => $evaluation_id,
                 'title' => $objective['title'],
                 'description' => $objective['description'],
-                'specific_goals' => $objective['specific_goals'],
-                'key_actions' => $objective['key_actions'],
-                'resources_required' => $objective['resources_required'],
+                'specific_goals' => $objective['specific_goals'] ?? null,
+                'key_actions' => $objective['key_actions'] ?? null,
+                'resources_required' => $objective['resources_required'] ?? null,
                 'start_date' => $objective['start_date'],
                 'end_date' => $objective['end_date'],
-                'success_metrics' => $objective['success_metrics'],
-                'potential_challenges' => $objective['potential_challenges'],
-                'support_needed' => $objective['support_needed'],
+                'success_metrics' => $objective['success_metrics'] ?? null,
+                'potential_challenges' => $objective['potential_challenges'] ?? null,
+                'support_needed' => $objective['support_needed'] ?? null,
                 'weight' => $objective['weight']
             ];
     
-            $result = $this->db->table('objectives')->insert($insertData);
-            if (!$result) {
-                log_message('error', 'Failed to insert objective: ' . print_r($insertData, true));
-                log_message('error', 'DB Error: ' . $this->db->error());
-            } else {
-                log_message('debug', 'Successfully inserted objective: ' . print_r($insertData, true));
-            }
+            $this->db->table('objectives')->insert($insertData);
         }
     
-        return redirect()->to('/espacerespo/evaluation');
+        return redirect()->to('/espacerespo/evaluation')->with('success', 'Objectives saved successfully.');
     }
     
 

@@ -136,7 +136,7 @@ $myid = $_SESSION['cnxid'];
                       if ($info['validationcs'] == 1 && $info['validationsdrh'] == 1) {
                         echo 'Modification impossible!';
                       } else {
-                        echo anchor('espaceadmin/validerca/' . $info['IDconge'], '<i class="fas fa-check-double" title="Valider"></i>') . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . anchor('espaceadmin/rejetca/' . $info['IDconge'], '<i class="fas fa-times" title="Rejeter"></i>');
+                        echo anchor('espaceadmin/validerca/' . $info['IDconge'], '<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>') . '' . anchor('espaceadmin/rejetca/' . $info['IDconge'], '<span class="btn btn-warning mb-2"><i class="m-0 fas fa-times" title="Rejeter"></i></span>');
                       }
                     }
                   }

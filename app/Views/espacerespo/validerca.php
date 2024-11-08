@@ -99,7 +99,7 @@ echo view('toast');
 											<td>'.$info['etat'].'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espacerespo/validerca/'.$info['IDconge'],'<i class="fas fa-user-edit" title="Modifier"></i>').'
+										'.anchor('espacerespo/validerca/'.$info['IDconge'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
 									</td>
                                         </tr>
 											';

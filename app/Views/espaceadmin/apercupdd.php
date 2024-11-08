@@ -118,13 +118,12 @@ $permissiondd = $query->getResultArray();
                                                         } else {
                                                             if ($info['validationcs'] == 1 && $info['validationsdrh'] == 1) {
                                                                 echo 'Modification impossible!';
-                                                            } else echo anchor('espaceadmin/validerpdd/' . $info['IDpermission'], '<i class="fas fa-check-double" title="Valider"></i>') . '&nbsp;&nbsp;' . anchor('espaceadmin/rejetpdd/' . $info['IDpermission'], '<i class="fas fa-times" title="Rejeter"></i>');
+                                                            } else echo anchor('espaceadmin/validerpdd/' . $info['IDpermission'], '<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i>') . '&nbsp;&nbsp;' . anchor('espaceadmin/rejetpdd/' . $info['IDpermission'], '<i class="fas fa-times" title="Rejeter"></i></span>');
                                                         }
                                                     }
                                                 }
                                             }
-
-//										    echo anchor('espaceadmin/validerpdd/'.$info['IDpermission'],'<i class="fas fa-check-double" title="Valider"></i>').'';
+                                            // echo anchor('espaceadmin/validerpdd/'.$info['IDpermission'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>').'';
                                             echo '</td><td>';
                                             if($info['justificatif'])  {
                                                 $lieu = './agents/'.$row->matricule.'/4-CONGES/';

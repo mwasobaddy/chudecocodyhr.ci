@@ -90,9 +90,11 @@
 										';
 										
 										if(strcmp($info['etat'],'EN COURS')==0 || strcmp($info['etat'], 'PROROGATION')==0) {
-										echo anchor('espaceadmin/editarrettravail/'.$info['IDarrettravail'],'<i class="fas fa-user-edit" title="Modifier arrêt de travail"></i>').'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/retourarrettravail/'.$info['IDarrettravail'],'<i class="fas fa-angle-double-left" title="Retour Arrêt travail"></i>').'<br/>'.anchor('espaceadmin/prorogerarrettravail/'.$info['IDarrettravail'],'<i class="fas fa-redo-alt" title="Proroger arrêt de travail"></i>').'&nbsp;&nbsp;'.anchor('espaceadmin/delarrettravail/'.$info['IDarrettravail'],'<i class="fas fa-trash" title="Supprimer arrêt de travail"></i>').'&nbsp;&nbsp;
-									';
+										echo anchor('espaceadmin/editarrettravail/'.$info['IDarrettravail'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier arrêt de travail"></i></span>').'
+                       '.anchor('espaceadmin/retourarrettravail/'.$info['IDarrettravail'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-left" title="Retour Arrêt travail"></i></span>').'
+                       '.anchor('espaceadmin/prorogerarrettravail/'.$info['IDarrettravail'],'<span class="btn btn-secondary mb-2"><i class="m-0 fas fa-redo-alt" title="Proroger arrêt de travail"></i></span>').'
+                       '.anchor('espaceadmin/delarrettravail/'.$info['IDarrettravail'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer arrêt de travail"></i></span>').'
+                    ';
                                         if($info['justificatif1']) {
                                             $lieu = './agents/'.$agent->matricule.'/5-MALADIE/';
                                             echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';

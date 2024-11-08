@@ -82,8 +82,8 @@
 											}*/
                                             
                                             echo '<td style="text-align:center;">
-										'.anchor('espaceadmin/editposteservice/'.$info['IDposteservice'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delposteservice/'.$info['IDposteservice'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/editposteservice/'.$info['IDposteservice'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espaceadmin/delposteservice/'.$info['IDposteservice'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

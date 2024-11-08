@@ -110,13 +110,13 @@
                     echo '<a target="new" href="'.base_url('/espacerespo/pdfcongerespo/'.$info['IDconge'].'').'"><i class="fas fa-file-alt" title="TELECHARGER ATTESTATION"></i></a>';	
 									
                     if($info['horspays']==1 || $info['horspays']=='1') {
-                      echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url('/espaceagent/pdfcongecertificatrespo/'.$info['IDconge'].'').'"><i class="fas fa-file-alt" title="TELECHARGER DECISION"></i></a>';
+                      echo '<a target="new" href="'.base_url('/espaceagent/pdfcongecertificatrespo/'.$info['IDconge'].'').'"><i class="fas fa-file-alt" title="TELECHARGER DECISION"></i></a>';
                     }
-                    echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url('/espacerespo/pdfrepriseconge/'.$info['IDconge'].'').'"><i class="fas fa-hiking" title="Certificat de reprise"></i></a>';	
+                    echo '<a target="new" href="'.base_url('/espacerespo/pdfrepriseconge/'.$info['IDconge'].'').'"><i class="fas fa-hiking" title="Certificat de reprise"></i></a>';	
 										
                   } else {
-											echo anchor('espacerespo/editcongeannuel/'.$info['IDconge'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espacerespo/delcongeannuel/'.$info['IDconge'],'<i class="fas fa-trash" title="Supprimer"></i>');
+											echo anchor('espacerespo/editcongeannuel/'.$info['IDconge'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espacerespo/delcongeannuel/'.$info['IDconge'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
 										}
 									
 									echo '</td>
