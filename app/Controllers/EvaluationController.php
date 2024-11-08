@@ -59,12 +59,34 @@ class EvaluationController extends Controller {
             echo view('templates/espacerespo/pied', $data);
         } 
         else { // Admin
-            $data['evaluations'] = $this->getAllEvaluations();
-            echo view('templates/espaceadmin/entete', $data);
-            echo view('templates/espaceadmin/sidebar', $data);
-            echo view('templates/espaceadmin/topbar', $data);
-            echo view('templates/espaceadmin/evaluation', $data);
-            echo view('templates/espaceadmin/pied', $data);            
+            $evaluations = $this->db->table('evaluations')
+            ->select('evaluations.*, 
+                     e.nom as employee_name,
+                     m1.nom as manager_n1_name,
+                     m2.nom as manager_n2_name')
+            ->join('agent e', 'e.idagent = evaluations.employee_id')
+            ->join('agent m1', 'm1.idagent = evaluations.line_manager_n1_id')
+            ->join('agent m2', 'm2.idagent = evaluations.line_manager_n2_id', 'left')
+            ->get()
+            ->getResultArray();
+
+        // Fetch available managers for dropdown
+        $managers = $this->db->table('agent')
+            ->where('IDdroitaccess', 2) // Assuming 2 is for line managers
+            ->get()
+            ->getResultArray();
+
+        $data = [
+            'evaluations' => $evaluations ?? [],  // Ensure empty array if null
+            'managers' => $managers ?? [],
+            'agent_id' => $agent_id
+        ];
+
+        echo view('templates/espaceadmin/entete', $data);
+        echo view('templates/espaceadmin/sidebar', $data);
+        echo view('templates/espaceadmin/topbar', $data);
+        echo view('templates/espaceadmin/evaluation', $data);
+        echo view('templates/espaceadmin/pied', $data);          
         }
     }
 
@@ -400,6 +422,34 @@ private function mapPercentageToScore($percentage)
     if ($percentage >= 26) return 1.5;
     if ($percentage >= 5)  return 1.0;
     return 0.0;
+}
+
+public function changeManager()
+{
+    $session = session();
+    if ($session->get('IDdroitaccess') != 1) {
+        return redirect()->back()->with('error', 'Access denied');
+    }
+
+    $evaluation_id = $this->request->getPost('evaluation_id');
+    $manager_type = $this->request->getPost('manager_type');
+    $new_manager_id = $this->request->getPost('new_manager_id');
+
+    $field = $manager_type === 'n1' ? 'line_manager_n1_id' : 'line_manager_n2_id';
+
+    $this->db->table('evaluations')
+        ->where('idevaluation', $evaluation_id)
+        ->update([$field => $new_manager_id]);
+
+    return redirect()->back()->with('success', 'Manager updated successfully');
+}
+
+public function getManagers()
+{
+    return $this->db->table('agent')
+        ->where('IDdroitaccess', 2) // Assuming 2 is for line managers
+        ->get()
+        ->getResultArray();
 }
     private function getEvaluationsForAgent($agent_id, $role) {
         if ($role === 'line_manager') {

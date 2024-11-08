@@ -49,6 +49,9 @@ $routes->group('espaceagent', function($routes) {
 
 $routes->group('espaceadmin', function($routes) {
     $routes->get('evaluation', 'EvaluationController::index');
+    $routes->post('evaluation/change-manager', 'EvaluationController::changeManager');
+    $routes->get('evaluation/view/(:num)', 'EvaluationController::viewEvaluation/$1');
+    $routes->get('evaluation/managers', 'EvaluationController::getManagers');
 });
 
 $routes->group('espacerespo', function($routes) {
