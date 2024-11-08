@@ -2,73 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Evaluations</title>
-    
+    <title>Team Evaluations - Line Manager</title>
     <!-- Bootstrap CSS -->
     <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!-- Custom styles -->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<?= base_url('vendor/fontawesome-free/css/all.min.css') ?>" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
+        <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Team Evaluations</h1>
         </div>
 
+        <!-- Pending Evaluations Section -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 border-left-warning">
-                <h6 class="m-0 font-weight-bold text-primary">Employee Objectives</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Pending Evaluations</h6>
             </div>
             <div class="card-body">
-            <form id="objectivesForm" action="<?= base_url('espacerespo/evaluation/submit-objectives') ?>" method="POST">
-            <input type="hidden" name="evaluation_id" value="<?= $evaluation['idevaluation'] ?? '' ?>">
-                    
-                    <?php for ($i = 1; $i <= 5; $i++): ?>
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <h6 class="m-0 font-weight-bold">Objective <?= $i ?></h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Title</label>
-                                        <input type="text" name="objectives[<?= $i ?>][title]" class="form-control" required>
+                <?php if (!empty($pending_evaluations)): ?>
+                    <div class="row">
+                        <?php foreach ($pending_evaluations as $evaluation): ?>
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-primary h-100 shadow-sm">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">
+                                            <?= esc($evaluation['employee_name']); ?>
+                                        </h6>
+                                        <div class="dropdown no-arrow">
+                                            <span class="badge badge-warning">Pending</span>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea name="objectives[<?= $i ?>][description]" class="form-control" rows="3" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Weight (%)</label>
-                                        <input type="number" name="objectives[<?= $i ?>][weight]" class="form-control weight-input" min="0" max="100" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Timeline</label>
-                                        <div class="row">
-                                            <div class="col">
-                                                <input type="date" name="objectives[<?= $i ?>][start_date]" class="form-control" required>
-                                            </div>
-                                            <div class="col">
-                                                <input type="date" name="objectives[<?= $i ?>][end_date]" class="form-control" required>
-                                            </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <small class="text-muted">Started: </small>
+                                            <p class="mb-0"><?= date('d M Y', strtotime($evaluation['started_at'])); ?></p>
+                                        </div>
+                                        <hr>
+                                        <div class="btn-group d-flex" role="group">
+                                            <!-- Set Objectives -->
+                                            <a href="<?= base_url('espacerespo/evaluation/set-objectives/' . $evaluation['idevaluation']); ?>" 
+                                               class="btn btn-primary btn-sm flex-fill mr-1">
+                                                <i class="fas fa-tasks fa-sm"></i>
+                                                <span class="d-none d-md-inline ml-1">Set</span>
+                                            </a>
+                                            
+                                            <!-- Validate Objectives -->
+                                            <a href="<?= base_url('espacerespo/evaluation/objective-evaluation/' . $evaluation['idevaluation']); ?>" 
+                                               class="btn btn-success btn-sm flex-fill mr-1">
+                                                <i class="fas fa-check-circle fa-sm"></i>
+                                                <span class="d-none d-md-inline ml-1">Validate</span>
+                                            </a>
+                                            
+                                            <!-- Sign Off -->
+                                            <button type="button" 
+                                                    class="btn btn-info btn-sm flex-fill"
+                                                    data-toggle="modal" 
+                                                    data-target="#signOffModal<?= $evaluation['idevaluation'] ?>">
+                                                <i class="fas fa-signature fa-sm"></i>
+                                                <span class="d-none d-md-inline ml-1">Sign</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <?php endfor; ?>
 
-                    <div class="alert alert-info">
-                        Total Weight: <span id="totalWeight">0</span>%
+                            <!-- Sign Off Modal -->
+                            <div class="modal fade" id="signOffModal<?= $evaluation['idevaluation'] ?>" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Sign Off Evaluation</h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span>&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><strong>Line Manager Acknowledgement:</strong></p>
+                                            <p>I confirm that I have conducted a thorough performance review with <?= esc($evaluation['employee_name']) ?>.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <form action="<?= base_url('espacerespo/evaluation/submit-sign-off') ?>" method="POST" class="d-inline">
+                                                <input type="hidden" name="evaluation_id" value="<?= $evaluation['idevaluation'] ?>">
+                                                <button type="submit" class="btn btn-primary">Sign Off</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Save Objectives</button>
-                </form>
+                <?php else: ?>
+                    <div class="text-center py-4">
+                        <div class="text-gray-500">No pending evaluations</div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -76,22 +108,5 @@
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
-    
-    <!-- Custom scripts -->
-    <script>
-        $(document).ready(function() {
-            // Calculate total weight
-            function calculateTotalWeight() {
-                let total = 0;
-                $('.weight-input').each(function() {
-                    total += parseInt($(this).val()) || 0;
-                });
-                $('#totalWeight').text(total);
-            }
-
-            // Update total weight when inputs change
-            $('.weight-input').on('input', calculateTotalWeight);
-        });
-    </script>
 </body>
 </html>

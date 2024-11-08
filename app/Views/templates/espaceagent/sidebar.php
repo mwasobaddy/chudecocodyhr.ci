@@ -111,7 +111,6 @@
                         
                         <a class="collapse-item" href="<?php echo base_url('/espaceagent/evaluation');?>">Fixation des objectifs</a>
                     
-                        <a class="collapse-item" href="<?php echo base_url('');?>">Examen annuel des performances</a>
                     
                     </div>
                     
