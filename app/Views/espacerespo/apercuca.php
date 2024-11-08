@@ -16,9 +16,9 @@ $congeannuel = $query->getResultArray();
 
 <div class="container-fluid"> 
   
-  <!-- Page Heading 
+  <!-- Page Heading  -->
   <h1 class="h3 mb-2 text-primary">Module employés > liste des agents</h1>
-  <p class="mb-4">Manipulez toutes les données relatives au fichier agent.</p>-->
+  <p class="mb-4">Manipulez toutes les données relatives au fichier agent.</p>
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">

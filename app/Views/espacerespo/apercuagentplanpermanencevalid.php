@@ -9,12 +9,10 @@ $permissiondd = $query->getResultArray();
 ?>
 
 <!-- Begin Page Content -->
-
-<div class="container-fluid"> 
   
-  <!-- Page Heading 
-  <h1 class="h3 mb-2 text-primary">Module employés > liste des agents</h1>
-  <p class="mb-4">Manipulez toutes les données relatives au fichier agent.</p>-->
+  <!-- Page Heading  -->
+  <h1 class="h3 mb-2 text-primary">Module employés > Liste des Permissions jour à jour</h1>
+  <p class="mb-4">Traitez toute la liste d’autorisations quotidienne.</p>
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
