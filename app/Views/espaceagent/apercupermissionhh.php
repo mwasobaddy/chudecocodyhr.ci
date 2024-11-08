@@ -2,9 +2,9 @@
 
 <div class="container-fluid"> 
   
-  <!-- Page Heading 
-  <h1 class="h3 mb-2 text-primary">Module employés > liste des agents</h1>
-  <p class="mb-4">Manipulez toutes les données relatives au fichier agent.</p>-->
+  <!-- Page Heading  -->
+  <h1 class="h3 mb-2 text-primary">Module employés > Liste des Permissions heure à heure</h1>
+  <p class="mb-4">Traiter toutes les données de la liste de permissions heure par heure.</p>
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">

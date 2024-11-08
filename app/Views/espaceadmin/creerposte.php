@@ -108,7 +108,7 @@ echo form_open('espaceadmin/creerposte');
               <label for="justificatif2">justificatif 2</label>
     <input type="file" class="form-control-file" id="justificatif2" name="justificatif2">
             </div> -->
-             <div class="form-group col-md-12">
+             <div class="form-group col-md-12 d-flex justify-content-center">
               <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>          </div>
           </div>
           

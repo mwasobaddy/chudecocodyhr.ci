@@ -20,7 +20,7 @@
     <div class="card-header py-3 border-left-warning">
       <table style="width:100%">
         <tr>
-          <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des Poste<->Sous-Direction</h6></td>
+          <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des Poste > Sous-Direction</h6></td>
           
         </tr>
       </table>
