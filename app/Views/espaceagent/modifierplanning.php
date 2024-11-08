@@ -96,9 +96,9 @@ echo view('toast');
                                             <td style="text-align:center;">';
 											
 											if($info['changement']==1) {
-													echo anchor('espaceagent/editplanningn/'.$info['idagentplanpermanence'],'<i class="fas fa-trash" title="Annuler demande de changement"></i>');
+													echo anchor('espaceagent/editplanningn/'.$info['idagentplanpermanence'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Annuler demande de changement"></i></span>');
 											} else {
-												echo anchor('espaceagent/editplanning/'.$info['idagentplanpermanence'],'<i class="fas fa-user-edit" title="Initier changement"></i>');
+												echo anchor('espaceagent/editplanning/'.$info['idagentplanpermanence'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Initier changement"></i></span>');
 												
 											
 											}

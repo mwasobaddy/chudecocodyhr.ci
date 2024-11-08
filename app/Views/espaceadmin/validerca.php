@@ -95,8 +95,8 @@ $congeannuel = $query->getResultArray();
 											<td>'.$info['etat'].'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/validerca/'.$info['IDconge'],'<i class="fas fa-user-edit" title="Valider"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delcongeannuel/'.$info['IDconge'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/validerca/'.$info['IDconge'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Valider"></i></span>').'
+									'.anchor('espaceadmin/delcongeannuel/'.$info['IDconge'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

@@ -91,19 +91,19 @@ $congematernite = $query->getResultArray();
 											<td>'.$info['etat'].'</td>
                                             
                       <td style="text-align:center;">
-										'.anchor('espacerespo/validercm/'.$info['IDconge'],'<i class="fas fa-check-double" title="Valider"></i>').'
+										'.anchor('espacerespo/validercm/'.$info['IDconge'],'<span class="btn btn-success mb-2"><i class="m-0 fas a-check-double" title="Valider"></i></span>').'
 									';
 
                   echo '</td><td style="text-align:center;">';
                   $lieu = './agents/'.$row->matricule.'/4-CONGES/';
                   if (!empty($info['justificatif1'])) {
-                    echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 1"></i></a>'; 
+                    echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 1"></i></a>'; 
                   }
                   if (!empty($info['justificatif2'])) {
-                    echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 2"></i></a>'; 
+                    echo '<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 2"></i></a>'; 
                   }
                   if (!empty($info['justificatif3'])) {
-                    echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 3"></i></a>'; 
+                    echo '<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 3"></i></a>'; 
                   }
               
                   echo '</td>

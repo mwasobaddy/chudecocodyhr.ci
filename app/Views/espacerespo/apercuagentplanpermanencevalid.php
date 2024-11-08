@@ -63,38 +63,28 @@ $permissiondd = $query->getResultArray();
 			?>
             <?php foreach ($permissiondd as $info): ?>
             <?php 
-		
-		
-										
-										echo '<tr>
-                                            <td>'.($i++).' </td>';
-                                            
-											
+              echo '
+                <tr>
+                  <td>'.($i++).' </td>';
+                  $query = $db->query('SELECT IDagent, matricule, nom from agent where IDagent='.$info['Idagent']);
+									$row   = $query->getRow();
 
-	$query = $db->query('SELECT IDagent, matricule, nom from agent where IDagent='.$info['Idagent']);
-											$row   = $query->getRow();
-
-								echo '<td>'.$row->matricule.'</td>';
-								echo '<td>'.$row->nom.'</td>';
-								
-				//echo '<td></td><td></td>';
+                  echo '<td>'.$row->matricule.'</td>';
+                  echo '<td>'.$row->nom.'</td>';
+                  //echo '<td></td><td></td>';
 											
-											echo '<td>'.$info['motif'].'</td>
-											<td>'.$info['datesortie'].'</td>
-											<td>'.$info['lieu'].'</td>
-											<td>'.$info['jourdepart'].'</td>
-											<td>'.$info['jourarrivee'].'</td>
-											<td>'.$info['etat'].'</td>
-                                            
-											
-											
-                                            <td style="text-align:center;">
-										'.anchor('espacerespo/validerpdd/'.$info['IDpermission'],'<i class="fas fa-check-double" title="Valider"></i>').'
+                  echo '<td>'.$info['motif'].'</td>
+                  <td>'.$info['datesortie'].'</td>
+                  <td>'.$info['lieu'].'</td>
+                  <td>'.$info['jourdepart'].'</td>
+                  <td>'.$info['jourarrivee'].'</td>
+                  <td>'.$info['etat'].'</td>
+                  <td style="text-align:center;">
+										'.anchor('espacerespo/validerpdd/'.$info['IDpermission'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>').'
 									</td>
-                                        </tr>
-											';
-		
-										?>
+                </tr>
+							';
+            ?>
             <?php endforeach; ?>
             <?php else : ?>
          

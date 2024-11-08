@@ -76,8 +76,8 @@
 											
                                             
                                             echo '<td style="text-align:center;">
-										'.anchor('espaceadmin/validerbesoinservice/'.$info['IDbesoinservice'],'<i class="fas fa-user-edit" title="Valider la demande"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/invaliderbesoinservice/'.$info['IDbesoinservice'],'<i class="fas fa-trash" title="Invalider la demande"></i>').'
+										'.anchor('espaceadmin/validerbesoinservice/'.$info['IDbesoinservice'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Valider la demande"></i></span>').'
+									'.anchor('espaceadmin/invaliderbesoinservice/'.$info['IDbesoinservice'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Invalider la demande"></i></span>').'
 									</td>
                                         </tr>
 											';

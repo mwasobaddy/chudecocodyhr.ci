@@ -208,6 +208,34 @@ svg {
   vertical-align: middle;
 }
 
+
+table {
+  border: none !important;
+  border-spacing: 5px; /* Adds 10px space between each cell */
+  margin-top: 20px;
+}
+
+tbody th,
+tbody td {
+  border: none !important;
+}
+
+tbody th:last-child,
+tbody td:last-child {
+  border-right: none !important;  /* Remove the right border from the last column */
+}
+
+
+tbody tr:nth-child(even) {
+  background-color: #f1f1f1 !important;  /* Light green background for odd rows */
+}
+
+
+th{
+  background-color: #6ec1e4;
+  color: #ffffff;
+}
+
 table {
   border-collapse: collapse;
 }
