@@ -66,8 +66,8 @@
 											<td>'.$info['Intitule'].'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/editposte/'.$info['IDposte'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delposte/'.$info['IDposte'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/editposte/'.$info['IDposte'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espaceadmin/delposte/'.$info['IDposte'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

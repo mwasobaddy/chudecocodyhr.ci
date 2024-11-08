@@ -82,7 +82,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
 											
 											} else {
 												echo '
-											'.anchor('espaceadmin/departretraite/'.$info['idagent'],'<i class="fas fa-angle-double-right" title="Depart à la retraite"></i>').'	';
+											'.anchor('espaceadmin/departretraite/'.$info['idagent'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-right" title="Depart à la retraite"></i></span>').'	';
 											}
 											
 											

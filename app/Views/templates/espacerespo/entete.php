@@ -72,7 +72,7 @@ function selectagent($m, $cmp)
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-<link rel="shortcut icon" href="<?php echo base_url('favicon.png');?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo base_url('favicon.ico');?>" type="image/x-icon" />
     <title>Portail RH CHU de Cocody</title>
 
     <!-- Custom fonts for this template-->

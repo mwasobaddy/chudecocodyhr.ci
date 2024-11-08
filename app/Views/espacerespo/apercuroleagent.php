@@ -65,8 +65,8 @@
 											//.$info['libelle'].'</td>
                                             
                                            echo ' <td style="text-align:center;">
-										'.anchor('espacerespo/editroleagent/'.$info['IDroleagent'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espacerespo/delroleagent/'.$info['IDroleagent'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espacerespo/editroleagent/'.$info['IDroleagent'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espacerespo/delroleagent/'.$info['IDroleagent'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

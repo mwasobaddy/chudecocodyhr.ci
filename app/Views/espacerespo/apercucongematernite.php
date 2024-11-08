@@ -92,15 +92,15 @@ foreach ($results as $info)
 												echo '<a target="new" href="'.base_url('/espaceagent/pdfcongemagentdecret/'.$info['IDconge'].'').'"><img src="'.base_url('/img/okok.jpg').'" alt="TELECHARGER ACTE" style="width:30px; height:30px;"/></a><a target="new" href="'.base_url('/espaceagent/pdfcongemagentattestation/'.$info['IDconge'].'').'">&nbsp;&nbsp;<img src="'.base_url('/img/okok.jpg').'" alt="TELECHARGER ACTE" style="width:30px; height:30px;"/></a>';
                        
                         $lieu = './agents/'.$row->matricule.'/4-CONGES/';
-                      echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 1"></i></a>';	
-                      echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 2"></i></a>';	
-                      echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 3"></i></a>';	
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 1"></i></a>';	
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 2"></i></a>';	
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 3"></i></a>';	
                   
                     
                       } else { //pdfcongeagentpays
 											///espaceagent/pdfcongeagentpays/'.$info['IDconge'].'
-												echo anchor('espaceagent/editcongematernite/'.$info['IDconge'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-											'.anchor('espaceagent/delcongematernite/'.$info['IDconge'],'<i class="fas fa-trash" title="Supprimer"></i>');
+												echo anchor('espaceagent/editcongematernite/'.$info['IDconge'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+											'.anchor('espaceagent/delcongematernite/'.$info['IDconge'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
 											
 											}
 										

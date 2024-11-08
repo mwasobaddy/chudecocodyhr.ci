@@ -69,8 +69,8 @@ $db = \Config\Database::connect();
                                             <td>'.$info['datecreation'].'</td><td></td>';
                                            
 										   /* echo '<td style="text-align:center;">
-										'.anchor('espacerespo/editplancongeannuel/'.$info['IDcontrat'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espacerespo/delplancongeannuel/'.$info['IDplancongeannuel'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espacerespo/editplancongeannuel/'.$info['IDcontrat'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espacerespo/delplancongeannuel/'.$info['IDplancongeannuel'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>';*/
 									echo '
                                         </tr>

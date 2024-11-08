@@ -83,8 +83,8 @@
 											
 											echo '                                           
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/editpostedirection/'.$info['IDpostedirection'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delpostedirection/'.$info['IDpostedirection'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/editpostedirection/'.$info['IDpostedirection'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espaceadmin/delpostedirection/'.$info['IDpostedirection'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

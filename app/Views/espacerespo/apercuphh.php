@@ -105,12 +105,13 @@ $permissionhh = $query->getResultArray();
                                                         } else {
                                                             if ($info['validationcs'] == 1 && $info['validationsdrh'] == 1) {
                                                                 echo 'Modification impossible!';
-                                                            } else echo anchor('espacerespo/validerphh/' . $info['IDpermission'], '<i class="fas fa-check-double" title="Valider"></i>') . '&nbsp;&nbsp;' . anchor('espacerespo/rejetphh/' . $info['IDpermission'], '<i class="fas fa-times" title="Rejeter"></i>');
+                                                            } else echo anchor('espacerespo/validerphh/' . $info['IDpermission'], '<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>') . '
+                                                                    ' . anchor('espacerespo/rejetphh/' . $info['IDpermission'], '<i class="fas fa-times" title="Rejeter"></i>');
                                                         }
                                                     }
                                                 }
                                             }
-                            //                                              echo anchor('espaceadmin/validerphh/'.$info['IDpermission'],'<i class="fas fa-check-double" title="Valider"></i>').'';
+                            //                                              echo anchor('espaceadmin/validerphh/'.$info['IDpermission'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>').'';
                                             echo '</td><td>';
                                             if($info['justificatif'])  {
                                                 $lieu = './agents/'.$row->matricule.'/4-CONGES/';

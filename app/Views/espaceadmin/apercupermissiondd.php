@@ -78,13 +78,13 @@
   											<td>'.$info['etat'].'</td>
                                               
   											<td style="text-align:center;">
-  										    '.anchor('espaceadmin/editpermissiondd/'.$info['IDpermission'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-  									      '.anchor('espaceadmin/delpermissiondd/'.$info['IDpermission'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+  										    '.anchor('espaceadmin/editpermissiondd/'.$info['IDpermission'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+  									      '.anchor('espaceadmin/delpermissiondd/'.$info['IDpermission'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
   									     ';
                         echo '</td><td>';
                             if($info['justificatif']){
                                $lieu = './agents/'.$row->matricule.'/4-CONGES/';
-                               echo '&nbsp;&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif']).'"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';
+                               echo '<a target="new" href="'.base_url($lieu.$info['justificatif']).'"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';
                                   }
                 
                         echo '</td>

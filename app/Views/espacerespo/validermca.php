@@ -96,7 +96,7 @@ foreach ($results as $info)
 											<td>'.$info['etat'].'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espaceagent/validationagentcongeannuel/'.$info['IDcongeannuel'],'<i class="fas fa-user-edit" title="Valider"></i>').'
+										'.anchor('espaceagent/validationagentcongeannuel/'.$info['IDcongeannuel'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Valider"></i></span>').'
 									</td>
                                         </tr>
 											';

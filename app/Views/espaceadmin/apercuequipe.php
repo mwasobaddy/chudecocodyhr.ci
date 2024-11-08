@@ -58,8 +58,8 @@ $db = \Config\Database::connect();
                                             <td>'.$info['libelle'].'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/addagentequipe/'.$info['IDequipe'],'<i class="fas fa-user-plus" title="Ajouter des agents à l\'équipe"></i>').'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.anchor('espaceadmin/editequipe/'.$info['IDequipe'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delequipe/'.$info['IDequipe'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/addagentequipe/'.$info['IDequipe'],'<i class="fas fa-user-plus" title="Ajouter des agents à l\'équipe"></i>').''.anchor('espaceadmin/editequipe/'.$info['IDequipe'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espaceadmin/delequipe/'.$info['IDequipe'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

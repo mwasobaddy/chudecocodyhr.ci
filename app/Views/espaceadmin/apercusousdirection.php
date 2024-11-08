@@ -81,8 +81,8 @@
 											echo '</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/editsousdirection/'.$info['IDsousdirection'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delsousdirection/'.$info['IDsousdirection'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/editsousdirection/'.$info['IDsousdirection'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espaceadmin/delsousdirection/'.$info['IDsousdirection'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

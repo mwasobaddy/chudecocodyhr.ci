@@ -91,8 +91,8 @@ echo view('toast');
 											
 											
                                             <td style="text-align:center;">
-										'.anchor('espacerespo/editpermissiondd/'.$info['IDpermission'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espacerespo/delpermissiondd/'.$info['IDpermission'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espacerespo/editpermissiondd/'.$info['IDpermission'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espacerespo/delpermissiondd/'.$info['IDpermission'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

@@ -48,8 +48,8 @@
                                             <td>'.$info['libelle'].'</td>
                                             
                                             <td style="text-align:center;">
-										'.anchor('espaceadmin/editcontrat/'.$info['IDcontrat'],'<i class="fas fa-user-edit" title="Modifier"></i>').'&nbsp;&nbsp;&nbsp;
-									'.anchor('espaceadmin/delcontrat/'.$info['IDcontrat'],'<i class="fas fa-trash" title="Supprimer"></i>').'
+										'.anchor('espaceadmin/editcontrat/'.$info['IDcontrat'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+									'.anchor('espaceadmin/delcontrat/'.$info['IDcontrat'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
 									</td>
                                         </tr>
 											';

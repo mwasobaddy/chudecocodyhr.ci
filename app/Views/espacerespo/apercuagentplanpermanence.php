@@ -92,7 +92,7 @@ $agentplanpermanence = $query->getResultArray();
 						
 					} else {
 						
-						echo '</td><td style="text-align:center;">'.anchor('espacerespo/delagentplanpermanence/'.$libdel,'<i class="fas fa-trash" title="Supprimer"></i>').'</td></tr>';
+						echo '</td><td style="text-align:center;">'.anchor('espacerespo/delagentplanpermanence/'.$libdel,'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'</td></tr>';
 						
 						echo '<tr><td>'.($i++).' </td>
 						<td>'.$info['libequipe'].'</td>
@@ -108,7 +108,7 @@ $agentplanpermanence = $query->getResultArray();
 				}
 
 if($nbr == $total) {
-	echo '</td><td style="text-align:center;">'.anchor('espacerespo/delagentplanpermanence/'.$libdel,'<i class="fas fa-trash" title="Supprimer"></i>').'</td></tr>';
+	echo '</td><td style="text-align:center;">'.anchor('espacerespo/delagentplanpermanence/'.$libdel,'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'</td></tr>';
 }
 $lastid = $info['IDequipe'];
 
