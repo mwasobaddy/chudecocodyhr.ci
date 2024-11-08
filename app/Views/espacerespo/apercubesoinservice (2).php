@@ -20,7 +20,7 @@
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Poste_service</h6>
         </div>
         <div class="card-body">
@@ -130,7 +130,7 @@ echo ' <option value="'.$row->IDlafonction.'">'.$row->libelle.'</option>';
     <input type="file" class="form-control-file" id="justificatif2" name="justificatif2">
             </div> -->
              <div class="form-group col-md-12">
-              <button type="submit" class="btn btn-primary" style="width:100%">Valider formulaire</button>          </div>
+              <button type="submit" class="btn btn-primary">Valider formulaire</button>          </div>
           </div>
           
           

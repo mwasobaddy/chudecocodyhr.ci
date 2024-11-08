@@ -274,7 +274,7 @@ echo form_open('espaceadmin/afficher/creeragent')
               </div>
               <div class="form-group col-md-4"> </div>
               <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary" style="width:100%">Valider formulaire</button>
+                <button type="submit" class="btn btn-primary">Valider formulaire</button>
               </div>
             </div>
           </form>
@@ -289,7 +289,7 @@ echo form_open('espaceadmin/afficher/creeragent')
   <div class="row">
     <div class="col-xs-6 col-sm-6">
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Liste des documents et photo</h6>
         </div>
         <div class="card-body"> 
@@ -337,7 +337,7 @@ echo form_open('espaceadmin/afficher/creeragent')
     </div>
     <div class="col-xs-6 col-sm-6">
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Liste des rôles</h6>
         </div>
         <div class="card-body"> 

@@ -23,7 +23,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Depart du CHU</h6>
         </div>
         <div class="card-body">
@@ -42,33 +42,33 @@ if(isset($lidretourchu)) {
 ?>
           <!---- <form> ----->
           <div class="form-row">
-            <div class="form-group col-md-4">
-            <input type="hidden" class="form-control" id="idagent" name="idagent"   <?php   if(isset($lidagent)) {echo 'value="'.$agent->idagent.'"';} ?> >
+            <div class="form-group col-md-6">
+              <input type="hidden" class="form-control" id="idagent" name="idagent"   <?php   if(isset($lidagent)) {echo 'value="'.$agent->idagent.'"';} ?> >
             
-          <label for="datedepart">Date départ/retour du CHU </label>
+              <label for="datedepart">Date départ/retour du CHU </label>
               <input type="date" class="form-control" id="datedepart" name="datedepart"  placeholder="Depart" required="required" <?php   if(isset($lidenformation)) {echo 'value="'.$enformation->datedepart.'"';} ?>>
               
             </div>
             
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
               <label for="motif">Motif départ/retour</label>
               <input list="lmotif" class="form-control" id="motif" name="motif" autocomplete="off" required="required" placeholder="Ex : Mutation" <?php   if(isset($lidretourchu)) {echo 'value="'.$agent->motifquitterchu.'"';} ?>/>
-<datalist id="lmotif">
+              <datalist id="lmotif">
 
-<option value="Abandon de poste">
-  <option value="Décès">
-    <option value="Formation-promotion" >
-  <option value="Mutation">
-  <option value="Permutation">
+                <option value="Abandon de poste">
+                <option value="Décès">
+                <option value="Formation-promotion" >
+                <option value="Mutation">
+                <option value="Permutation">
 
 
-  
-</datalist>
+                
+              </datalist>
               
             </div>
             
-            <div class="form-group col-md-4">
-             <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>
+            <div class="form-group col-md-12 d-flex justify-content-center">
+              <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>
             </div>
             
              

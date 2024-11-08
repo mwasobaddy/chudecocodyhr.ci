@@ -228,7 +228,7 @@ echo form_open('espaceadmin/afficher/accueil')
                 </select>
               </div>
               <div class="form-group col-md-3 mb-3">
-                <button type="submit" class="btn btn-primary" style="width:100%; height:100%">Valider</button>
+                <button type="submit" class="btn btn-primary" style="width: 200px; height: 100%">Valider</button>
               </div>
             </div>
             

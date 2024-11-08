@@ -24,7 +24,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Congé de</h6>
         </div>
         <div class="card-body">
@@ -32,19 +32,19 @@ echo view('toast');
           <!---- <form> ----->
           <form action="<?php base_url('/espaceagent/rapports')?>" method="post">
             <div class="row">
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-6">
                <label for="dateterme">Date</label>
                 <input type="date" class="form-control" id="dateterme" name="dateterme" placeholder="datedemande" required="required">
               </div>
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-6">
                 <label for="datereprise">To Date</label>
                <input type="date" class="form-control"  id="datereprise" name="datereprise" required="required">
               </div>
             </div>
 
             <div class="form-row">
-              <div class="form-group col-md-3">
-               <button  type="submit"  class="btn btn-primary" style="width:100%; height:100%">Search</button>          
+              <div class="form-group col-md-12 d-flex justify-content-center">
+               <button  type="submit"  class="btn btn-primary" style="width:200px; height:100%">Search</button>          
               </div>
             </div>
           </form>
@@ -67,7 +67,7 @@ echo view('toast');
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
       <table style="width:100%">
         <tr>
           <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des Congés </h6></td>

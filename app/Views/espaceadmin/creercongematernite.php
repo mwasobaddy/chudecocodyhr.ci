@@ -24,7 +24,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Congé de maternité</h6>
         </div>
         <div class="card-body">
@@ -94,21 +94,21 @@ echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</op
           
           
            <div class="form-row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                <label for="justificatif1">justificatif 1</label>
-    <input type="file" class="form-control-file" id="justificatif1" <?php   if(isset($lidcongematernite)) {echo 'value="'.$congematernite->justificatif1.'"';} ?> name="justificatif1">
+              <input type="file" class="form-control-file" id="justificatif1" <?php   if(isset($lidcongematernite)) {echo 'value="'.$congematernite->justificatif1.'"';} ?> name="justificatif1">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
               <label for="justificatif2">justificatif 2</label>
-    <input type="file" class="form-control-file" id="justificatif2" name="justificatif2" <?php   if(isset($lidcongematernite)) {echo 'value="'.$congematernite->justificatif2.'"';} ?>>
+              <input type="file" class="form-control-file" id="justificatif2" name="justificatif2" <?php   if(isset($lidcongematernite)) {echo 'value="'.$congematernite->justificatif2.'"';} ?>>
             </div>
-             <div class="form-group col-md-3">
+             <div class="form-group col-md-4">
               <label for="justificatif3">justificatif 3</label>
-    <input type="file" class="form-control-file" id="justificatif3" name="justificatif3" <?php   if(isset($lidcongematernite)) {echo 'value="'.$congematernite->justificatif3.'"';} ?>>
+              <input type="file" class="form-control-file" id="justificatif3" name="justificatif3" <?php   if(isset($lidcongematernite)) {echo 'value="'.$congematernite->justificatif3.'"';} ?>>
             </div>
-             <div class="form-group col-md-3">
-               <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>          </div>
-          </div>
+             <div class="form-group col-md-12 d-flex justify-content-center">
+               <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>          </div>
+            </div>
       
       
       

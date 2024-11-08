@@ -19,7 +19,7 @@ $agentplanpermanence = $query->getResultArray();
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
      <?php
 echo view('toast');
  ?>

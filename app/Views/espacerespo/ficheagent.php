@@ -455,8 +455,9 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
             
             
              <div class="form-row">
-              <div class="form-group col-md-12">
-               <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>
+
+              <div class="form-group col-md-12 d-flex justify-content-center">
+               <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>
               </div>
               </div>
           </form>
@@ -471,7 +472,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
   <div class="row">
     <div class="col-xs-6 col-sm-6">
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Liste des documents</h6>
         </div>
         <div class="card-body"> 

@@ -24,7 +24,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Modifier planning agent</h6>
         </div>
         <div class="card-body">
@@ -112,21 +112,15 @@ echo form_open('espaceagent/editplanning/'.$lid);
         
           
             <div class="form-row">
-            <div class="form-group col-md-9">
-             <label for="justificatif">Jour souhaité et justificatif *</label>
-             <input type="text" class="form-control" id="justificatif" name="justificatif"  placeholder="le 04/04/2021 car retour de maladie" required>
-            </div>
+              <div class="form-group col-md-12">
+                <label for="justificatif">Jour souhaité et justificatif *</label>
+                <input type="text" class="form-control" id="justificatif" name="justificatif"  placeholder="le 04/04/2021 car retour de maladie" required>
+              </div>
   
-             <div class="form-group col-md-3">
-              <button type="submit" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>          </div>
-          </div>
-          
-          
-          
-          
-          
-          
-        </div>
+              <div class="form-group col-md-12 d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>          </div>
+              </div>
+            </div>
       </div>
       
     </div>

@@ -14,7 +14,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Contrat</h6>
         </div>
         <div class="card-body">
@@ -30,7 +30,7 @@ echo form_open('espacerespo/creercontrat')
               <input type="text" class="form-control" id="libelle" name="libelle"  placeholder="Nom du Contrat">
             </div>
             <div class="form-group col-md-2">
-              <button type="submit" class="btn btn-primary" style="width:100%">Valider formulaire</button>
+              <button type="submit" class="btn btn-primary">Valider formulaire</button>
             </div>
           </div>
         </div>

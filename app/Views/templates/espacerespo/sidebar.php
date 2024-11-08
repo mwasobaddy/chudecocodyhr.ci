@@ -1,7 +1,7 @@
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion pt-4" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('/espacerespo/afficher/accueil');?>">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center mb-4" href="<?php echo base_url('/espacerespo/afficher/accueil');?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                  <!--    <i class="fas fa-laugh-wink"></i>-->
                 </div>
@@ -114,9 +114,9 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="<?php echo base_url('/espacerespo/evaluation');?>">Objectives setting</a>
+                        <a class="collapse-item" href="<?php echo base_url('/espacerespo/evaluation');?>">Fixation des objectifs</a>
                     
-                        <a class="collapse-item" href="<?php echo base_url('');?>">Annual Performance Review</a>
+                        <a class="collapse-item" href="<?php echo base_url('');?>">Examen annuel des performances</a>
                     
                     </div>
                     

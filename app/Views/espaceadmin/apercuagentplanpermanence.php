@@ -16,7 +16,7 @@ $agentplanpermanence = $query->getResultArray();
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
       <table style="width:100%">
         <tr>
           <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des permanences</h6></td>
@@ -92,14 +92,23 @@ $agentplanpermanence = $query->getResultArray();
 						
 					} else {
 						
-						echo '</td><td style="text-align:center;">'.anchor('espaceadmin/delagentplanpermanence/'.$libdel,'<i class="fas fa-trash" title="Supprimer"></i>').'</td></tr>';
+						echo '
+							</td>
+								<td style="text-align:center;">
+									'.anchor('espaceadmin/delagentplanpermanence/'.$libdel,'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
+								</td>
+							</tr>
+						';
 						
-						echo '<tr><td>'.($i++).' </td>
-						<td>'.$info['libequipe'].'</td>
-						<td>'.$info['libplan'].'</td>
-						<td>'.$jjj.'/'.$row->mois.'/'.$row->annee.'
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-						//$cpt=0; 
+						echo '
+						<tr>
+							<td>'.($i++).' </td>
+							<td>'.$info['libequipe'].'</td>
+							<td>'.$info['libplan'].'</td>
+							<td>'.$jjj.'/'.$row->mois.'/'.$row->annee.'
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						';
+							//$cpt=0; 
 						
 						
 					}
@@ -108,7 +117,13 @@ $agentplanpermanence = $query->getResultArray();
 				}
 
 if($nbr == $total) {
-	echo '</td><td style="text-align:center;">'.anchor('espaceadmin/delagentplanpermanence/'.$libdel,'<i class="fas fa-trash" title="Supprimer"></i>').'</td></tr>';
+	echo '
+		</td>
+			<td style="text-align:center;">
+				'.anchor('espaceadmin/delagentplanpermanence/'.$libdel,'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>').'
+			</td>
+		</tr>
+	';
 }
 $lastid = $info['IDequipe'];
 

@@ -19,7 +19,7 @@ $permissiondd = $query->getResultArray();
   
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 border-left-warning">
       <table style="width:100%">
         <tr>
           <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des Permissions jour à jour</h6></td>
@@ -74,7 +74,7 @@ $permissiondd = $query->getResultArray();
 		
 										
 										if($info['jourarrivee'] < date('Y-m-d')) {
-			echo '<tr style="background-color:red !important; color:#FFF !important;">';
+			echo '<tr style="background-color: #f8d7da !important; color: #842029 !important;">';
 		} else {
 			echo '<tr>';
 		}

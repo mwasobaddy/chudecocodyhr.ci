@@ -457,7 +457,7 @@ echo form_open('espaceagent/monprofil')
   <div class="row">
     <div class="col-xs-12 col-sm-12">
       <div class="card shadow mb-12">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Liste des documents</h6>
         </div>
         <div class="card-body">

@@ -11,7 +11,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Arrêt de travail</h1>
+  <h1 class="h3 mb-2 text-primary">Module employés &gt; Arrêt de travail</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier Arrêt de travail.
    
   </p>
@@ -22,7 +22,7 @@ echo view('toast');
     <div class="col-xs-12 col-sm-12">
       
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Fiche Arrêt de travail</h6>
         </div>
         <div class="card-body">
@@ -128,8 +128,8 @@ echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</op
     <input type="file" class="form-control-file" id="justificatif2" name="justificatif2">
             </div> -->
             
-             <div class="form-group col-md-12">
-               <button type="submit" name="go" value="go" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>          </div>
+             <div class="form-group col-md-12 d-flex justify-content-center">
+               <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>          </div>
           </div>
           
           
