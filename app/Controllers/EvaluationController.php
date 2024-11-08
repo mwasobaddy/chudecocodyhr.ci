@@ -39,7 +39,10 @@ class EvaluationController extends Controller {
                 echo "<script>console.log('Database connected');</script>";
             }
             $data['current_evaluation'] = $this->getCurrentEvaluation($agent_id);
-            $data['objectives'] = $this->getObjectives($data['current_evaluation']['idevaluation'] ?? null);
+
+            if ($data['current_evaluation']) {
+                $data['objectives'] = $this->getObjectives($data['current_evaluation']['idevaluation']);
+            }
             echo view('templates/espaceagent/entete', $data);
             echo view('templates/espaceagent/sidebar', $data);
             echo view('templates/espaceagent/topbar', $data);
@@ -203,6 +206,23 @@ class EvaluationController extends Controller {
     
         return redirect()->to('/espacerespo/evaluation')->with('success', 'Objectives saved successfully.');
     }
+
+    public function agreeObjective()
+{
+    $objective_id = $this->request->getPost('objective_id');
+    $agreement = $this->request->getPost('agreement');
+    $comments = $this->request->getPost('comments');
+
+    // Update the objective with the employee's agreement and comments
+    $this->db->table('objectives')
+        ->where('idobjective', $objective_id)
+        ->update([
+            'agreement' => $agreement,
+            'employee_comments' => $comments
+        ]);
+
+    return redirect()->back()->with('success', 'Your response has been saved.');
+}
     
 
     public function submitAgreement() {
