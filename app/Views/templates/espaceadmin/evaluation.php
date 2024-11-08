@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Evaluation Management</h1>
+        <h1 class="h3 mb-0 text-primary">Gestion de l'évaluation</h1>
     </div>
 
     <!-- Overview Cards -->
@@ -14,7 +14,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Total Evaluations</div>
+                                Total des évaluations</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= count($evaluations) ?></div>
                         </div>
                         <div class="col-auto">
@@ -32,7 +32,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Pending</div>
+                                En attente</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?= count(array_filter($evaluations, fn($e) => $e['status'] === 'Started')) ?>
                             </div>
@@ -52,7 +52,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Completed</div>
+                                Terminé</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?= count(array_filter($evaluations, fn($e) => $e['status'] === 'Completed')) ?>
                             </div>
@@ -68,20 +68,20 @@
 
     <!-- Evaluations List -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">All Evaluations</h6>
+        <div class="card-header py-3 border-left-warning">
+            <h6 class="m-0 font-weight-bold text-primary">Toutes les évaluations</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="evaluationsTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Employee</th>
-                            <th>Line Manager N+1</th>
-                            <th>Line Manager N+2</th>
-                            <th>Status</th>
-                            <th>Started</th>
-                            <th>Completed</th>
+                            <th>Employé</th>
+                            <th>Responsable hiérarchique N+1</th>
+                            <th>Responsable hiérarchique N+2</th>
+                            <th>Statut</th>
+                            <th>Commencé</th>
+                            <th>Terminé</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -118,7 +118,7 @@
                                 <td><?= date('d M Y', strtotime($eval['started_at'])) ?></td>
                                 <td><?= $eval['completed_at'] ? date('d M Y', strtotime($eval['completed_at'])) : '-' ?></td>
                                 <td>
-                                    <button class="btn btn-info btn-sm" 
+                                    <button class="btn btn-success btn-sm" 
                                             data-toggle="modal" 
                                             data-target="#viewDetailsModal_<?= $eval['idevaluation'] ?>">
                                         <i class="fas fa-eye"></i> View
@@ -127,6 +127,17 @@
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Employé</th>
+                            <th>Responsable hiérarchique N+1</th>
+                            <th>Responsable hiérarchique N+2</th>
+                            <th>Statut</th>
+                            <th>Commencé</th>
+                            <th>Terminé</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -149,7 +160,7 @@
                     <input type="hidden" name="manager_type" id="modalManagerType">
                     
                     <div class="form-group">
-                        <label>Select New Manager:</label>
+                        <label>Sélectionnez Nouveau gestionnaire :</label>
                         <select name="new_manager_id" class="form-control" required>
                             <?php foreach ($managers as $manager): ?>
                                 <option value="<?= $manager['idagent'] ?>">
@@ -160,8 +171,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
                 </div>
             </form>
         </div>

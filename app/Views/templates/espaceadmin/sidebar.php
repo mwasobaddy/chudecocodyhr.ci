@@ -148,8 +148,6 @@
                         
                         <a class="collapse-item" href="<?php echo base_url('/espaceadmin/evaluation');?>">Fixation des objectifs</a>
                     
-                        <a class="collapse-item" href="<?php echo base_url('');?>">Examen annuel des performances</a>
-                    
                     </div>
                     
                 </div>
