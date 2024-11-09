@@ -89,7 +89,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Évaluation</span>
+                    <span>Evaluation</span>
                 </a>
              </li>
              <li class="nav-item">

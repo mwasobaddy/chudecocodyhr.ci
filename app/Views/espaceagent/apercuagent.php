@@ -12,7 +12,7 @@
       <table style="width:100%">
         <tr>
           <td><h6 class="m-0 font-weight-bold text-primary text-left">Liste des agents</h6></td>
-          <td><p class="text-right font-weight-bold text-primary"> <a href="<?php echo base_url('espaceadmin/creeragent');?>" class="btn btn-primary btn-icon-split"> <span class="icon text-white-50"><i class="fas fa-plus-circle"></i></span><span class="text">Créer nouvel agent</span> </a> </p></td>
+          <td><p class="text-right font-weight-bold text-primary"> <a href="<?php echo base_url('espaceadmin/creeragent');?>" class="btn btn-primary btn-icon-split"> <span class="icon text-white-50"><i class="fas fa-plus-circle"></i></span><span class="text">Ajouter un nouvel agent</span> </a> </p></td>
         </tr>
       </table>
     </div>
