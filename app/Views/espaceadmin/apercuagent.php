@@ -119,7 +119,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
                   <td style="text-align:center;">
                     '.anchor('espaceadmin/ficheagent/'.$info['idagent'],'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Voir fiche"></i></span>').'
                     '.anchor('espaceadmin/delagent/'.$info['idagent'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Désactiver agent"></i></span>').'
-                    '.'<a href="JavaScript:;" data-val="'.$info['idagent'].'" data-toggle="modal" data-target="#passwordModal"><span class="btn btn-primary"><i class="m-0 fas fa-pencil-alt" title="Créer un mot de passe"></i></span></a>'.'
+                    '.'<a href="JavaScript:;" data-val="'.$info['idagent'].'" data-toggle="modal" data-target="#passwordModal"><span class="btn btn-primary"><i class="m-0 fas fa-key" title="Créer un mot de passe"></i></span></a>'.'
                   </td>
                 </tr>
 							';
