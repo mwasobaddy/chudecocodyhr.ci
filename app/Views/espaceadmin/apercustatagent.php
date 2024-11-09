@@ -36,6 +36,7 @@ echo view('toast');
 
               <th>Nom et prénoms</th>
               <th>Date naissance</th>
+              <th>L'âge</th>
               <th>Genre</th>
               <th>Emploi</th>
               <th>Grade</th>
@@ -57,6 +58,7 @@ echo view('toast');
             <tr>
               <th>Nom et prénoms</th>
               <th>Date naissance</th>
+              <th>L'âge</th>
               <th>Genre</th>
               <th>Emploi</th>
               <th>Grade</th>
@@ -77,38 +79,37 @@ echo view('toast');
             <?php if (! empty($agent) && is_array($agent)) : ?>
             <?php foreach ($agent as $info): ?>
             <?php
-
-                    $ff = ($info['enformation'])?('OUI'):('NON');
-					$dd = ($info['quitterchu'])?('OUI'):('NON');
-					$rr = ($info['alaretraite'])?('OUI'):('NON');
-					//$dis = ($info['disponibilite'])?('OUI'):('NON');
-										echo '<tr>
-
-                                            <td>'.$info['nom'].'</td>
-                                            <td>'.$info['datenais'].'</td>
-                                            <td style="width:10px;">'.$info['llgenre'].'</td>
-                                            <td>'.$info['llemploi'].'</td>
-                                            <td>'.$info['llgrade'].'</td>
-                                            <td>'.$info['llfonction'].'</td>
-                                            <td>'.$info['pschu'].'</td>
-                                            <td>'.$info['psfp'].'</td>
-                                            <td>'.$info['llcontrat'].'</td>
-                                            
-											<td>'.$info['lldirection'].'</td>
-                                            <td>'.$info['llsousdirection'].'</td>
-											<td>'.$info['llservice'].'</td>            
-                                           
-                                            <td>'.$ff.'</td>
-											<td>'.$dd.'</td>
-											<td>'.$info['position'].'</td>
-											<td>'.$rr.'</td>
-
-                                        </tr>
-											';
-
- 
-
-										?>
+              $ff = ($info['enformation'])?('OUI'):('NON');
+              $dd = ($info['quitterchu'])?('OUI'):('NON');
+              $rr = ($info['alaretraite'])?('OUI'):('NON');
+              //$dis = ($info['disponibilite'])?('OUI'):('NON');
+              
+              // Assuming $info['datenais'] is in 'Y-m-d' format
+              $dob = new DateTime($info['datenais']);
+              $now = new DateTime();
+              $age = $now->diff($dob)->y;
+              echo '
+                <tr>
+                  <td>'.$info['nom'].'</td>
+                  <td>'.$info['datenais'].'</td>
+                  <td>'.$age.'</td>
+                  <td style="width:10px;">'.$info['llgenre'].'</td>
+                  <td>'.$info['llemploi'].'</td>
+                  <td>'.$info['llgrade'].'</td>
+                  <td>'.$info['llfonction'].'</td>
+                  <td>'.$info['pschu'].'</td>
+                  <td>'.$info['psfp'].'</td>
+                  <td>'.$info['llcontrat'].'</td>
+                  <td>'.$info['lldirection'].'</td>
+                  <td>'.$info['llsousdirection'].'</td>
+                  <td>'.$info['llservice'].'</td>
+                  <td>'.$ff.'</td>
+                  <td>'.$dd.'</td>
+                  <td>'.$info['position'].'</td>
+                  <td>'.$rr.'</td>
+                </tr>
+              ';
+            ?>
             <?php endforeach; ?>
             <?php else : ?>
           <h3>Rien à afficher</h3>
