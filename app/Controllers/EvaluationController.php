@@ -90,6 +90,8 @@ class EvaluationController extends Controller {
         }
     }
 
+    
+
     public function setObjectives($evaluation_id)
 {
     $session = session();
@@ -164,14 +166,19 @@ class EvaluationController extends Controller {
             ->getRowArray();
     }
 
-    private function getObjectives($evaluation_id) {
-        if (!$evaluation_id) return [];
-        
+    private function getObjectives($evaluation_id)
+{
+    try {
         return $this->db->table('objectives')
             ->where('evaluation_id', $evaluation_id)
             ->get()
             ->getResultArray();
+    } catch (\Exception $e) {
+        log_message('error', 'Error fetching objectives: ' . $e->getMessage());
+        return [];
     }
+}
+ 
 
 
     public function startEvaluation() {
@@ -463,71 +470,73 @@ public function getManagers()
             ->where('employee_id', $agent_id)
             ->get()->getResultArray();
     }
-    // public function selfAppraisal($evaluation_id)
-    // {
-    //     $session = session();
-    //     $agent_id = $session->get('cnxid');
-    //     $userAccess = $session->get('idd');
-
-    //     if ($userAccess != 1) { // Ensure it's the employee
-    //         return redirect()->back()->with('error', 'Access denied.');
-    //     }
-
-    //     $evaluation = $this->getEvaluation($evaluation_id);
-
-    //     if (!$evaluation || $evaluation['employee_id'] != $agent_id) {
-    //         return redirect()->back()->with('error', 'Evaluation not found.');
-    //     }
-
-    //     $objectives = $this->getObjectives($evaluation_id);
-
-    //     // Fetch existing self-appraisals
-    //     $selfAppraisals = $this->db->table('self_appraisals')
-    //         ->where('evaluation_id', $evaluation_id)
-    //         ->get()
-    //         ->getResultArray();
-
-    //     // Map self-appraisals by objective_id for easy access
-    //     $selfAppraisalsByObjective = [];
-    //     foreach ($selfAppraisals as $selfAppraisal) {
-    //         $selfAppraisalsByObjective[$selfAppraisal['objective_id']] = $selfAppraisal;
-    //     }
-
-    //     $data = [
-    //         'evaluation' => $evaluation,
-    //         'objectives' => $objectives,
-    //         'selfAppraisals' => $selfAppraisalsByObjective,
-    //     ];
-
-    //     // Load views
-    //     echo view('templates/espaceagent/entete', $data);
-    //     echo view('templates/espaceagent/sidebar', $data);
-    //     echo view('templates/espaceagent/topbar', $data);
-    //     echo view('templates/espaceagent/self_appraisal', $data);
-    //     echo view('templates/espaceagent/pied', $data);
-    // }
     
-public function selfAppraisal($evaluation_id = null)
+   
+public function selfAppraisal($evaluation_id)
 {
+    $session = session();
+    $agent_id = $session->get('cnxid');
+    $userAccess = $session->get('idd');
+
+    // Log session data to file
+    log_message('debug', 'selfAppraisal called with agent_id: ' . $agent_id . ', userAccess: ' . $userAccess);
+
     if (!$evaluation_id) {
+        log_message('debug', 'No evaluation ID provided');
         return redirect()->back()->with('error', 'No evaluation ID provided');
     }
 
     try {
         $evaluation = $this->getEvaluation($evaluation_id);
         if (!$evaluation) {
+            log_message('debug', 'Evaluation not found for ID: ' . $evaluation_id);
             return redirect()->back()->with('error', 'Evaluation not found');
+        }
+
+        // Ensure the evaluation belongs to the logged-in agent
+        if ($evaluation['employee_id'] != $agent_id) {
+            log_message('debug', 'Access denied. Evaluation employee_id: ' . $evaluation['employee_id'] . ', agent_id: ' . $agent_id);
+            return redirect()->back()->with('error', 'Access denied.');
+        }
+
+        // Fetch objectives
+        $objectives = $this->getObjectives($evaluation_id);
+
+        // Ensure objectives is an array
+        if (!is_array($objectives)) {
+            log_message('error', 'Invalid objectives data: ' . print_r($objectives, true));
+            return redirect()->back()->with('error', 'Invalid objectives data.');
+        }
+
+        // Fetch existing self-appraisals (if any)
+        $selfAppraisals = $this->db->table('self_appraisals')
+            ->where('evaluation_id', $evaluation_id)
+            ->get()
+            ->getResultArray();
+
+        // Ensure selfAppraisals is an array
+        if (!is_array($selfAppraisals)) {
+            log_message('error', 'Invalid selfAppraisals data: ' . print_r($selfAppraisals, true));
+            return redirect()->back()->with('error', 'Invalid selfAppraisals data.');
+        }
+
+        // Map self-appraisals by objective_id for easy access in views
+        $selfAppraisalsByObjective = [];
+        foreach ($selfAppraisals as $selfAppraisal) {
+            $selfAppraisalsByObjective[$selfAppraisal['objective_id']] = $selfAppraisal;
         }
 
         $data = [
             'evaluation' => $evaluation,
-            'current_evaluation_id' => $evaluation_id
+            'objectives' => $objectives,
+            'selfAppraisals' => $selfAppraisalsByObjective,
         ];
 
+        // Load views
         echo view('templates/espaceagent/entete', $data);
         echo view('templates/espaceagent/sidebar', $data);
         echo view('templates/espaceagent/topbar', $data);
-        echo view('templates/espaceagent/evaluation', $data);
+        echo view('templates/espaceagent/self_appraisal', $data);
         echo view('templates/espaceagent/pied', $data);
 
     } catch (\Exception $e) {
@@ -541,13 +550,15 @@ public function submitSelfAppraisal()
     $agent_id = $session->get('cnxid');
     $userAccess = $session->get('idd');
 
-    if ($userAccess != 1) { // Ensure it's the employee
+    // Ensure it's the employee
+    if ($userAccess != 1) {
         return redirect()->back()->with('error', 'Access denied.');
     }
 
     $evaluation_id = $this->request->getPost('evaluation_id');
     $evaluation = $this->getEvaluation($evaluation_id);
 
+    // Validate evaluation
     if (!$evaluation || $evaluation['employee_id'] != $agent_id) {
         return redirect()->back()->with('error', 'Invalid evaluation.');
     }
@@ -557,12 +568,18 @@ public function submitSelfAppraisal()
     $comments = $this->request->getPost('comments');
     $action = $this->request->getPost('action');
 
+    // Validate input data
+    if (empty($objective_ids) || empty($self_scores) || count($objective_ids) != count($self_scores)) {
+        return redirect()->back()->with('error', 'Invalid input data.');
+    }
+
     foreach ($objective_ids as $index => $objective_id) {
         $data = [
             'evaluation_id' => $evaluation_id,
             'objective_id' => $objective_id,
+            'employee_id' => $agent_id,
             'self_score' => $self_scores[$index],
-            'comments' => $comments[$index],
+            'employee_comments' => $comments[$index] ?? '',
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
@@ -583,36 +600,114 @@ public function submitSelfAppraisal()
         }
     }
 
-    // Handle action: Save, Save and Share, Recall
+    // Handle action: Save, Save and Share
     $is_shared = ($action == 'Save and Share') ? 1 : 0;
-
     $this->db->table('self_appraisals')
         ->where('evaluation_id', $evaluation_id)
         ->update(['is_shared' => $is_shared]);
 
     $message = 'Self-appraisal ' . ($is_shared ? 'shared' : 'saved') . ' successfully.';
-
-    return redirect()->to('/espaceagent/evaluation/self-appraisal/' . $evaluation_id)
+    return redirect()->to('/espaceagent/evaluation/')
         ->with('success', $message);
 }
 
+public function evaluationDetails($evaluation_id)
+{
+    $session = session();
+    $agent_id = $session->get('cnxid');
+    $userAccess = $session->get('idd'); // 1: Employee, 2: Line Manager
+
+    // Fetch the evaluation
+    $evaluation = $this->getEvaluation($evaluation_id);
+
+    if (!$evaluation) {
+        return redirect()->back()->with('error', 'Evaluation not found.');
+    }
+
+    // Check if the user is authorized to view this evaluation
+    if ($userAccess == 1 && $evaluation['employee_id'] != $agent_id) {
+        // Employee trying to access another employee's evaluation
+        return redirect()->back()->with('error', 'Access denied.');
+    } elseif ($userAccess == 2 && $evaluation['line_manager_n1_id'] != $agent_id && $evaluation['line_manager_n2_id'] != $agent_id) {
+        // Line manager trying to access an evaluation not assigned to them
+        return redirect()->back()->with('error', 'Access denied.');
+    }
+
+    // Fetch objectives
+    $objectives = $this->getObjectives($evaluation_id);
+
+    // Fetch self-appraisals
+    $selfAppraisals = $this->db->table('self_appraisals')
+        ->where('evaluation_id', $evaluation_id)
+        ->get()
+        ->getResultArray();
+
+    // Map self-appraisals by objective_id for easy access in views
+    $selfAppraisalsByObjective = [];
+    foreach ($selfAppraisals as $selfAppraisal) {
+        $selfAppraisalsByObjective[$selfAppraisal['objective_id']] = $selfAppraisal;
+    }
+
+    // Prepare data for the view
+    $data = [
+        'evaluation' => $evaluation,
+        'objectives' => $objectives,
+        'selfAppraisals' => $selfAppraisalsByObjective,
+        'agent_id' => $agent_id,
+        'userAccess' => $userAccess,
+    ];
+
+    // Load the appropriate view based on user role
+    if ($userAccess == 1) {
+        // Employee view
+        echo view('templates/espaceagent/entete', $data);
+        echo view('templates/espaceagent/sidebar', $data);
+        echo view('templates/espaceagent/topbar', $data);
+        echo view('templates/espaceagent/evaluation_details', $data);
+        echo view('templates/espaceagent/pied', $data);
+    } elseif ($userAccess == 2) {
+        // Line manager view
+        echo view('templates/espacerespo/entete', $data);
+        echo view('templates/espacerespo/sidebar', $data);
+        echo view('templates/espacerespo/topbar', $data);
+        echo view('templates/espacerespo/evaluation_details', $data);
+        echo view('templates/espacerespo/pied', $data);
+    } else {
+        return redirect()->back()->with('error', 'Access denied.');
+    }
+}
 public function objectiveEvaluation($evaluation_id)
 {
     $session = session();
     $agent_id = $session->get('cnxid');
-    $userAccess = $session->get('idd');
+    $userAccess = $session->get('idd'); // 1: Employee, 2: Line Manager
 
-    if ($userAccess != 2) { // Ensure it's the Line Manager N+1
-        return redirect()->back()->with('error', 'Access denied.');
-    }
-
+    // Fetch the evaluation
     $evaluation = $this->getEvaluation($evaluation_id);
 
-    if (!$evaluation || $evaluation['line_manager_n1_id'] != $agent_id) {
+    if (!$evaluation) {
         return redirect()->back()->with('error', 'Evaluation not found.');
     }
 
+    // Ensure the user is authorized to view this evaluation
+    if ($userAccess != 2 || ($evaluation['line_manager_n1_id'] != $agent_id && $evaluation['line_manager_n2_id'] != $agent_id)) {
+        return redirect()->back()->with('error', 'Access denied.');
+    }
+
+    // Fetch objectives
     $objectives = $this->getObjectives($evaluation_id);
+
+    // Fetch self-appraisals
+    $selfAppraisals = $this->db->table('self_appraisals')
+        ->where('evaluation_id', $evaluation_id)
+        ->get()
+        ->getResultArray();
+
+    // Ensure selfAppraisals is an array
+    if (!is_array($selfAppraisals)) {
+        log_message('error', 'Invalid selfAppraisals data: ' . print_r($selfAppraisals, true));
+        return redirect()->back()->with('error', 'Invalid selfAppraisals data.');
+    }
 
     // Fetch existing objective evaluations
     $objectiveEvaluations = $this->db->table('objective_evaluations')
@@ -620,16 +715,17 @@ public function objectiveEvaluation($evaluation_id)
         ->get()
         ->getResultArray();
 
-    // Map evaluations by objective_id
-    $evaluationsByObjective = [];
-    foreach ($objectiveEvaluations as $evaluation) {
-        $evaluationsByObjective[$evaluation['objective_id']] = $evaluation;
+    // Map objective evaluations by objective_id for easy access in views
+    $objectiveEvaluationsByObjective = [];
+    foreach ($objectiveEvaluations as $objectiveEvaluation) {
+        $objectiveEvaluationsByObjective[$objectiveEvaluation['objective_id']] = $objectiveEvaluation;
     }
 
     $data = [
         'evaluation' => $evaluation,
         'objectives' => $objectives,
-        'objectiveEvaluations' => $evaluationsByObjective,
+        'selfAppraisals' => $selfAppraisals,
+        'objectiveEvaluations' => $objectiveEvaluationsByObjective,
     ];
 
     // Load views

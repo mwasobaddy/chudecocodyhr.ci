@@ -55,11 +55,33 @@
                                                 <option value="No" <?= ($objective['agreement'] == 'No') ? 'selected' : '' ?>>No</option>
                                             </select>
                                         </div>
+                                        
                                         <div class="form-group">
                                             <label><strong>Comments:</strong></label>
                                             <textarea name="comments" class="form-control" rows="3"><?= esc($objective['employee_comments']) ?></textarea>
                                         </div>
+
+
                                         <button type="submit" class="btn btn-primary">Submit Response</button>
+                                        <?php
+                                            $allObjectivesAgreed = true;
+                                            foreach ($objectives as $objective) {
+                                                if ($objective['agreement'] !== 'Yes') {
+                                                    $allObjectivesAgreed = false;
+                                                    break;
+                                                }
+                                            }
+
+                                            $selfAppraisalSubmitted = false;
+                                            // Check if self-appraisal has already been submitted (implement logic as needed)
+
+                                            if ($allObjectivesAgreed && !$selfAppraisalSubmitted): ?>
+                                                <div class="text-center mb-4">
+                                                    <a href="<?= base_url('espaceagent/evaluation/self-appraisal/' . $current_evaluation['idevaluation']) ?>" class="btn btn-primary">
+                                                        <i class="fas fa-star-half-alt"></i> Proceed to Self-Appraisal
+                                                    </a>
+                                                </div>
+                                            <?php endif; ?>
                                     </form>
                                 </div>
                             </div>
