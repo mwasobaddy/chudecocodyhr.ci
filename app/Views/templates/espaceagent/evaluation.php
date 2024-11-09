@@ -1,7 +1,7 @@
 <!-- app/Views/templates/espaceagent/evaluation.php -->
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">My Evaluation</h1>
+        <h1 class="h3 mb-0 text-gray-800">Mon évaluation</h1>
     </div>
 
     <?php if (!isset($current_evaluation)): ?>
@@ -16,10 +16,10 @@
             </div>
         </div>
     <?php else: ?>
-        <!-- Objectives Review -->
+        <!-- Revue des objectifs -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 border-left-warning">
-                <h6 class="m-0 font-weight-bold text-primary">Objectives Review</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Revue des objectifs</h6>
             </div>
             <div class="card-body">
                 <?php if (!empty($objectives)): ?>
@@ -102,7 +102,7 @@
                                         <div class="modal-body">
                                             <p><strong>Objective:</strong> <?= esc($objective['title']) ?></p>
                                             <p>
-                                                <strong>Employee Acknowledgement:</strong><br>
+                                                <strong>Reconnaissance du collaborateur::</strong><br>
                                                 I acknowledge that I have reviewed and agreed to this objective.
                                             </p>
                                         </div>
@@ -120,20 +120,20 @@
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <p>No objectives have been set by your line manager yet.</p>
+                    <p>Aucun objectif n'a encore été fixé par votre responsable hiérarchique.</p>
                 <?php endif; ?>
             </div>
         </div>
 
-        <!-- Final Sign Off Section -->
+        <!-- Approbation finale Section -->
         <div class="card shadow mb-4" id="signOffSection" style="display: none;">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Final Sign Off</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Approbation finale</h6>
             </div>
             <div class="card-body">
                 <p>
-                    <strong>Employee Acknowledgement:</strong><br>
-                    I acknowledge that I have reviewed all objectives and agree with them.
+                    <strong>Reconnaissance du collaborateur::</strong><br>
+                    Je reconnais avoir pris connaissance de l'ensemble des objectifs et les accepte sans réserve.
                 </p>
                 
                 <?php if (isset($signOff) && $signOff['employee_signed']): ?>
@@ -141,7 +141,7 @@
                 <?php else: ?>
                     <form action="<?= base_url('espaceagent/evaluation/submit-sign-off') ?>" method="POST">
                         <input type="hidden" name="evaluation_id" value="<?= $current_evaluation['idevaluation'] ?>">
-                        <button type="submit" class="btn btn-primary">Sign Off All Objectives</button>
+                        <button type="submit" class="btn btn-primary">Approuver tous les objectifs</button>
                     </form>
                 <?php endif; ?>
             </div>
