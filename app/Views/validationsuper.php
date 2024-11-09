@@ -53,8 +53,8 @@
                             <div class="col-lg-7 p-0 d-flex align-items-center justify-content-center">
                                 <div class=" py-0 px-5 mb-4">
                                     <div class="text-center d-flex flex-column align-items-center">
-                                        <div class="logo rounded-circle overflow-hidden d-none d-lg-flex mt-4 p-3" style="height: 200px;  width: 200px; border: 2px solid black; background-color: #ffffff;">
-                                            <img src="<?php echo base_url('/img/CHU-logo.jpg');?>" alt="Logo CHU Cocody" title="Logo CHU Cocody" style="width:100%; height:100%"/>
+                                        <div class="logo rounded-circle overflow-hidden d-none d-lg-flex mt-4 p-3" style="height: 200px;  width: 200px; background-color: #ffffff;">
+                                            <img src="<?php echo base_url('/img/CHU-logo.jpg');?>" alt="Logo CHU Cocody" title="Logo CHU Cocody" style="width:100%; height:100%" />
                                         </div>
                                         <h3 class="text-dark mt-4" style="font-weight: bold;">Connexion à votre compte</h3>
                                         <hr class="hr bg-dark rounded-circle m-0 w-50" style="height: 0.5px;" />

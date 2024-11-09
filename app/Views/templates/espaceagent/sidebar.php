@@ -104,7 +104,7 @@
                 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFour"
                     aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-highlighter"></i>
-                    <span>Évaluation</span>
+                    <span>Evaluation</span>
                 </a>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">

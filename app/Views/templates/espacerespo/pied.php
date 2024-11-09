@@ -2,7 +2,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; 2022 - CHU DE COCODY - PORTAIL RH</span>
+                        <span>Copyright &copy; 2024 - CHU DE COCODY - PORTAIL RH</span>
                     </div>
                 </div>
             </footer>
