@@ -9,8 +9,8 @@
 					$lgenre = $query->getResultArray();
 					
 
-			$query   = $db->query('SELECT * FROM agent');
-			$lagent = $query->getResultArray();
+          $query = $db->query('SELECT *, TRIM(nom) as nom FROM agent ORDER BY nom ASC');        $lagent = null;
+        $lagent = $query->getResultArray();
 			
 			$query   = $db->query('SELECT * FROM contrat');
 			$lcontrat = $query->getResultArray();
@@ -259,28 +259,31 @@ echo form_open('espaceadmin/creeragent')
                 </select>
               </div>
               <div class="form-group col-md-4">
-                <label for="Responsablen1">Responsable hiérarchique N+1</label>
-                <select id="Responsablen1" name="Responsablen1" class="form-control">
+              <label for="Responsablen1">Responsable hiérarchique N+1</label>
+              <select id="Responsablen1" name="Responsablen1" class="form-control">
                   <option value="">Choisir...</option>
-                   <?php if (! empty($lagent) && is_array($lagent)) : ?>
-            		<?php foreach ($lagent as $info): ?>
-            		<?php echo ' <option value="'.$info['idagent'].'">'.$info['matricule'].'-'.$info['nom'].'</option>';?>						
-            		<?php endforeach; ?>
-          		<?php endif ?>
-                </select>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="Responsablen2">Responsable hiérarchique N+2</label>
-                <select id="Responsablen2" name="Responsablen2" class="form-control">
+                  <?php if (!empty($lagent)): ?>
+                      <?php foreach ($lagent as $agent): ?>
+                          <option value="<?= esc($agent['idagent']) ?>">
+                              <?= esc($agent['nom']) ?>
+                          </option>
+                      <?php endforeach; ?>
+                  <?php endif; ?>
+              </select>
+          </div>
+          <div class="form-group col-md-4">
+              <label for="Responsablen2">Responsable hiérarchique N+2</label>
+              <select id="Responsablen2" name="Responsablen2" class="form-control">
                   <option value="">Choisir...</option>
-                   <?php if (! empty($lagent) && is_array($lagent)) : ?>
-            		<?php foreach ($lagent as $info): ?>
-            		<?php echo ' <option value="'.$info['idagent'].'">'.$info['matricule'].'-'.$info['nom'].'</option>';?>						
-            		<?php endforeach; ?>
-          		<?php endif ?>
-                </select>
-              </div>
-            </div>
+                  <?php if (!empty($lagent)): ?>
+                      <?php foreach ($lagent as $agent): ?>
+                          <option value="<?= esc($agent['idagent']) ?>">
+                              <?= esc($agent['nom']) ?>
+                          </option>
+                      <?php endforeach; ?>
+                  <?php endif; ?>
+              </select>
+          </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="Sousdrh">Sous-DRH</label>
@@ -289,7 +292,7 @@ echo form_open('espaceadmin/creeragent')
                     <?php
 				  
 				  $myid = $_SESSION['cnxid'];
-			$query   = $db->query("SELECT *, (select libelle from emploi where emploi.IDemploi=agent.IDemploi) as llemploi, (select libelle from service where service.IDservice=agent.IDservice) as llservice FROM agent where matricule='357986U'");			$sdrh = $query->getResultArray();
+			$query   = $db->query("SELECT *, (select libelle from emploi where emploi.IDemploi=agent.IDemploi) as llemploi, (select libelle from service where service.IDservice=agent.IDservice) as llservice FROM agent where matricule='331224V'");			$sdrh = $query->getResultArray();
 				  
 				  ?>
                   
@@ -307,7 +310,7 @@ echo form_open('espaceadmin/creeragent')
                   <?php
 				  
 				  $myid = $_SESSION['cnxid'];
-			$query   = $db->query("SELECT *, (select libelle from emploi where emploi.IDemploi=agent.IDemploi) as llemploi, (select libelle from service where service.IDservice=agent.IDservice) as llservice FROM agent where matricule='305855D'");			$dg = $query->getResultArray();
+			$query   = $db->query("SELECT *, (select libelle from emploi where emploi.IDemploi=agent.IDemploi) as llemploi, (select libelle from service where service.IDservice=agent.IDservice) as llservice FROM agent where matricule='202924K'");			$dg = $query->getResultArray();
 				  
 				  ?>
                   
@@ -363,7 +366,7 @@ echo form_open('espaceadmin/creeragent')
               </div>
             </div>
             
-            
+            </div>
              <div class="form-row">
               <div class="form-group col-md-12 d-flex justify-content-center">
                <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>
