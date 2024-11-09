@@ -14,11 +14,12 @@
     <form action="<?= base_url('espacerespo/evaluation/submit-objective-evaluation') ?>" method="POST">
         <input type="hidden" name="evaluation_id" value="<?= $evaluation['idevaluation'] ?>">
 
-        <?php foreach ($objectives as $objective): ?>
-            <?php
-                // Fetch existing evaluation for this objective
-                $objectiveEvaluation = isset($objectiveEvaluations[$objective['idobjective']]) ? $objectiveEvaluations[$objective['idobjective']] : null;
-            ?>
+        <?php if (is_array($objectives)): ?>
+            <?php foreach ($objectives as $objective): ?>
+                <?php
+                    // Fetch existing evaluation for this objective
+                    $objectiveEvaluation = isset($objectiveEvaluations[$objective['idobjective']]) ? $objectiveEvaluations[$objective['idobjective']] : null;
+                ?>
             <div class="card mb-4">
                 <div class="card-header">
                     <h5>Objective: <?= esc($objective['title']) ?></h5>
@@ -36,6 +37,29 @@
                     <p><strong>Weight:</strong> <?= esc($objective['weight']) ?>%</p>
                     <p><strong>Agreement:</strong> <?= esc($objective['agreement']) ?></p>
                     <p><strong>Employee Comments:</strong> <?= esc($objective['employee_comments']) ?></p>
+                    <p><strong>Description:</strong> <?= esc($objective['description']) ?></p>
+
+                    <?php
+                        $selfAppraisal = null;
+                        if (is_array($selfAppraisals)) {
+                            foreach ($selfAppraisals as $sa) {
+                                if ($sa['objective_id'] == $objective['idobjective']) {
+                                    $selfAppraisal = $sa;
+                                    break;
+                                }
+                            }
+                        }
+                    ?>
+                    <?php if ($selfAppraisal): ?>
+                            <div class="border p-3 mt-3">
+                                <h5>Employee Self-Appraisal</h5>
+                                <p><strong>Self Rating:</strong> <?= esc($selfAppraisal['self_score']) ?>/5</p>
+                                <p><strong>Comments:</strong> <?= esc($selfAppraisal['employee_comments']) ?></p>
+                            </div>
+                        <?php else: ?>
+                        <p>No self-appraisal submitted by the employee.</p>
+                    <?php endif; ?>
+
 
                     <!-- Manager Evaluation -->
                     <div class="form-group">
@@ -52,7 +76,9 @@
                 </div>
             </div>
         <?php endforeach; ?>
-
+        <?php else: ?>
+            <p>No objectives found.</p>
+        <?php endif; ?>
         <!-- Action Buttons -->
         <button type="submit" name="action" value="Save" class="btn btn-secondary">Save</button>
         <button type="submit" name="action" value="Save and Share" class="btn btn-primary">Save and Share</button>
