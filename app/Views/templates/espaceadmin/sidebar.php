@@ -152,6 +152,11 @@
                     
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('espaceadmin/bonus/configure');?>">
+                    <i class="fas fa-award"></i>
+                    <span>Bonus</span></a>
+            </li>
              <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFor"

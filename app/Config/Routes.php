@@ -45,6 +45,7 @@ $routes->group('espaceagent', function($routes) {
     $routes->post('evaluation/submit-self-appraisal', 'EvaluationController::submitSelfAppraisal');
     $routes->get('evaluation/sign-off/(:num)', 'EvaluationController::signOff/$1');
     $routes->post('evaluation/submit-sign-off', 'EvaluationController::submitSignOff');
+    $routes->get('bonus', 'BonusController::employeeBonus');
 });
 
 $routes->group('espaceadmin', function($routes) {
@@ -52,6 +53,9 @@ $routes->group('espaceadmin', function($routes) {
     $routes->post('evaluation/change-manager', 'EvaluationController::changeManager');
     $routes->get('evaluation/view/(:num)', 'EvaluationController::viewEvaluation/$1');
     $routes->get('evaluation/managers', 'EvaluationController::getManagers');
+    $routes->get('bonus/configure', 'BonusController::configure');
+    $routes->post('bonus/save-configuration', 'BonusController::saveConfiguration');
+
 });
 
 $routes->group('espacerespo', function($routes) {
@@ -62,6 +66,7 @@ $routes->group('espacerespo', function($routes) {
     $routes->post('evaluation/submit-objective-evaluation', 'EvaluationController::submitObjectiveEvaluation');
     $routes->get('evaluation/sign-off/(:num)', 'EvaluationController::signOff/$1');
     $routes->post('evaluation/submit-sign-off', 'EvaluationController::submitSignOff');
+    $routes->get('bonus/managerReport', 'BonusController::managerReport');
 });
 // $routes->post('/evaluation/start', 'EvaluationController::startEvaluation');
 // $routes->post('/evaluation/submit-objectives', 'EvaluationController::submitObjectives');

@@ -116,7 +116,11 @@
                     
                 </div>
             </li>
-                   
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('/espaceagent/bonus');?>">
+                    <i class="fas fa-award"></i>
+                    <span>Bonus</span></a>
+            </li>
 
           
 
