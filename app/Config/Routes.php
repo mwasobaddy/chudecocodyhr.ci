@@ -55,6 +55,7 @@ $routes->group('espaceadmin', function($routes) {
     $routes->get('evaluation/managers', 'EvaluationController::getManagers');
     $routes->get('bonus/configure', 'BonusController::configure');
     $routes->post('bonus/save-configuration', 'BonusController::saveConfiguration');
+    $routes->get('bonus/report', 'BonusController::report');
 
 });
 
