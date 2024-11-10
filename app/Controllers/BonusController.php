@@ -56,7 +56,7 @@ class BonusController extends Controller
             'evaluation_score_threshold' => $evaluationScoreThreshold
         ]);
 
-        return redirect()->to('/bonus/configure')->with('success', 'Bonus configuration saved successfully.');
+        return redirect()->back()->with('success', 'Bonus configuration saved successfully.');
     }
 
     /**
@@ -96,24 +96,43 @@ class BonusController extends Controller
                     break;
                 default:
                     $startDate = null;
+                    break;
             }
 
             if ($startDate) {
-                // Fetch evaluations within the period and above the threshold
                 $builder = $this->db->table('evaluations');
-                $builder->select('evaluations.*, agent.idagent, agent.employee_number, CONCAT(agent.first_name, " ", agent.last_name) as full_name, agent.job_title, agent.grade');
+                $builder->select('evaluations.*, agent.matricule, agent.nom, agent.IDgrade as grade');
                 $builder->join('agent', 'evaluations.employee_id = agent.idagent');
-                $builder->where('evaluations.created_at >=', $startDate);
-                $builder->where('evaluations.score >=', $evaluationScoreThreshold);
+                $builder->where('evaluations.completed_at >=', $startDate); // Use 'completed_at'
+                $builder->where('evaluations.evaluation_score >=', $evaluationScoreThreshold); // Use 'evaluation_score'
                 $evaluationsQuery = $builder->get();
                 $evaluations = $evaluationsQuery->getResultArray();
+                log_message('debug', 'Start Date: ' . $startDate);
+                log_message('debug', 'Number of evaluations found: ' . count($evaluations));
             } else {
                 $evaluations = [];
             }
 
-            // Calculate bonus to be paid
             foreach ($evaluations as &$evaluation) {
-                $evaluation['bonus_to_be_paid'] = round($evaluation['score'] * $bonusPercentage / 100, 2);
+                // Calculate bonus amount
+                $evaluation['bonus_to_be_paid'] = round($evaluation['evaluation_score'] * $bonusPercentage / 100, 2); // Use 'evaluation_score'
+
+                // Check if bonus already exists
+                $bonusExists = $this->db->table('bonuses')
+                    ->where('evaluation_id', $evaluation['idevaluation'])
+                    ->get()
+                    ->getRowArray();
+
+                if (!$bonusExists) {
+                    // Insert bonus record
+                    $this->db->table('bonuses')->insert([
+                        'employee_id' => $evaluation['employee_id'],
+                        'evaluation_id' => $evaluation['idevaluation'],
+                        'bonus_amount' => $evaluation['bonus_to_be_paid'],
+                        'bonus_percentage' => $bonusPercentage,
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
+                }
             }
             unset($evaluation); // Break the reference
 
@@ -127,7 +146,7 @@ class BonusController extends Controller
         echo view('templates/espaceadmin/entete', $data);
         echo view('templates/espaceadmin/sidebar', $data);
         echo view('templates/espaceadmin/topbar', $data);
-        echo view('templates/espaceadmin/bonus_report', $data);
+        echo view('templates/espaceadmin/bonus_configuration', $data);
         echo view('templates/espaceadmin/pied', $data);
     }
 
@@ -171,29 +190,44 @@ class BonusController extends Controller
                     break;
                 default:
                     $startDate = null;
+                    break;
             }
 
             if ($startDate) {
-                // Fetch evaluations within the period and above the threshold for subordinates
-                // Assuming there is a relationship between managers and employees
-                // For example, agent table has manager_id column
                 $builder = $this->db->table('evaluations');
-                $builder->select('evaluations.*, agent.idagent, agent.employee_number, CONCAT(agent.first_name, " ", agent.last_name) as full_name, agent.job_title, agent.grade');
+                $builder->select('evaluations.*, agent.matricule, agent.nom, agent.IDgrade as grade');
                 $builder->join('agent', 'evaluations.employee_id = agent.idagent');
-                $builder->where('evaluations.created_at >=', $startDate);
-                $builder->where('evaluations.score >=', $evaluationScoreThreshold);
-                $builder->where('agent.manager_id', $managerId); // Adjust based on your schema
+                $builder->where('evaluations.completed_at >=', $startDate); // Use 'completed_at'
+                $builder->where('evaluations.evaluation_score >=', $evaluationScoreThreshold); // Use 'evaluation_score'
+                $builder->where('agent.Responsablen1', $managerId); // Adjust to your field name
                 $evaluationsQuery = $builder->get();
                 $evaluations = $evaluationsQuery->getResultArray();
             } else {
                 $evaluations = [];
             }
 
-            // Calculate bonus to be paid
             foreach ($evaluations as &$evaluation) {
-                $evaluation['bonus_to_be_paid'] = round($evaluation['score'] * $bonusPercentage / 100, 2);
+                // Calculate bonus amount
+                $evaluation['bonus_to_be_paid'] = round($evaluation['evaluation_score'] * $bonusPercentage / 100, 2);
+
+                // Check if bonus already exists
+                $bonusExists = $this->db->table('bonuses')
+                    ->where('evaluation_id', $evaluation['idevaluation'])
+                    ->get()
+                    ->getRowArray();
+
+                if (!$bonusExists) {
+                    // Insert bonus record
+                    $this->db->table('bonuses')->insert([
+                        'employee_id' => $evaluation['employee_id'],
+                        'evaluation_id' => $evaluation['idevaluation'],
+                        'bonus_amount' => $evaluation['bonus_to_be_paid'],
+                        'bonus_percentage' => $bonusPercentage,
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
+                }
             }
-            unset($evaluation); // Break the reference
+            unset($evaluation);
 
             $data = [
                 'evaluations' => $evaluations,

@@ -8,7 +8,7 @@
     <?php endif; ?>
 
     <!-- Bonus Configuration Form -->
-    <form action="<?= base_url('bonus/saveConfiguration') ?>" method="POST">
+    <form action="<?= base_url('espaceadmin/bonus/save-configuration') ?>" method="POST">
         <?= csrf_field() ?>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -46,7 +46,6 @@
                 <tr>
                     <th>Employee Number</th>
                     <th>Full Name</th>
-                    <th>Job Title</th>
                     <th>Grade</th>
                     <th>Evaluation Score</th>
                     <th>Bonus Percentage Agreed</th>
@@ -56,16 +55,15 @@
             <tbody>
                 <?php if (empty($evaluations)): ?>
                     <tr>
-                        <td colspan="7" class="text-center">No scored evaluations yet.</td>
+                        <td colspan="6" class="text-center">No scored evaluations yet.</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($evaluations as $evaluation): ?>
                         <tr>
-                            <td><?= esc($evaluation['employee_number']) ?></td>
-                            <td><?= esc($evaluation['full_name']) ?></td>
-                            <td><?= esc($evaluation['job_title']) ?></td>
+                            <td><?= esc($evaluation['matricule']) ?></td>
+                            <td><?= esc($evaluation['nom']) ?></td>
                             <td><?= esc($evaluation['grade']) ?></td>
-                            <td><?= esc($evaluation['score']) ?></td>
+                            <td><?= esc($evaluation['evaluation_score']) ?></td>
                             <td><?= esc($bonusPercentage) ?>%</td>
                             <td><?= esc(number_format($evaluation['bonus_to_be_paid'], 2)) ?></td>
                         </tr>
