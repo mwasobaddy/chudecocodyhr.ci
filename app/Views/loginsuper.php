@@ -83,15 +83,26 @@
                                         echo form_open('home/loginsuper');
                                         
                                     ?>
-                                        <div class="form-group mb-4">
+                                        <div class="form-group mb-3">
                                             <label for="mobile mb-3">Saisissez votre numéro de téléphone précédé de +225</label>
                                             <input type="mobile" class="form-control form-control-user"
                                                 id="mobile" name="mobile" aria-describedby="mobile" 
                                                 placeholder="+2250505050505" required
                                             />
                                         </div>
+                                        <div class="form-group mb-4">
+                                            <label for="password mb-3">Votre mot de passe</label>
+                                            <input type="password" class="form-control form-control-user"
+                                                id="password" name="password"
+                                                placeholder="Code de validation"
+                                            />
+                                            
+                                            
+                                        </div>
                                         
-                                        <button type="submit" class="btn btn-primary mb-3" name="go" value="go" style="width:100%">Valider numéro</button>
+                                        <div class="d-flex justify-content-center mb-3">
+                                            <button type="submit" class="btn btn-primary mb-3" name="go" value="go">connexion</button>
+                                        </div>
                                         
                                         <?php  
 										

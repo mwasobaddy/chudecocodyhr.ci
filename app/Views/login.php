@@ -84,26 +84,34 @@
                                             
                                         ?>
 
-                                        <div class="form-group mb-4">
+                                        <div class="form-group mb-3">
                                             <label for="mobile mb-3">Saisissez votre numéro de téléphone précédé de +225</label>
                                             <input type="text" class="form-control form-control-user"
                                                 id="mobile" name="mobile" aria-describedby="mobile" 
                                                 placeholder="+2250505050505" required
                                             />
                                         </div>
+                                        <div class="form-group mb-4">
+                                            <label for="password">Votre mot de passe</label>
+                                            <input type="password" class="form-control form-control-user"
+                                                id="password"
+                                                name="password"
+                                                placeholder="Mot de passe"
+                                                required=""
+                                            />
+                                            
+                                            
+                                        </div>
                                         
-                                        <button type="submit" class="btn btn-primary mb-3" name="go" value="go"  style="width:100%">Valider numéro</button>
-                                        <br/>
+                                        <div class="d-flex justify-content-center mb-3">
+                                            <button type="submit" class="btn btn-primary mb-3" name="go" value="go">connexion</button>
+                                        </div>
                                         
                                         <?php  
 										
 										//var_dump($cnxerror);
 										
 										?>
-                                        
-                                     
-                                        
-                                        <br/>
                                         
                                       
                                     </form>

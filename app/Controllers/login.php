@@ -56,14 +56,21 @@ echo form_open('home/login');
 ?>
 
                                         <div class="form-group"><br/>
-                                         <label for="mobile">Saisissez votre numéro de téléphone précédé de +225</label>
+                                            <label for="mobile">Saisissez votre numéro de téléphone précédé de +225</label>
                                             <input type="tel" class="form-control form-control-user"
                                                 id="mobile" name="mobile" aria-describedby="mobile" 
-                                                placeholder="+2250505050505">
+                                                placeholder="+2250505050505"
+                                            >
                                         </div>
-                                       
-                                        <div class="form-group">
-                                            <br/>
+                                        <div class="form-group mb-4">
+                                            <label for="password">Votre mot de passe</label>
+                                            <input type="password" class="form-control form-control-user"
+                                                id="password"
+                                                name="password"
+                                                placeholder="Mot de passe"
+                                            >
+                                            
+                                            
                                         </div>
                                         
                                         <button type="submit" class="btn btn-primary" style="width:100%">Valider numéro</button>

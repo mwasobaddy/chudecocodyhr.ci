@@ -46,23 +46,125 @@ class Home extends BaseController
 	}
 
 
+	// public function login()
+	// {
+	// 	helper('form');
+	// 	$model = new AgentModel();
+	// 	if (!$this->validate([
+	// 		'mobile' => 'required|min_length[10]|max_length[14]'
+	// 	])) {
+
+	// 		$data = [
+	// 			'toast' => 'Echec authentification !',
+	// 		];
+
+	// 		echo view('login', $data);
+	// 	} else {
+	// 		$db = \Config\Database::connect();
+	// 		$num = $this->request->getVar('mobile');
+	// 		//echo "SELECT * from agent where mobile = '$num'";350209E
+
+	// 		$query = $db->query("SELECT * from agent where matricule = '350209E'");
+
+	// 		$res = $query->getRow();
+
+	// 		$sdrh2 = (isset($res->idagent) ? $res->idagent : '');
+
+
+	// 		$query = $db->query("SELECT * from agent where mobile = '$num' and actif = 1");
+	// 		$results = $query->getResult();
+
+	// 		if (count($results) == 1) {
+
+	// 			$pwd = "";
+	// 			$firstc = 1;
+
+	// 			foreach ($results as $row) {
+
+	// 				if ($row->IDgenre == 2 || $row->IDcivilite == 2 || $row->IDcivilite == 3) {
+	// 					$genre = 1;
+	// 				} else {
+	// 					$genre = 0;
+	// 				}
+
+	// 				$authotp = '';
+	// 				// if(empty($row->pwd)) {
+	// 				// 	$firstc = 1;
+	// 				// 	$pwd = "";
+
+	// 				// 	$authotp = $this->testsms($num);
+	// 				// 	$authotpmd = md5($authotp);
+	// 				// 	$query = $db->query("UPDATE agent set pwd='$authotpmd' where mobile = '$num'");
+	// 				// 	$_SESSION['toast'] = 'Votre mot de passe par défaut a été envoyé sur votre cellulaire, vous êtes conseillé de le changer. Veuillez utiliser ce mot de passe chaque fois que vous souhaitez accéder au Portail RH.';
+
+	// 				// } else {
+	// 				// 	$firstc = 0;
+	// 				// 	$pwd = "";
+
+	// 				// 	//$authotp = $this->testsms($num);
+	// 				// 	$_SESSION['toast'] = 'Veuillez saisir votre mot de passe pour accéder au Portail RH.';
+	// 				// }
+	// 				$firstc = 0;
+	// 				$pwd = "";
+	// 				$_SESSION['toast'] = 'Veuillez saisir votre mot de passe pour accéder au Portail RH.';
+
+	// 				$data = [
+	// 					'idd' => $row->IDdroitaccess,
+	// 					'cnxname' => $row->nom,
+	// 					'cnxid' => $row->idagent,
+	// 					'avatar' => $row->matricule,
+	// 					'mat' => $row->matricule,
+	// 					'genre' => $genre,
+	// 					'sdrh2' => $sdrh2,
+	// 					'randd' => $authotp,
+	// 					'super' => 0,
+	// 					'firstc' => $firstc,
+	// 				];
+
+
+	// 				session()->set($data);
+	// 			}
+	// 		}
+
+	// 		if (count($results) == 1) {
+
+	// 			echo view('validation', $data);
+	// 		} else {
+	// 			$data = [
+	// 				'toast' => 'Votre numéro n\'est pas reconnu par le Portail, veuillez contacter les Ressources Humaines s\'il vous plaît!'
+	// 			];
+	// 			echo view('login', $data);
+	// 		}
+	// 	}
+	// }
+	
 	public function login()
 	{
 		helper('form');
 		$model = new AgentModel();
 		if (!$this->validate([
-			'mobile' => 'required|min_length[10]|max_length[14]'
+			'mobile' => 'required|min_length[10]|max_length[14]',
+			'password' => 'required'
 		])) {
+			$errors = $this->validator->getErrors();
+			$errorMessage = '';
+
+			if (isset($errors['mobile'])) {
+				$errorMessage .= 'Le numéro de mobile est requis et doit être entre 10 et 14 caractères. ';
+			}
+			if (isset($errors['password'])) {
+				$errorMessage .= 'Le mot de passe est requis. ';
+			}
 
 			$data = [
-				'toast' => 'Echec authentification !',
+				'toast' => $errorMessage,
 			];
 
 			echo view('login', $data);
 		} else {
 			$db = \Config\Database::connect();
 			$num = $this->request->getVar('mobile');
-			//echo "SELECT * from agent where mobile = '$num'";350209E
+			$password = $this->request->getVar('password');
 
 			$query = $db->query("SELECT * from agent where matricule = '350209E'");
 
@@ -70,43 +172,22 @@ class Home extends BaseController
 
 			$sdrh2 = (isset($res->idagent) ? $res->idagent : '');
 
-
+			// Check if the mobile number exists and is active
 			$query = $db->query("SELECT * from agent where mobile = '$num' and actif = 1");
 			$results = $query->getResult();
 
 			if (count($results) == 1) {
+				$row = $results[0];
+				
+				$hashedPassword = md5($password);
 
-				$pwd = "";
-				$firstc = 1;
-
-				foreach ($results as $row) {
-
+				// Check if the hashed password matches (again, not recommended)
+				if ($hashedPassword === $row->pwd) {
 					if ($row->IDgenre == 2 || $row->IDcivilite == 2 || $row->IDcivilite == 3) {
 						$genre = 1;
 					} else {
 						$genre = 0;
 					}
-
-					$authotp = '';
-					// if(empty($row->pwd)) {
-					// 	$firstc = 1;
-					// 	$pwd = "";
-
-					// 	$authotp = $this->testsms($num);
-					// 	$authotpmd = md5($authotp);
-					// 	$query = $db->query("UPDATE agent set pwd='$authotpmd' where mobile = '$num'");
-					// 	$_SESSION['toast'] = 'Votre mot de passe par défaut a été envoyé sur votre cellulaire, vous êtes conseillé de le changer. Veuillez utiliser ce mot de passe chaque fois que vous souhaitez accéder au Portail RH.';
-
-					// } else {
-					// 	$firstc = 0;
-					// 	$pwd = "";
-
-					// 	//$authotp = $this->testsms($num);
-					// 	$_SESSION['toast'] = 'Le numéro de mobile a été vérifié avec succès. Veuillez saisir votre mot de passe pour continuer.';
-					// }
-					$firstc = 0;
-					$pwd = "";
-					$_SESSION['toast'] = 'Le numéro de mobile a été vérifié avec succès. Veuillez saisir votre mot de passe pour continuer.';
 
 					$data = [
 						'idd' => $row->IDdroitaccess,
@@ -116,19 +197,32 @@ class Home extends BaseController
 						'mat' => $row->matricule,
 						'genre' => $genre,
 						'sdrh2' => $sdrh2,
-						'randd' => $authotp,
+						'randd' => '',
 						'super' => 0,
-						'firstc' => $firstc,
+						'firstc' => 0,
 					];
 
-
 					session()->set($data);
+
+					// Redirect based on user role
+					switch ($row->IDdroitaccess) {
+						case 1:
+							return redirect()->to(base_url('espaceagent/index'));
+						case 2:
+							return redirect()->to(base_url('espacerespo/afficher/accueil'));
+						case 3:
+							return redirect()->to(base_url('espaceadmin/afficher/accueil'));
+						case 4:
+							return redirect()->to(base_url('espacesuperadmin/afficher/accueil'));
+						default:
+							return redirect()->to(base_url('login'));
+					}
+				} else {
+					$data = [
+						'toast' => 'Mot de passe incorrect !'
+					];
+					echo view('login', $data);
 				}
-			}
-
-			if (count($results) == 1) {
-
-				echo view('validation', $data);
 			} else {
 				$data = [
 					'toast' => 'Votre numéro n\'est pas reconnu par le Portail, veuillez contacter les Ressources Humaines s\'il vous plaît!'
@@ -137,65 +231,158 @@ class Home extends BaseController
 			}
 		}
 	}
+
+
+	// public function loginsuper()
+	// {
+	// 	helper('form');
+	// 	$model = new SuperModel();
+	// 	if (!$this->validate([
+	// 		'mobile' => 'required|min_length[10]|max_length[14]'
+	// 	])) {
+
+	// 		$data = [
+	// 			'toast' => 'Echec authentification !',
+	// 		];
+
+	// 		echo view('loginsuper', $data);
+	// 	} else {
+	// 		$db = \Config\Database::connect();
+	// 		$num = $this->request->getVar('mobile');
+	// 		// $query = $db->query("SELECT * from agent where mobile = '$num'");
+	// 		$query = $db->query("SELECT * from agent where matricule = '350209E'");
+	// 		$res = $query->getRow();
+	// 		// print_r($res);
+	// 		// exit;
+	// 		$sdrh2 = (isset($res->idagent) ? $res->idagent : '');
+
+	// 		//echo "SELECT * from agent where mobile = '$num'";
+	// 		$query = $db->query("SELECT * from superadm where mobile = '$num'");
+
+	// 		$results = $query->getResult();
+	// 		// print_r($results);
+
+	// 		// exit;
+
+	// 		if (count($results) == 1) {
+	// 			$pwd = "";
+	// 			$firstc = 1;
+
+	// 			foreach ($results as $row) {
+
+	// 				if ($row->IDgenre == 2 || $row->IDcivilite == 2 || $row->IDcivilite == 3) {
+	// 					$genre = 1;
+	// 				} else {
+	// 					$genre = 0;
+	// 				}
+
+
+	// 				$authotp = '';
+	// 				if (empty($row->pwd)) {
+	// 					$firstc = 1;
+	// 					$pwd = "";
+
+	// 					$authotp = $this->testsms($num);
+	// 					$authotpmd = md5($authotp);
+	// 					$query = $db->query("UPDATE superadm set pwd='$authotpmd' where mobile = '$num'");
+	// 					$_SESSION['toast'] = 'Votre mot de passe par défaut a été envoyé sur votre cellulaire, vous êtes conseillé de le changer. Veuillez utiliser ce mot de passe chaque fois que vous souhaitez accéder au Portail RH.';
+	// 				} else {
+	// 					$firstc = 0;
+	// 					$pwd = "";
+
+	// 					//$authotp = $this->testsms($num);
+	// 					$_SESSION['toast'] = 'Veuillez saisir votre mot de passe pour accéder au Portail RH.';
+	// 				}
+
+
+	// 				$data = [
+	// 					'idd' => $row->IDdroitaccess,
+	// 					'cnxname' => $row->nom,
+	// 					'cnxid' => $row->idagent,
+	// 					'avatar' => $row->Photo,
+	// 					'mat' => $row->matricule,
+	// 					'genre' => $genre,
+	// 					'sdrh2' => $sdrh2,
+	// 					'randd' => $authotp,
+	// 					'super' => 1,
+	// 				];
+	// 				session()->set($data);
+	// 			}
+	// 		}
+	// 		if (count($results) == 1) {
+
+	// 			echo view('validationsuper', $data);
+	// 		} else {
+	// 			$data = [
+	// 				'toast' => 'Votre numéro n\'est pas reconnu par le portail, veuillez contacter les Ressources Humaines s\'il vous plaît!'
+	// 			];
+
+	// 			echo view('loginsuper', $data);
+	// 		}
+	// 	}
+	// }
+
+	
+	
 	public function loginsuper()
 	{
 		helper('form');
-		$model = new SuperModel();
+		$model = new AgentModel();
 		if (!$this->validate([
-			'mobile' => 'required|min_length[10]|max_length[14]'
+			'mobile' => 'required|min_length[10]|max_length[14]',
+			'password' => 'required|min_length[4]|max_length[15]'
 		])) {
+			$errors = $this->validator->getErrors();
+			$errorMessage = '';
+
+			if (isset($errors['mobile'])) {
+				$errorMessage .= 'Le numéro de mobile est requis et doit être entre 10 et 14 caractères. ';
+			}
+			if (isset($errors['password'])) {
+				$errorMessage .= 'Le mot de passe est requis. ';
+			}
 
 			$data = [
-				'toast' => 'Echec authentification !',
+				'toast' => $errorMessage,
 			];
 
 			echo view('loginsuper', $data);
 		} else {
 			$db = \Config\Database::connect();
 			$num = $this->request->getVar('mobile');
-			// $query = $db->query("SELECT * from agent where mobile = '$num'");
+			$password = $this->request->getVar('password');
+
 			$query = $db->query("SELECT * from agent where matricule = '350209E'");
+
 			$res = $query->getRow();
-			// print_r($res);
-			// exit;
+
 			$sdrh2 = (isset($res->idagent) ? $res->idagent : '');
 
-			//echo "SELECT * from agent where mobile = '$num'";
+			// Check if the mobile number exists and is active
 			$query = $db->query("SELECT * from superadm where mobile = '$num'");
-
 			$results = $query->getResult();
-			// print_r($results);
-
-			// exit;
-
+			
 			if (count($results) == 1) {
-				$pwd = "";
-				$firstc = 1;
+				$row = $results[0];
+				
+				$authotp = '';
+				if (empty($row->pwd)) {
+					$firstc = 1;
+					$pwd = "";
 
-				foreach ($results as $row) {
+					$authotp = $this->testsms($num);
+					$authotpmd = md5($authotp);
+					$query = $db->query("UPDATE superadm set pwd='$authotpmd' where mobile = '$num'");
+					$_SESSION['toast'] = 'Votre mot de passe par défaut a été envoyé sur votre cellulaire, vous êtes conseillé de le changer. Veuillez utiliser ce mot de passe chaque fois que vous souhaitez accéder au Portail RH.';
+				}
 
+				$hashedPassword = md5($password);
+
+				if ($hashedPassword === $row->pwd) {
 					if ($row->IDgenre == 2 || $row->IDcivilite == 2 || $row->IDcivilite == 3) {
 						$genre = 1;
 					} else {
 						$genre = 0;
-					}
-
-
-					$authotp = '';
-					if (empty($row->pwd)) {
-						$firstc = 1;
-						$pwd = "";
-
-						$authotp = $this->testsms($num);
-						$authotpmd = md5($authotp);
-						$query = $db->query("UPDATE superadm set pwd='$authotpmd' where mobile = '$num'");
-						$_SESSION['toast'] = 'Votre mot de passe par défaut a été envoyé sur votre cellulaire, vous êtes conseillé de le changer. Veuillez utiliser ce mot de passe chaque fois que vous souhaitez accéder au Portail RH.';
-					} else {
-						$firstc = 0;
-						$pwd = "";
-
-						//$authotp = $this->testsms($num);
-						$_SESSION['toast'] = 'Le numéro de mobile a été vérifié avec succès. Veuillez saisir votre mot de passe pour continuer.';
 					}
 
 
@@ -210,18 +397,22 @@ class Home extends BaseController
 						'randd' => $authotp,
 						'super' => 1,
 					];
+
 					session()->set($data);
-				}
-			}
-			if (count($results) == 1) {
 
-				echo view('validationsuper', $data);
+					return redirect()->to(base_url('//espaceadmin/afficher/accueil'));
+
+				} else {
+					$data = [
+						'toast' => 'Mot de passe incorrect !'
+					];
+					echo view('login', $data);
+				}
 			} else {
 				$data = [
-					'toast' => 'Votre numéro n\'est pas reconnu par le portail, veuillez contacter les Ressources Humaines s\'il vous plaît!'
+					'toast' => 'Votre numéro n\'est pas reconnu par le Portail, veuillez contacter les Ressources Humaines s\'il vous plaît!'
 				];
-
-				echo view('loginsuper', $data);
+				echo view('login', $data);
 			}
 		}
 	}
@@ -230,126 +421,126 @@ class Home extends BaseController
 
 
 
-	public function checking()
-	{
-		helper('form');
-		$model = new AgentModel();
+	// public function checking()
+	// {
+	// 	helper('form');
+	// 	$model = new AgentModel();
 
-		if (!$this->validate([
-			'code' => 'required|min_length[4]|max_length[15]',
-		])) {
-			$data = [
-				'iddd' => $this->request->getVar('iddd'),
-				'toast' => 'Echec authentification !',
-			];
-			echo view('validation', $data);
-		} else {
+	// 	if (!$this->validate([
+	// 		'code' => 'required|min_length[4]|max_length[15]',
+	// 	])) {
+	// 		$data = [
+	// 			'iddd' => $this->request->getVar('iddd'),
+	// 			'toast' => 'Echec authentification !',
+	// 		];
+	// 		echo view('validation', $data);
+	// 	} else {
 
-			$pp = $this->request->getVar('code');
-			$pdp = md5($pp);
+	// 		$pp = $this->request->getVar('code');
+	// 		$pdp = md5($pp);
 
-			$lid = $_SESSION['cnxid'];
+	// 		$lid = $_SESSION['cnxid'];
 
-			$db = \Config\Database::connect();
-			$query = $db->query("SELECT * from agent where idagent = $lid and pwd='$pdp'");
-			//echo "SELECT * from agent where idagent = $lid and pwd='$pdp'";
-			$results = $query->getResult();
-			//var_dump($pp);
-			if (count($results) == 1) {
-				/*$db = \Config\Database::connect();
-				$num = $this->request->getVar('mobile');
-				$query = $db->query("SELECT * from agent where mobile = '$num'");
-				$results = $query->getResult();
-				if(count($results)==1) {
-					echo view('espaceadmin/index');
-				} else {
-					echo view('login');
-				}*/
-
-
-				switch ($this->request->getVar('iddd')) {
-					case 1:
-						return redirect()->to(base_url('//espaceagent/index'));
-						break;
-					case 2:
-						return redirect()->to(base_url('//espacerespo/afficher/accueil'));
-						break;
-					case 3:
-						return redirect()->to(base_url('//espaceadmin/afficher/accueil'));
-						break;
-					case 4:
-						return redirect()->to(base_url('//espacesuperadmin/afficher/accueil'));
-						break;
-				}
-
-				//echo view('espaceadmin');
-				//header('Location: '.base_url('/espaceadmin/afficher/accueil'));
-				//header(base_url('/espaceadmin/afficher/accueil'));
-			} else {
-				$data = [
-					'iddd' => $this->request->getVar('iddd'),
-					'toast' => 'Echec authentification !',
-				];
-				echo view('validation', $data);
-			}
-		}
-	}
+	// 		$db = \Config\Database::connect();
+	// 		$query = $db->query("SELECT * from agent where idagent = $lid and pwd='$pdp'");
+	// 		//echo "SELECT * from agent where idagent = $lid and pwd='$pdp'";
+	// 		$results = $query->getResult();
+	// 		//var_dump($pp);
+	// 		if (count($results) == 1) {
+	// 			/*$db = \Config\Database::connect();
+	// 			$num = $this->request->getVar('mobile');
+	// 			$query = $db->query("SELECT * from agent where mobile = '$num'");
+	// 			$results = $query->getResult();
+	// 			if(count($results)==1) {
+	// 				echo view('espaceadmin/index');
+	// 			} else {
+	// 				echo view('login');
+	// 			}*/
 
 
-	public function checkingsuper()
-	{
-		//print_r($_SESSION);
-		helper('form');
-		$model = new SuperModel();
-		if (!$this->validate([
-			'code' => 'required|min_length[4]|max_length[15]',
-		])) {
-			$data = [
-				'iddd' => $this->request->getVar('iddd'),
-				'toast' => 'Echec authentification!',
-			];
+	// 			switch ($this->request->getVar('iddd')) {
+	// 				case 1:
+	// 					return redirect()->to(base_url('//espaceagent/index'));
+	// 					break;
+	// 				case 2:
+	// 					return redirect()->to(base_url('//espacerespo/afficher/accueil'));
+	// 					break;
+	// 				case 3:
+	// 					return redirect()->to(base_url('//espaceadmin/afficher/accueil'));
+	// 					break;
+	// 				case 4:
+	// 					return redirect()->to(base_url('//espacesuperadmin/afficher/accueil'));
+	// 					break;
+	// 			}
 
-			echo view('validationsuper', $data);
-		} else {
+	// 			//echo view('espaceadmin');
+	// 			//header('Location: '.base_url('/espaceadmin/afficher/accueil'));
+	// 			//header(base_url('/espaceadmin/afficher/accueil'));
+	// 		} else {
+	// 			$data = [
+	// 				'iddd' => $this->request->getVar('iddd'),
+	// 				'toast' => 'Echec authentification !',
+	// 			];
+	// 			echo view('validation', $data);
+	// 		}
+	// 	}
+	// }
 
-			$pp = $this->request->getVar('code');
 
-			$num = $_SESSION['cnxid'];
-			$pdp = md5($pp);
-			$db = \Config\Database::connect();
-			$query = $db->query("SELECT * from superadm where idagent = '$num' and pwd='$pdp'");
-			//echo "SELECT * from agent where idagent = '$num' and pwd='$pp'";
-			$results = $query->getResult();
+	// public function checkingsuper()
+	// {
+	// 	//print_r($_SESSION);
+	// 	helper('form');
+	// 	$model = new SuperModel();
+	// 	if (!$this->validate([
+	// 		'code' => 'required|min_length[4]|max_length[15]',
+	// 	])) {
+	// 		$data = [
+	// 			'iddd' => $this->request->getVar('iddd'),
+	// 			'toast' => 'Echec authentification!',
+	// 		];
+
+	// 		echo view('validationsuper', $data);
+	// 	} else {
+
+	// 		$pp = $this->request->getVar('code');
+
+	// 		$num = $_SESSION['cnxid'];
+	// 		$pdp = md5($pp);
+	// 		$db = \Config\Database::connect();
+	// 		$query = $db->query("SELECT * from superadm where idagent = '$num' and pwd='$pdp'");
+	// 		//echo "SELECT * from agent where idagent = '$num' and pwd='$pp'";
+	// 		$results = $query->getResult();
 
 
-			/*
-			var_dump($results);
-			var_dump($num);
-			var_dump($pp);
-			var_dump($pdp);
-			exit;
-			*/
+	// 		/*
+	// 		var_dump($results);
+	// 		var_dump($num);
+	// 		var_dump($pp);
+	// 		var_dump($pdp);
+	// 		exit;
+	// 		*/
 
-			if (count($results) == 1) {
-				/*$db = \Config\Database::connect();
-				$num = $this->request->getVar('mobile');
-				$query = $db->query("SELECT * from agent where mobile = '$num'");
-				$results = $query->getResult();
-				if(count($results)==1) {
-					echo view('espaceadmin/index');
-				} else {
-					echo view('login');
-				}*/
-				return redirect()->to(base_url('//espaceadmin/afficher/accueil'));
+	// 		if (count($results) == 1) {
+	// 			/*$db = \Config\Database::connect();
+	// 			$num = $this->request->getVar('mobile');
+	// 			$query = $db->query("SELECT * from agent where mobile = '$num'");
+	// 			$results = $query->getResult();
+	// 			if(count($results)==1) {
+	// 				echo view('espaceadmin/index');
+	// 			} else {
+	// 				echo view('login');
+	// 			}*/
+	// 			return redirect()->to(base_url('//espaceadmin/afficher/accueil'));
 
-				//echo view('espaceadmin');
-				//header('Location: '.base_url('/espaceadmin/afficher/accueil'));
-				//header(base_url('/espaceadmin/afficher/accueil'));
-			} else {
-				echo view('validationsuper');
-			}
-		}
-	}
+	// 			//echo view('espaceadmin');
+	// 			//header('Location: '.base_url('/espaceadmin/afficher/accueil'));
+	// 			//header(base_url('/espaceadmin/afficher/accueil'));
+	// 		} else {
+	// 			echo view('validationsuper');
+	// 		}
+	// 	}
+	// }
 
 
 
