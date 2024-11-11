@@ -1,7 +1,7 @@
 <!-- app/Views/templates/espaceagent/sign_off.php || app/Views/templates/espacerespo/sign_off.php -->
 
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">Sign-Off</h1>
+    <h1 class="h3 mb-4 text-primary">Sign-Off</h1>
 
     <!-- Display success or error messages -->
     <?php if (session()->getFlashdata('success')): ?>

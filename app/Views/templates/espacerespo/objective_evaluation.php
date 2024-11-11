@@ -1,7 +1,7 @@
 <!-- app/Views/templates/espacerespo/objective_evaluation.php -->
 
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">Objectives Evaluation</h1>
+    <h1 class="h3 mb-4 text-primary">Objectives Evaluation</h1>
 
     <!-- Display success or error messages -->
     <?php if (session()->getFlashdata('success')): ?>

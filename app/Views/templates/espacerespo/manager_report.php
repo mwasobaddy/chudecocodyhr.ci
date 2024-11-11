@@ -1,21 +1,21 @@
 
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">Manager Bonus Report</h1>
+    <h1 class="h3 mb-4 text-primary">Rapport sur les primes des gestionnaires</h1>
 
     <?php if (empty($evaluations)): ?>
-        <div class="alert alert-info">No scored evaluations for your team yet.</div>
+        <div class="alert alert-info">Il n'y a pas encore d'évaluations notées pour votre équipe.</div>
     <?php else: ?>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead class="thead-light">
                     <tr>
-                        <th>Employee Number</th>
-                        <th>Full Name</th>
-                        <th>Job Title</th>
-                        <th>Grade</th>
-                        <th>Evaluation Score</th>
-                        <th>Bonus Percentage Agreed</th>
-                        <th>Bonus to be Paid</th>
+                        <th>Numéro d'employé</th>
+                        <th>Nom complet</th>
+                        <th>Titre du poste</th>
+                        <th>Niveau</th>
+                        <th>Score d'évaluation</th>
+                        <th>Pourcentage de bonus convenu</th>
+                        <th>Bonus à payer</th>
                     </tr>
                 </thead>
                 <tbody>

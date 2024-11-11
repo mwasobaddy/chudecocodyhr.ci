@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">Bonus Configuration</h1>
+    <h1 class="h3 mb-4 text-primary">Configuration du bonus</h1>
 
     <!-- Success Message -->
     <?php if (session()->getFlashdata('success')): ?>
@@ -12,18 +12,18 @@
         <?= csrf_field() ?>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="evaluation_period">Evaluation Period</label>
+                <label for="evaluation_period">Période d'évaluation/label>
                 <select id="evaluation_period" name="evaluation_period" class="form-control" required>
-                    <option value="">Select Period</option>
-                    <option value="3 months">3 Months</option>
-                    <option value="6 months">6 Months</option>
-                    <option value="12 months">12 Months</option>
+                    <option value="">Sélectionner la période</option>
+                    <option value="3 months">3 Mois</option>
+                    <option value="6 months">6 Mois</option>
+                    <option value="12 months">12 Mois</option>
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="bonus_percentage">Bonus Percentage</label>
+                <label for="bonus_percentage">Pourcentage de bonus</label>
                 <select id="bonus_percentage" name="bonus_percentage" class="form-control" required>
-                    <option value="">Select Percentage</option>
+                    <option value="">Sélectionner la période</option>
                     <option value="5">5%</option>
                     <option value="10">10%</option>
                     <option value="15">15%</option>
@@ -31,31 +31,31 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="evaluation_score_threshold">Evaluation Score Threshold</label>
+                <label for="evaluation_score_threshold">Seuil de la note d'évaluation</label>
                 <input type="number" step="0.1" id="evaluation_score_threshold" name="evaluation_score_threshold" class="form-control" placeholder="e.g., 3.5" required>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Save Configuration</button>
+        <button type="submit" class="btn btn-primary">Sauvegarder la configuration</button>
     </form>
 
     <!-- Bonus Report -->
-    <h2 class="mt-5">Bonus Report</h2>
+    <h2 class="mt-5">Rapport sur les bonus</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th>Employee Number</th>
-                    <th>Full Name</th>
+                    <th>Numéro d'employé</th>
+                    <th>Nom complet</th>
                     <th>Grade</th>
-                    <th>Evaluation Score</th>
-                    <th>Bonus Percentage Agreed</th>
-                    <th>Bonus to be Paid</th>
+                    <th>Note d'évaluation</th>
+                    <th>Pourcentage de bonus convenu</th>
+                    <th>Prime à verser</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($evaluations)): ?>
                     <tr>
-                        <td colspan="6" class="text-center">No scored evaluations yet.</td>
+                        <td colspan="6" class="text-center">Il n'y a pas encore d'évaluations notées.</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($evaluations as $evaluation): ?>

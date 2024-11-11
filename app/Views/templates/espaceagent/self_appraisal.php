@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">Self-Appraisal</h1>
+    <h1 class="h3 mb-4 text-primary">Self-Appraisal</h1>
     <form action="<?= base_url('espaceagent/evaluation/submit-self-appraisal') ?>" method="post">
         <?= csrf_field() ?>
         <input type="hidden" name="evaluation_id" value="<?= esc($evaluation['idevaluation']) ?>">

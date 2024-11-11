@@ -10,7 +10,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Veuillez cliquer sur le lien ci-dessous</h1>
+                    <h1 class="h3 mb-4 text-primary">Veuillez cliquer sur le lien ci-dessous</h1>
 
 <br/><br/>
 <div style="text-align:center; width:100%; font-weight:bold; font-size:36px">
