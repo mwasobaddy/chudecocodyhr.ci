@@ -2880,13 +2880,17 @@ class Espaceadmin extends Controller
 			'datedms'  => 'required',*/
 			//'justificatif'  => 'required',
 		];
-		if (!empty($_FILES['justificatif']['name'])) {
-			$rule['justificatif'] = [
-				'label' => 'Justificatif',
-				'rules' => 'uploaded[justificatif]'
-					. '|mime_in[justificatif,image/jpg,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats,application/msword]',
-			];
-		}
+
+
+    // Add file validation if file is uploaded
+	if (!empty($_FILES['justificatif']['name'])) {
+		$rules['justificatif'] = [
+			'label' => 'Justificatif',
+			'rules' => 'uploaded[justificatif]'
+				. '|mime_in[justificatif,image/jpg,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword]'
+				. '|max_size[justificatif,10240]',
+		];
+	}
 		if (!$this->validate($rules)) {
 			echo view('templates/espaceadmin/entete');
 			echo view('templates/espaceadmin/sidebar');

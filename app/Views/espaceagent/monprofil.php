@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-                <?php
+<?php
 				
 				//echo $this->router->fetch_method();
 				//print_r($this->view);
@@ -62,7 +62,20 @@
   <!-- Page Heading -->
   <h1 class="h3 mb-2 text-primary">Fiche agent</h1>
   <p class="mb-4">Visualisez toutes les données relatives à votre fiche agent.</p>
- 
+ <?php
+if (isset($toast) && isset($_POST['go']) && !empty($_POST['go'])) {
+   echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert">  
+	   '.$toast.' 
+    </div>';
+}
+
+if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
+   echo ' <div class="alert alert-warning alert-dismissible fade show" role="alert" style="color: #0f6848; background-color: #d2f4e8; border-color: #bff0de;
+">  
+	   '.$_SESSION['toast'].' 
+    </div>';
+	unset($_SESSION['toast']);
+} ?>
   <div class="row">
     <div class="col-xs-12 col-sm-12">
       <div class="card shadow mb-4"> 
@@ -82,11 +95,11 @@
         <div class="card-body"> 
           
           <!---- ///////////////////////////////////////////////// ----->
-          
+           <?= \Config\Services::validation()->listErrors(); ?>
   <?php
 
 helper('form');
-echo form_open('espaceagent/monprofil')
+echo form_open('espaceadmin/monprofil')
 
 ?>
          <!---- <form> ----->
@@ -136,7 +149,7 @@ echo form_open('espaceagent/monprofil')
                 </select>
               </div>
               <div class="form-group col-md-3">
-                <label for="IDcivilite">Civilité</label>
+                 <label for="IDcivilite">Civilité</label>
                 <select id="IDcivilite" readonly name="IDcivilite" class="form-control">
                   <option value="">Choisir...</option>
                   <?php if (! empty($lcivilite) && is_array($lcivilite)) : ?>
@@ -161,6 +174,10 @@ echo form_open('espaceagent/monprofil')
               <div class="form-group col-md-4">
                 <label for="mobile">Mobile</label>
                 <input type="text" class="form-control" id="mobile" name="mobile" value="<?php echo $row->mobile;  ?>" readonly="readonly" placeholder="+225070501070501">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="fixe">Fixe</label>
+                <input type="fixe" class="form-control" id="fixe" name="fixe" value="<?php echo $row->fixe;  ?>" readonly="readonly" placeholder="+225270501070501">
               </div>
               <div class="form-group col-md-4">
                 <label for="email">Courriel</label>
@@ -288,7 +305,7 @@ echo form_open('espaceagent/monprofil')
 					if($info['IDsousdirection']==$row->IDsousdirection) {
 					echo ' <option value="'.$info['IDsousdirection'].'" selected="selected">'.$info['libelle'].'</option>';
 					} else {
-						echo ' <option value="'.$info['IDsousdirection'].'">'.$info['libelle'].'</option>';
+						//echo ' <option value="'.$info['IDsousdirection'].'">'.$info['libelle'].'</option>';
 					}
 					
 					
@@ -308,7 +325,7 @@ echo form_open('espaceagent/monprofil')
 					if($info['IDservice']==$row->IDservice) {
 					echo ' <option value="'.$info['IDservice'].'" selected="selected">'.$info['libelle'].'</option>';
 					} else {
-						echo ' <option value="'.$info['IDservice'].'">'.$info['libelle'].'</option>';
+						//echo ' <option value="'.$info['IDservice'].'">'.$info['libelle'].'</option>';
 				
 					}
 					
@@ -415,14 +432,13 @@ echo form_open('espaceagent/monprofil')
               </div>
              
               
-              
             </div>
             
              <div class="form-row">
               <div class="form-group col-md-12">
                 
                <label for="observations">Observations</label>
-    <textarea class="form-control" id="observations" name="observations" rows="2" value="<?php echo $row->Observations;  ?>" readonly="readonly" style="width:100%"></textarea>
+    <textarea class="form-control" id="observations" name="observations" rows="2" value="<?php echo $row->observations;  ?>" readonly="readonly" style="width:100%"></textarea>
               </div>
               
             </div>
@@ -430,7 +446,7 @@ echo form_open('espaceagent/monprofil')
             <div class="form-row">
               <div class="form-group col-md-12">
                 <div class="form-check">
-                  <label for="actif">Statut agent</label>
+                <label for="actif">Statut agent</label>
                 <select id="actif" name="actif" class="form-control" readonly="readonly">
                  <!--- <option value="">Choisir...</option> -->
                   <option value="1" <?php echo ($row->actif==1)?('selected'):('');  ?>>Agent actif</option>
@@ -439,9 +455,9 @@ echo form_open('espaceagent/monprofil')
                 </select>
                 </div>
               </div>
-              <!-- <div class="form-group col-md-4"> </div>
+             <!-- <div class="form-group col-md-4"> </div>
               <div class="form-group col-md-4">
-                  <button type="submit" class="btn btn-primary" readonly style="width:100%" readonly="readonly">Valider formulaire</button> 
+                 <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>
               </div>-->
             </div>
           </form>
@@ -460,75 +476,76 @@ echo form_open('espaceagent/monprofil')
         <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Liste des documents</h6>
         </div>
-        <div class="card-body">
-          
-        <?php
-          $dir    = 'agents/'.$row->matricule.'/';
-          //echo $dir;
-          $files1 = scandir($dir);
-          //print_r($files1);
-          $opt = "";
+        <div class="card-body"> 
+        
+          <?php
+            $dir    = 'agents/'.$row->matricule.'/';
+            //echo $dir;
+            $files1 = scandir($dir);
+            //print_r($files1);
+            $opt = "";
 
-          foreach ($files1 as $value) {
-            if($value!='.' && $value!='..'){
-              if(is_dir($dir.$value)){
-                $opt = $opt.'<option value="'.$dir.$value.'">'.$value.'</option>';
-                
+            foreach ($files1 as $value) {
+              if($value!='.' && $value!='..'){
+                if(is_dir($dir.$value)){
+                  $opt = $opt.'<option value="'.$dir.$value.'">'.$value.'</option>';
+                  
+                }
               }
             }
-          }
-		  
-          //print_r($opt);	  
+                  
+              //print_r($opt);	  
 
-          //print_r($files1);
-          echo '
-            <table style="width:100%" border="1">
-              <tr>
-                <td colspan="3" style="text-align:center; font-size:24px; color: blue;">CONTENU DU DOSSIER</td>
-              </tr>
-          ';
-
-          $db = \Config\Database::connect();
-          $query = $db->query('SELECT * from acte where idagent='.$_SESSION['cnxid'].' order by categorie'); 
-          $acte   = $query->getResultArray();
-          $lastcat ="";
-          foreach ($acte as $info) {
-            
-            $atts = array(
-              'target' => '_new'              
-            );
-            
-            if($lastcat == $info['categorie']) {
-              echo '
+            //print_r($files1);
+            echo '
+              <table style="width:100%" border="1">
                 <tr>
-                  <td colspan="2">'.$info['titre'].'</td>
-                  <td style="text-align:center">
-                    '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
-                  </td>
+                  <td colspan="3" style="text-align:center; font-size:24px; color: blue;">CONTENU DU DOSSIER</td>
                 </tr>
-              ';
-            } else {
+            ';
+
+            $db = \Config\Database::connect();
+            $query = $db->query('SELECT * from acte where idagent='.$_SESSION['cnxid'].' order by categorie'); 
+            $acte   = $query->getResultArray();
+            $lastcat ="";
+            foreach ($acte as $info) {
               
-              $lastcat = $info['categorie'];
-              echo '
-                <tr>
-                  <td colspan="3" style="text-align:left; font-size:18px; color: red;">'.$info['categorie'].'</td>
-                </tr>
-                <tr>
-                  <td colspan="2">'.$info['titre'].'</td>
-                  <td style="text-align:center">
-                    '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
-                  </td>
-                </tr>';
+              $atts = array(
+                'target' => '_new'              
+              );
+              
+              if($lastcat == $info['categorie']) {
+                echo '
+                  <tr>
+                    <td colspan="2">'.$info['titre'].'</td>
+                    <td style="text-align:center">
+                      '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
+                    </td>
+                  </tr>
+                ';
+              } else {
+                
+                $lastcat = $info['categorie'];
+                echo '
+                  <tr>
+                    <td colspan="3" style="text-align:left; font-size:18px; color: red;">'.$info['categorie'].'</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">'.$info['titre'].'</td>
+                    <td style="text-align:center">
+                      '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
+                    </td>
+                  </tr>
+                ';
+                
+              }
+              
               
             }
-            
-            
-          }
-          
+                      
 
-          echo '</table>';
-        ?>
+            echo '</table>';
+          ?>
 
         
         </div>
@@ -540,4 +557,4 @@ echo form_open('espaceagent/monprofil')
   <!-- /.container-fluid --> 
 </div>
 </div>
-<!-- End of Main Content --> 
+<!-- End of Main Content -->

@@ -28,15 +28,13 @@ echo view('toast');
           <h6 class="m-0 font-weight-bold text-primary">Fiche Congé de maternité</h6>
         </div>
         <div class="card-body">
-          <?php
-
-helper('form');
-if(isset($lidcongematernite)) {
-	echo form_open('espaceadmin/editcongematernite/'.$lidcongematernite);
-} else {
-	echo form_open('espaceadmin/creercongematernite');
-}
-?>
+        <?php
+          if (isset($lidcongematernite)) {
+              echo form_open('espaceadmin/editcongematernite/' . $lidcongematernite, ['enctype' => 'multipart/form-data']);
+          } else {
+              echo form_open('espaceadmin/creercongematernite', ['enctype' => 'multipart/form-data']);
+          }
+        ?>
 
 
           <!---- <form> ----->
@@ -83,7 +81,7 @@ echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</op
             </div>
            <div class="form-group col-md-3">
                <label for="daterepriseeffective">Date reprise effective</label>
-               <input type="date" class="form-control" onclick="" id="daterepriseeffective" name="daterepriseeffective" <?php   if(isset($lidcongematernite)) {echo 'value="'.$lidcongematernite->daterepriseeffective.'"';} else {echo 'readonly="readonly"';} ?>>
+               <input type="date" class="form-control" onclick="" id="daterepriseeffective" name="daterepriseeffective" <?php if(isset($lidcongematernite)) {echo 'value="'.$congematernite->daterepriseeffective.'"';} else {echo 'readonly="readonly"';} ?>>
            </div>
           </div>
           

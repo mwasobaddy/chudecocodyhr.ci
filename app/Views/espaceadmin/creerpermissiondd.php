@@ -41,36 +41,24 @@ if(isset($lidpermissiondd)) {
                    <!---- <form> ----->
       
       <div class="form-row">
-        <div class="form-group col-md-9">
-          <input type="hidden" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
+      <!-- Agent dropdown section -->
+      <div class="form-group col-md-9">
+          <input type="hidden" class="form-control col-2" id="IDpermission" name="IDpermission" value="<?php echo isset($lidpermissiondd) ? $permissiondd->IDpermission : ''; ?>">
           
-          <label for="IDagent">Agent</label>
-          <select id="Idagent" name="Idagent" class="form-control">
-            <?php 
-        
+          <label for="Idagent">Agent</label>
+          <select id="Idagent" name="Idagent" class="form-control" required>
+              <option value="">Sélectionner un agent</option>
+              <?php 
               $query = $db->query('SELECT idagent, matricule, nom from agent'); 
               $results = $query->getResult();
 
-              foreach ($results as $row)
-              {
-
-      
-      
-                if(isset($lidpermissiondd)) {
-                  if($permissiondd->Idagent == $row->idagent) {
-                    echo ' <option value="'.$row->idagent.'" selected>'.$row->matricule.' - '.$row->nom.'</option>';				
-                  } else { 
-                    echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';		
-                  }
-
-                } else {
-                      echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</option>';						
-                }
+              foreach ($results as $row) {
+                  $selected = (isset($lidpermissiondd) && $permissiondd->Idagent == $row->idagent) ? 'selected' : '';
+                  echo '<option value="'.$row->idagent.'" '.$selected.'>'.$row->matricule.' - '.$row->nom.'</option>';
               }
-            ?>
-              
+              ?>
           </select>
-        </div>
+      </div>
         <div class="form-group col-md-3">
           <label for="datesortie">Date demande</label>
           <input type="date" class="form-control" id="datesortie" name="datesortie" required="required" placeholder="datesortie" <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->datesortie.'"';} ?>>
@@ -134,6 +122,11 @@ if(isset($lidpermissiondd)) {
   
 
 <!-- /.container-fluid -->
-
+<!-- Add this script at the bottom of your file -->
+<script>
+document.getElementById('Idagent').addEventListener('change', function() {
+    document.getElementById('IDpermission').value = this.value;
+});
+</script>
 </div>
 <!-- End of Main Content -->
