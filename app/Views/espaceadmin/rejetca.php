@@ -43,9 +43,9 @@ if (isset($lidconge)) {
                                 echo 'value="' . $conge->motifrejet . '"';
                             } ?>>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-12 d-flex justify-content-center">
                             <button type="submit" name="go" value="go" class="btn btn-primary"
-                                    style="width:100%; height:100%">Valider formulaire
+                                    style="height:100%">Valider formulaire
                             </button>
                         </div>
                     </div>

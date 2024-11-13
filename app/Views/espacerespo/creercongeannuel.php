@@ -179,8 +179,8 @@ echo ' <option value="'.$row->IDplancongeannuel.'">'.$row->libelle.'</option>';
     <input type="file" class="form-control-file" id="justificatif2" name="justificatif2">
             </div> -->
             
-             <div class="form-group col-md-9">
-              <button type="submit" class="btn btn-primary" style="width:100%; height:100%">Valider formulaire</button>          </div>
+             <div class="form-group col-md-12 d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary" style="height:100%">Valider formulaire</button>          </div>
           </div>
           
           

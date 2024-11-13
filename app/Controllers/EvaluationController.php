@@ -233,7 +233,7 @@ class EvaluationController extends Controller {
             $this->db->table('objectives')->insert($insertData);
         }
     
-        return redirect()->to('/espacerespo/evaluation')->with('success', 'Objectives saved successfully.');
+        return redirect()->to('/espacerespo/evaluation')->with('success', 'Objectifs sauvegardés avec succès.');
     }
 
     public function agreeObjective()
@@ -250,7 +250,7 @@ class EvaluationController extends Controller {
             'employee_comments' => $comments
         ]);
 
-    return redirect()->back()->with('success', 'Your response has been saved.');
+    return redirect()->back()->with('success', 'Votre réponse a été enregistrée.');
 }
     
 
@@ -379,7 +379,7 @@ class EvaluationController extends Controller {
                 ]);
         }
     
-        return redirect()->back()->with('success', 'Sign-off completed successfully.');
+        return redirect()->back()->with('success', 'La signature a été effectuée avec succès.');
     }
 
     private function determineRole($agent_id) {
@@ -448,7 +448,7 @@ public function changeManager()
         ->where('idevaluation', $evaluation_id)
         ->update([$field => $new_manager_id]);
 
-    return redirect()->back()->with('success', 'Manager updated successfully');
+    return redirect()->back()->with('success', 'Mise à jour réussie du gestionnaire');
 }
 
 public function getManagers()
@@ -606,7 +606,7 @@ public function submitSelfAppraisal()
         ->where('evaluation_id', $evaluation_id)
         ->update(['is_shared' => $is_shared]);
 
-    $message = 'Self-appraisal ' . ($is_shared ? 'shared' : 'saved') . ' successfully.';
+    $message = 'Self-appraisal ' . ($is_shared ? 'shared' : 'saved') . ' avec succès.';
     return redirect()->to('/espaceagent/evaluation/')
         ->with('success', $message);
 }
@@ -794,9 +794,9 @@ public function submitObjectiveEvaluation()
     // Calculate evaluation score
     $this->calculateEvaluationScore($evaluation_id);
 
-    $message = 'Objective evaluation ' . ($is_shared ? 'shared' : 'saved') . ' successfully.';
+    $message = 'Objective evaluation ' . ($is_shared ? 'shared' : 'saved') . ' avec succès.';
 
-    return redirect()->to('/espacerespo/evaluation/objective-evaluation/' . $evaluation_id)
+    return redirect()->to('/espacerespo/evaluation')
         ->with('success', $message);
 }
 

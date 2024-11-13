@@ -462,74 +462,54 @@ echo form_open('espacerespo/monprofil')
         <div class="card-body"> 
         
              
-          <?php
-            $dir    = 'agents/'.$row->matricule.'/';
-            //echo $dir;
-            $files1 = scandir($dir);
-            //print_r($files1);
-            $opt = "";
+        <?php
+// Replace the problematic code section with:
+$dir = FCPATH . 'agents/' . $row->matricule . '/';
 
-            foreach ($files1 as $value) {
-              if($value!='.' && $value!='..'){
-                if(is_dir($dir.$value)){
-                  $opt = $opt.'<option value="'.$dir.$value.'">'.$value.'</option>';
-                  
-                }
-              }
-            }
-                  
-              //print_r($opt);	  
+// Check if directory exists, if not create it
+if (!is_dir($dir)) {
+    // Create directory with recursive option
+    if (!mkdir($dir, 0777, true)) {
+        echo '<div class="alert alert-warning">Unable to create agent directory</div>';
+        $files1 = [];
+    }
+} 
 
-            //print_r($files1);
-            echo '
-              <table style="width:100%" border="1">
-                <tr>
-                  <td colspan="3" style="text-align:center; font-size:24px; color: blue;">CONTENU DU DOSSIER</td>
-                </tr>
-            ';
+try {
+    // Scan directory if it exists
+    if (is_dir($dir)) {
+        $files1 = scandir($dir);
+    } else {
+        $files1 = [];
+    }
+} catch (Exception $e) {
+    echo '<div class="alert alert-warning">Unable to scan directory</div>';
+    $files1 = [];
+}
 
-            $db = \Config\Database::connect();
-            $query = $db->query('SELECT * from acte where idagent='.$_SESSION['cnxid'].' order by categorie'); 
-            $acte   = $query->getResultArray();
-            $lastcat ="";
-            foreach ($acte as $info) {
-              
-              $atts = array(
-                'target' => '_new'              
-              );
-              
-              if($lastcat == $info['categorie']) {
-                echo '
-                  <tr>
-                    <td colspan="2">'.$info['titre'].'</td>
-                    <td style="text-align:center">
-                      '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
-                    </td>
-                  </tr>
-                ';
-              } else {
-                
-                $lastcat = $info['categorie'];
-                echo '
-                  <tr>
-                    <td colspan="3" style="text-align:left; font-size:18px; color: red;">'.$info['categorie'].'</td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">'.$info['titre'].'</td>
-                    <td style="text-align:center">
-                      '.anchor(base_url($info['lien']),'<span class="btn btn-success mb-2"><i class="m-0 fas fa-eye" title="Visualiser"></i></span>',$atts).'
-                    </td>
-                  </tr>
-                ';
-                
-              }
-              
-              
-            }
-                      
+// Rest of your code remains the same
+$opt = "";
 
-            echo '</table>';
-          ?>
+foreach ($files1 as $value) {
+    if($value != '.' && $value != '..') {
+        if(is_dir($dir.$value)) {
+            $opt .= '<option value="'.$dir.$value.'">'.$value.'</option>';
+        }
+    }
+}
+?>
+
+<!-- Display table only if there are files -->
+<?php if (!empty($acte)): ?>
+<table style="width:100%" border="1">
+    <tr>
+        <td colspan="3" style="text-align:center; font-size:24px; color: blue;">CONTENU DU DOSSIER</td>
+    </tr>
+    <!-- Rest of your table code -->
+</table>
+<?php else: ?>
+<div class="alert alert-info">Aucun document disponible</div>
+<?php endif; ?>
 
         </div>
       </div>

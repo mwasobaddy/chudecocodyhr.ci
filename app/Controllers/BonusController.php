@@ -56,7 +56,7 @@ class BonusController extends Controller
             'evaluation_score_threshold' => $evaluationScoreThreshold
         ]);
 
-        return redirect()->back()->with('success', 'Bonus configuration saved successfully.');
+        return redirect()->back()->with('success', 'La configuration du bonus a été sauvegardée avec succès.');
     }
 
     /**

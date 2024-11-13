@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Team Evaluations</h1>
+            <h1 class="h3 mb-0 text-primary">Team Evaluations</h1>
         </div>
 
         <!-- Pending Evaluations Section -->
@@ -98,7 +98,7 @@
                     </div>
                 <?php else: ?>
                     <div class="text-center py-4">
-                        <div class="text-gray-500">No pending evaluations</div>
+                        <div class="text-gray-500">Pas d'évaluation en cours</div>
                     </div>
                 <?php endif; ?>
             </div>

@@ -177,7 +177,10 @@ echo form_open('espaceadmin/monprofil')
               </div>
               <div class="form-group col-md-4">
                 <label for="fixe">Fixe</label>
-                <input type="fixe" class="form-control" id="fixe" name="fixe" value="<?php echo $row->fixe;  ?>" readonly="readonly" placeholder="+225270501070501">
+                <input type="tel" class="form-control" id="fixe" name="fixe" 
+                      value="<?php echo isset($row->fixe) ? $row->fixe : ''; ?>" 
+                      readonly="readonly" 
+                      placeholder="+225270501070501">
               </div>
               <div class="form-group col-md-4">
                 <label for="email">Courriel</label>
@@ -434,14 +437,14 @@ echo form_open('espaceadmin/monprofil')
               
             </div>
             
-             <div class="form-row">
+            <div class="form-row">
               <div class="form-group col-md-12">
-                
-               <label for="observations">Observations</label>
-    <textarea class="form-control" id="observations" name="observations" rows="2" value="<?php echo $row->observations;  ?>" readonly="readonly" style="width:100%"></textarea>
+                  <label for="observations">Observations</label>
+                  <textarea class="form-control" id="observations" name="observations" 
+                            rows="2" readonly="readonly" 
+                            style="width:100%"><?php echo isset($row->observations) ? $row->observations : ''; ?></textarea>
               </div>
-              
-            </div>
+          </div>
             
             <div class="form-row">
               <div class="form-group col-md-12">

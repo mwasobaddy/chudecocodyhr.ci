@@ -1,8 +1,8 @@
 <?php
-$db = \Config\Database::connect();
-$myid = $_SESSION['cnxid'];
-$query   = $db->query('SELECT * from permissionhh where IDagent in(SELECT idagent FROM agent where idagent='.$myid.' or agent.Responsablen1='.$myid.' or agent.Responsablen2='.$myid.' or agent.Sousdrh='.$myid.') and (validationcs is null or validationsus is null or validationsdrh is null or validationcs=0 or validationsus=0 or validationsdrh=0)');
-$permissionhh = $query->getResultArray();
+  $db = \Config\Database::connect();
+  $myid = $_SESSION['cnxid'];
+  $query   = $db->query('SELECT * from permissionhh where IDagent in(SELECT idagent FROM agent where idagent='.$myid.' or agent.Responsablen1='.$myid.' or agent.Responsablen2='.$myid.' or agent.Sousdrh='.$myid.') and (validationcs is null or validationsus is null or validationsdrh is null or validationcs=0 or validationsus=0 or validationsdrh=0)');
+  $permissionhh = $query->getResultArray();
 ?>
 
 <!-- Begin Page Content -->

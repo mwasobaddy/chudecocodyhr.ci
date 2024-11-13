@@ -41,7 +41,7 @@ echo view('toast');
       
        <div class="form-row">
             <div class="form-group col-md-9">
-            <input type="text" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
+            <input type="hidden" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
             
              <label for="Idagent">Agent</label>
                 <select id="Idagent" name="Idagent" class="form-control">
@@ -118,8 +118,8 @@ echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</op
               <label for="justificatif">Justificatif</label>
               <input type="file" class="form-control-file" id="justificatif" name="justificatif" required="required">
             </div>
-            <div class="form-group col-md-8">
-              <button type="submit" class="btn btn-primary" style="width:100%; height:100%;">Valider formulaire</button>
+            <div class="form-group col-md-12 d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary" style="height:100%;">Valider formulaire</button>
             </div>
           </div>
           
