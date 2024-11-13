@@ -51,63 +51,51 @@
           </tfoot>
           <tbody>
             <?php 
-			$db = \Config\Database::connect();
-			$i = 1;
-			
-			?>
-           
-            <?php 
+              $db = \Config\Database::connect();
+              $i = 1;
 		
-		$query   = $db->query('SELECT * FROM permissiondd where Idagent='.$_SESSION['cnxid']);
-$results = $query->getResultArray();
+              $query   = $db->query('SELECT * FROM permissiondd where Idagent='.$_SESSION['cnxid']);
+              $results = $query->getResultArray();
 
-foreach ($results as $info)
-{
-										
-										echo '<tr>
-                                            <td>'.($i++).' </td>';
-                                            
-											
-
-	$query = $db->query('SELECT IDagent, matricule, nom from agent where IDagent='.$info['Idagent']);
-											$row   = $query->getRow();
+              foreach ($results as $info)
+              {
+                echo '<tr>
+                  <td>'.($i++).' </td>
+                ';
+                $query = $db->query('SELECT IDagent, matricule, nom from agent where IDagent='.$info['Idagent']);
+								$row   = $query->getRow();
 
 								echo '<td>'.$row->matricule.'</td>';
 								echo '<td>'.$row->nom.'</td>';
-								
-				//echo '<td></td><td></td>';
 											
-											echo '<td>'.$info['motif'].'</td>
-											<td>'.$info['datesortie'].'</td>
-											<td>'.$info['lieu'].'</td>
-											<td>'.$info['jourdepart'].'</td>
-											<td>'.$info['jourarrivee'].'</td>
-											<td>'.$info['etat'].'</td>
-                                            
-											
-											
-                                            <td style="text-align:center;">';
-											
-											if($info['validationcs']==1 && $info['validationsus']==1) {
-                        
-                        echo '<a href="'.base_url('espaceagent/pdfpermissiondd/'.$info['IDpermission'].'').'"><img src="'.base_url('/img/okok.jpg').'" alt="TELECHARGER ACTE" style="width:30px; height:30px;"/></a>';
-                       
-                       
-                      } else { //pdfcongeagentpays									
-												echo anchor('espaceagent/editpermissiondd/'.$info['IDpermission'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
-									'.anchor('espaceagent/delpermissiondd/'.$info['IDpermission'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>');
+                echo '
+                  <td>'.$info['motif'].'</td>
+                  <td>'.$info['datesortie'].'</td>
+                  <td>'.$info['lieu'].'</td>
+                  <td>'.$info['jourdepart'].'</td>
+                  <td>'.$info['jourarrivee'].'</td>
+                  <td>'.$info['etat'].'</td>
+                  <td style="text-align:center;">
+                ';
+                
+                if($info['validationcs']==1 && $info['validationsus']==1) {
+                  echo '<a href="'.base_url('espaceagent/pdfpermissiondd/'.$info['IDpermission'].'').'"><img src="'.base_url('/img/okok.jpg').'" alt="TELECHARGER ACTE" style="width:30px; height:30px;"/></a>';
+                } 
+                else {
+                  echo anchor('espaceagent/editpermissiondd/'.$info['IDpermission'],'<span class="btn btn-primary mb-2"><i class="m-0 fas fa-user-edit" title="Modifier"></i></span>').'
+                      '.anchor('espaceagent/delpermissiondd/'.$info['IDpermission'],'<span class="btn btn-danger mb-2"><i class="m-0 fas fa-trash" title="Supprimer"></i></span>')
+                    ;
                   echo '</td><td>';
                   $lieu = './agents/'.$row->matricule.'/4-CONGES/';
                   echo '<a target="new" href="'.base_url($lieu.$info['justificatif']).'"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';	
-              
-											}
-											
-									echo '
-									</td>
-                                        </tr>
-											';
-}
-										?>
+            
+								}
+                echo '
+									  </td>
+                  </tr>
+                ';
+              }
+            ?>
            
           </tbody>
           

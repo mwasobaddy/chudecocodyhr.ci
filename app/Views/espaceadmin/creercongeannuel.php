@@ -159,9 +159,9 @@ echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</op
             <div class="form-row">
             <div class="form-group col-md-3">
               <label for="hp">Hors du pays ?</label>
-                <select id="hp" name="hp" class="form-control">
-                  <option value="1" <?php  echo ($congeannuel->horspays==1)?('selected'):(''); ?> >OUI</option>
-                  <option value="0" <?php  echo ($congeannuel->horspays==0)?('selected'):(''); ?> >NON</option>
+                <select id="hp" name="hp" class="form-control">>
+                  <option value="1" <?php echo (isset($congeannuel) && $congeannuel->horspays == 1) ? 'selected' : ''; ?>>OUI</option>
+                  <option value="0" <?php echo (isset($congeannuel) && $congeannuel->horspays == 0) ? 'selected' : ''; ?>>NON</option>
                 </select>
             </div>
             

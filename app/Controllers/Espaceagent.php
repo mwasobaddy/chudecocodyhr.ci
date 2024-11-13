@@ -1680,22 +1680,22 @@ class Espaceagent extends Controller {
 			} else {
 				//echo " non vide";
 				$newName = date('YmdHis').'justificatif'.$_SESSION['mat'].'.'.$file->getClientExtension();
-			//echo $newName;
+				//echo $newName;
 
-			if (! $file->isValid())
-			{ //echo 'ICI';
-					throw new \RuntimeException($file->getErrorString().'('.$file->getError().')');
-			} else {
-				//echo 'YES';
-				if(!$file->hasMoved()) {
-					$file->move($lieu, $newName);
-					////$file->move(WRITEPATH . 'uploads');
+				if (! $file->isValid())
+				{ //echo 'ICI';
+						throw new \RuntimeException($file->getErrorString().'('.$file->getError().')');
+				} else {
+					//echo 'YES';
+					if(!$file->hasMoved()) {
+						$file->move($lieu, $newName);
+						////$file->move(WRITEPATH . 'uploads');
+					}
 				}
-			}
 			}
 			
 			//////////////////////////////////////////////////////////
-			    if($model->save([
+			if($model->save([
 				//'IDpermission'	=> $this->request->getVar('IDpermission'),
 				'Idagent'	=> $this->request->getVar('Idagent'),
 				'motif'	=> $this->request->getVar('motif'),
@@ -1715,7 +1715,9 @@ class Espaceagent extends Controller {
 				'validationdms'	=> $this->request->getVar('validationdms'),
 				'datedms'	=> $this->request->getVar('datedms'),*/
 				'justificatif'	=> $newName,
-			])) {$_SESSION['toast'] = 'Opération réussie !'; return redirect()->to(base_url('/espaceagent/creerpermissiondd'));} else { print_r($model->errors()); }
+			]))
+			{$_SESSION['toast'] = 'Opération réussie !'; return redirect()->to(base_url('/espaceagent/creerpermissiondd'));}
+			else { print_r($model->errors()); }
 			
 			
 		

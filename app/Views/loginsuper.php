@@ -102,7 +102,6 @@
 										
 										?>
                                         
-                                       <?= \Config\Services::validation()->listErrors(); ?>
                                     </form>
                                     
                                     

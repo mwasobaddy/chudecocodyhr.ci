@@ -29,19 +29,19 @@ echo view('toast');
         </div>
         <div class="card-body">
          <?php
-helper('form');
-if(isset($lidpermissiondd)) {
-	echo form_open_multipart('espacerespo/editpermissiondd/'.$lidpermissiondd, 'enctype="multipart/form-data"');
-} else {
-	echo form_open_multipart('espacerespo/creerpermissiondd', 'enctype="multipart/form-data"');
-}
-?>
+            helper('form');
+            if(isset($lidpermissiondd)) {
+              echo form_open_multipart('espacerespo/editpermissiondd/'.$lidpermissiondd, 'enctype="multipart/form-data"');
+            } else {
+              echo form_open_multipart('espacerespo/creerpermissiondd', 'enctype="multipart/form-data"');
+            }
+          ?>
          
                    <!---- <form> ----->
       
        <div class="form-row">
             <div class="form-group col-md-9">
-            <input type="hidden" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
+            <input type="text" class="form-control" id="IDpermission" name="IDpermission"   <?php   if(isset($lidpermissiondd)) {echo 'value="'.$permissiondd->IDpermission.'"';} ?> >
             
              <label for="Idagent">Agent</label>
                 <select id="Idagent" name="Idagent" class="form-control">
