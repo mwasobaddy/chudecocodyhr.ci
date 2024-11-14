@@ -172,8 +172,8 @@ echo ' <option value="'.$row->IDplancongeannuel.'">'.$row->libelle.'</option>';
             <div class="form-group col-md-3">
                <label for="hp">Hors du pays ?</label>
                 <select id="hp" name="hp" class="form-control">
-    <option value="1" <?php if(isset($congeannuel) && $congeannuel->horspays == 1) echo 'selected'; ?>>OUI</option>
-    <option value="0" <?php if(isset($congeannuel) && $congeannuel->horspays == 0) echo 'selected'; ?>>NON</option>
+                  <option value="1" <?php if(isset($congeannuel) && $congeannuel->horspays == 1) echo 'selected'; ?>>OUI</option>
+                  <option value="0" <?php if(isset($congeannuel) && $congeannuel->horspays == 0) echo 'selected'; ?>>NON</option>
                 </select>
             </div>
             <!--<div class="form-group col-md-4">

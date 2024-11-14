@@ -1585,153 +1585,90 @@ class Espaceagent extends Controller {
 	{
 		helper('form');
 		$model = new PermissionddModel();
-		$rules = [
-			'Idagent'  => 'required',
-			'motif'  => 'required',
-			'datesortie'  => 'required',
-			'lieu'  => 'required',
-			'jourdepart'  => 'required',
-			'jourarrivee'  => 'required',
-			'justificatif' => 'required',
-			//'etat'	=> 'ATTENTE DE VALIDATION',
-			/*'validationcs'  => 'required',
-			'datecs'  => 'required',
-			'validationsus'  => 'required',
-			'datesus'  => 'required',
-			'validationsdrh'  => 'required',
-			'datesdrh'  => 'required',
-			'validationsd'  => 'required',
-			'datesd'  => 'required',
-			'validationdms'  => 'required',
-			'datedms'  => 'required',*/
-			//'justificatif'  => 'required',
-		];
-		if (!empty($_FILES['justificatif']['name'])) {
-			$rule['justificatif'] = [
-						                'label' => 'Justificatif',
-						                'rules' => 'uploaded[justificatif]'
-						                    . '|mime_in[justificatif,image/jpg,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats,application/msword]',
-							        ];
-		}
-		if (! $this->validate($rules))	{
-			echo view('templates/espaceagent/entete');
-			echo view('templates/espaceagent/sidebar');
-			echo view('templates/espaceagent/topbar');
-			$data = [
-				'toast' =>'Veuillez vérifier les informations que vous éssayez de valider s\'il vous plait !'
-			];
-			echo view('espaceagent/creerpermissiondd', $data);
-		}
-		else
-		{
-
-			////////////////////////////////////////////////
-			/////CREATION DOSSIER ET ENVOI JUSTIFICATIF$path = './agents/'.$_SESSION['mat'];
-			
-			$path = './agents/'.$_SESSION['mat'];
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			} 
-			
-			$path = './agents/'.$_SESSION['mat'].'/1-IDENTIFICATION';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/2-ENTREE';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/3-CORRESPONDANCES';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$newName = '';
-			$path = './agents/'.$_SESSION['mat'].'/4-CONGES';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/5-MALADIE';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/6-EVALUATION';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/7-MERITES';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/8-SANCTIONS';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/9-SORTI-FIN';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-
-			$lieu = './agents/'.$_SESSION['mat'].'/4-CONGES';
-			
-			$file = $this->request->getFile('justificatif');
-			//var_dump($file);
-			if(empty($file)) {
-				//echo "vide";
-			} else {
-				//echo " non vide";
-				$newName = date('YmdHis').'justificatif'.$_SESSION['mat'].'.'.$file->getClientExtension();
-				//echo $newName;
-
-				if (! $file->isValid())
-				{ //echo 'ICI';
-						throw new \RuntimeException($file->getErrorString().'('.$file->getError().')');
-				} else {
-					//echo 'YES';
-					if(!$file->hasMoved()) {
-						$file->move($lieu, $newName);
-						////$file->move(WRITEPATH . 'uploads');
-					}
-				}
-			}
-			
-			//////////////////////////////////////////////////////////
-			if($model->save([
-				//'IDpermission'	=> $this->request->getVar('IDpermission'),
-				'Idagent'	=> $this->request->getVar('Idagent'),
-				'motif'	=> $this->request->getVar('motif'),
-				'datesortie'	=> $this->request->getVar('datesortie'),
-				'lieu'	=> $this->request->getVar('lieu'),
-				'jourdepart'	=> $this->request->getVar('jourdepart'),
-				'jourarrivee'	=> $this->request->getVar('jourarrivee'),
-				'etat'	=> 'ATTENTE DE VALIDATION',
-				/*'validationcs'	=> $this->request->getVar('validationcs'),
-				'datecs'	=> $this->request->getVar('datecs'),
-				'validationsus'	=> $this->request->getVar('validationsus'),
-				'datesus'	=> $this->request->getVar('datesus'),
-				'validationsdrh'	=> $this->request->getVar('validationsdrh'),
-				'datesdrh'	=> $this->request->getVar('datesdrh'),
-				'validationsd'	=> $this->request->getVar('validationsd'),
-				'datesd'	=> $this->request->getVar('datesd'),
-				'validationdms'	=> $this->request->getVar('validationdms'),
-				'datedms'	=> $this->request->getVar('datedms'),*/
-				'justificatif'	=> $newName,
-			]))
-			{$_SESSION['toast'] = 'Opération réussie !'; return redirect()->to(base_url('/espaceagent/creerpermissiondd'));}
-			else { print_r($model->errors()); }
-			
-			
 		
-			
-			
-			$_SESSION['toast'] = 'Opération réussie !';
-			//return redirect()->to(base_url('/espaceagent/creerpermissiondd'));
-			//echo view('espaceagent/creerpermissiondd', ['titre' => 'Creation d\'une permissiondd']);
+		// If form is submitted
+		if ($this->request->getMethod() === 'post') {
+			// Validation rules
+			$rules = [
+				'Idagent'    => 'required',
+				'motif'      => 'required',
+				'datesortie' => 'required',
+				'lieu'       => 'required',
+				'jourdepart' => 'required',
+				'jourarrivee'=> 'required'
+			];
+	
+			// Add file validation if file is uploaded
+			if (!empty($_FILES['justificatif']['name'])) {
+				$rules['justificatif'] = [
+					'label' => 'Justificatif',
+					'rules' => 'uploaded[justificatif]|mime_in[justificatif,image/jpg,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats,application/msword]'
+				];
+			}
+	
+			if ($this->validate($rules)) {
+				try {
+					// Handle file upload
+					$newName = '';
+					if ($file = $this->request->getFile('justificatif')) {
+						if ($file->isValid() && !$file->hasMoved()) {
+							// Create directories if they don't exist
+							$path = './agents/' . $_SESSION['mat'] . '/4-CONGES';
+							if (!is_dir($path)) {
+								mkdir($path, 0777, true);
+							}
+							
+							$newName = date('YmdHis') . 'justificatif' . $_SESSION['mat'] . '.' . $file->getClientExtension();
+							$file->move($path, $newName);
+							
+							// Log successful file upload
+							echo "<script>console.log('File uploaded successfully: " . $newName . "');</script>";
+						}
+					}
+	
+					// Prepare data for database
+					$data = [
+						'Idagent'     => $this->request->getPost('Idagent'),
+						'motif'       => $this->request->getPost('motif'),
+						'datesortie'  => $this->request->getPost('datesortie'),
+						'lieu'        => $this->request->getPost('lieu'),
+						'jourdepart'  => $this->request->getPost('jourdepart'),
+						'jourarrivee' => $this->request->getPost('jourarrivee'),
+						'etat'        => 'ATTENTE DE VALIDATION',
+						'justificatif'=> $newName
+					];
+	
+					// Save to database
+					if ($model->save($data)) {
+						echo "<script>console.log('Permission request saved successfully');</script>";
+						$_SESSION['toast'] = 'Opération réussie !';
+						return redirect()->to(base_url('/espaceagent/creerpermissiondd'));
+					} else {
+						echo "<script>console.error('Database save failed:', " . json_encode($model->errors()) . ");</script>";
+						throw new \RuntimeException('Failed to save permission request');
+					}
+	
+				} catch (\Exception $e) {
+					echo "<script>console.error('Error:', " . json_encode($e->getMessage()) . ");</script>";
+					$_SESSION['toast'] = 'Une erreur est survenue';
+				}
+			} else {
+				// Validation failed
+				echo "<script>console.error('Validation errors:', " . json_encode($this->validator->getErrors()) . ");</script>";
+			}
 		}
-		//////////////////////////////////////////////////////////
+	
+		// Display form
 		$data = [
 			'permissiondd' => $model->recPermissiondd(),
-			'titre' => 'Liste des permissiondd',
+			'titre' => 'Liste des permissions jour à jour',
+			'validation' => $this->validator ?? null
 		];
+	
+		echo view('templates/espaceagent/entete');
+		echo view('templates/espaceagent/sidebar');
+		echo view('templates/espaceagent/topbar');
+		echo view('espaceagent/creerpermissiondd', $data);
 		echo view('espaceagent/apercupermissiondd', $data);
 		echo view('templates/espaceagent/pied', $data);
 	}
@@ -1893,127 +1830,89 @@ class Espaceagent extends Controller {
 	{
 		helper('form');
 		$model = new PermissionhhModel();
-		$rules = [
-			'Idagent' => 'required',
-			'objetsortie' => 'required',
-			'datesortie' => 'required',
-			'lieu' => 'required',
-			'heuredepart' => 'required',
-			'heurearrivee'	 => 'required',
-			'justificatif'	 => 'required',
-		];
-		if (!empty($_FILES['justificatif']['name'])) {
-			$rule['justificatif'] = [
-						                'label' => 'Justificatif',
-						                'rules' => 'uploaded[justificatif]'
-						                    . '|mime_in[justificatif,image/jpg,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats,application/msword]',
-							        ];
-		}
-		if (! $this->validate($rules))	{
-			echo view('templates/espaceagent/entete');
-			echo view('templates/espaceagent/sidebar');
-			echo view('templates/espaceagent/topbar');
-			$data = [
-				'toast' =>'Veuillez vérifier les informations que vous éssayez de valider s\'il vous plait !'
+	
+		// If form is submitted
+		if ($this->request->getMethod() === 'post') {
+			// Validation rules
+			$rules = [
+				'Idagent'     => 'required',
+				'objetsortie' => 'required',
+				'datesortie'  => 'required',
+				'lieu'        => 'required',
+				'heuredepart' => 'required',
+				'heurearrivee'=> 'required'
 			];
-			echo view('espaceagent/creerpermissionhh', $data);
-		}
-		else
-		{
-
-			$newName='';
-			
-			$path = './agents/'.$_SESSION['mat'];
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			} 
-			
-			$path = './agents/'.$_SESSION['mat'].'/1-IDENTIFICATION';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
+	
+			// Add file validation if file is uploaded
+			if (!empty($_FILES['justificatif']['name'])) {
+				$rules['justificatif'] = [
+					'label' => 'Justificatif',
+					'rules' => 'uploaded[justificatif]|mime_in[justificatif,image/jpg,image/jpeg,image/png,application/pdf,application/vnd.openxmlformats,application/msword]'
+				];
 			}
-			$path = './agents/'.$_SESSION['mat'].'/2-ENTREE';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/3-CORRESPONDANCES';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/4-CONGES';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/5-MALADIE';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/6-EVALUATION';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/7-MERITES';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/8-SANCTIONS';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-			$path = './agents/'.$_SESSION['mat'].'/9-SORTI-FIN';
-			if (!is_dir($path)) {
-				mkdir($path, 0777, true);
-			}
-
-			$lieu = './agents/'.$_SESSION['mat'].'/4-CONGES';
-			$file = $this->request->getFile('justificatif');
-			
-			if(empty($file) or empty($_FILES['justificatif']['name'])) {
-				//echo "vide";
-			} else {
-				//echo " non vide";
-				$newName = date('YmdHis').'justificatif'.$_SESSION['mat'].'.'.$file->getClientExtension();
-				//echo $newName;
-
-			if (! $file->isValid())
-			{ //echo 'ICI';
-					throw new \RuntimeException($file->getErrorString().'('.$file->getError().')');
-			} else {
-				//echo 'YES';
-				if(!$file->hasMoved()) {
-					$file->move($lieu, $newName);
-					////$file->move(WRITEPATH . 'uploads');
+	
+			if ($this->validate($rules)) {
+				try {
+					// Handle file upload
+					$newName = '';
+					if ($file = $this->request->getFile('justificatif')) {
+						if ($file->isValid() && !$file->hasMoved()) {
+							// Create directories if they don't exist
+							$path = './agents/' . $_SESSION['mat'] . '/4-CONGES';
+							if (!is_dir($path)) {
+								mkdir($path, 0777, true);
+							}
+							
+							$newName = date('YmdHis') . 'justificatif' . $_SESSION['mat'] . '.' . $file->getClientExtension();
+							$file->move($path, $newName);
+							
+							echo "<script>console.log('File uploaded successfully: " . $newName . "');</script>";
+						}
+					}
+	
+					// Prepare data for database
+					$data = [
+						'Idagent'     => $this->request->getPost('Idagent'),
+						'objetsortie' => $this->request->getPost('objetsortie'),
+						'datesortie'  => $this->request->getPost('datesortie'),
+						'lieu'        => $this->request->getPost('lieu'),
+						'heuredepart' => $this->request->getPost('heuredepart'),
+						'heurearrivee'=> $this->request->getPost('heurearrivee'),
+						'etat'        => 'ATTENTE DE VALIDATION',
+						'justificatif'=> $newName
+					];
+	
+					// Save to database
+					if ($model->save($data)) {
+						echo "<script>console.log('Permission request saved successfully');</script>";
+						$_SESSION['toast'] = 'Opération réussie !';
+						return redirect()->to(base_url('/espaceagent/creerpermissionhh'));
+					} else {
+						echo "<script>console.error('Database save failed:', " . json_encode($model->errors()) . ");</script>";
+						throw new \RuntimeException('Failed to save permission request');
+					}
+	
+				} catch (\Exception $e) {
+					echo "<script>console.error('Error:', " . json_encode($e->getMessage()) . ");</script>";
+					$_SESSION['toast'] = 'Une erreur est survenue';
 				}
+			} else {
+				// Validation failed
+				echo "<script>console.error('Validation errors:', " . json_encode($this->validator->getErrors()) . ");</script>";
 			}
-			}
-
-
-			$model->save([
-
-				'Idagent' => $this->request->getVar('Idagent'),
-				'objetsortie' => $this->request->getVar('objetsortie'),
-				'datesortie' => $this->request->getVar('datesortie'),
-				'lieu' => $this->request->getVar('lieu'),
-				'heuredepart' => $this->request->getVar('heuredepart'),
-				'heurearrivee'	=> $this->request->getVar('heurearrivee'),
-				'etat'	=> 'ATTENTE DE VALIDATION',
-				//'validationcs' => $this->request->getVar('validationcs'),
-				//'datecs' => $this->request->getVar('datecs'),
-				//'validationsus'	=> $this->request->getVar('validationsus'),
-				//'datesus' => $this->request->getVar('datesus'),
-				//'validationsdrh' => $this->request->getVar('validationsdrh'),
-				//'datesdrh' => $this->request->getVar('datesdrh'),
-				'justificatif' => $newName,
-			]);
-			$_SESSION['toast'] = 'Opération réussie !';
-			
-			return redirect()->to(base_url('/espaceagent/creerpermissionhh'));
 		}
-		//////////////////////////////////////////////////////////
+	
+		// Display form
 		$data = [
 			'permissionhh' => $model->recPermissionhh(),
-			'titre' => 'Liste des permissionhh',
+			'titre' => 'Liste des permissions heure à heure',
+			'validation' => $this->validator ?? null
 		];
+	
+		echo view('templates/espaceagent/entete');
+		echo view('templates/espaceagent/sidebar');
+		echo view('templates/espaceagent/topbar');
+		echo view('espaceagent/creerpermissionhh', $data);
 		echo view('espaceagent/apercupermissionhh', $data);
 		echo view('templates/espaceagent/pied', $data);
 	}

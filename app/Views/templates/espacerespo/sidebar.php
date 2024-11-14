@@ -59,17 +59,20 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                        
-                        <h6 class="collapse-header">Mes demandes :</h6>
-                         <a class="collapse-item" href="<?php echo base_url('/espacerespo/creercongeannuel');?>">Congé annuel</a>
-                         <?php
-						 if($_SESSION['genre']==1) {
-						 ?>
-                        
+                    <h6 class="collapse-header">Mes demandes :</h6>
+                    <a class="collapse-item" href="<?php echo base_url('/espacerespo/creercongeannuel');?>">Congé annuel</a>
+                    <?php
+                    // Fix for undefined array key "genre"
+                    if(session_status() === PHP_SESSION_NONE) {
+                        session_start();
+                    }
+
+                    if(isset($_SESSION['genre']) && $_SESSION['genre'] == 1) {
+                    ?>
                         <a class="collapse-item" href="<?php echo base_url('/espacerespo/creercongematernite');?>">Congés de maternité</a>
-                        
-                        <?php
-						 }
-						 ?>
+                    <?php
+                    }
+                    ?>
                         <a class="collapse-item" href="<?php echo base_url('/espacerespo/creerpermissiondd');?>">Permission jour à jour</a>
                         <a class="collapse-item" href="<?php echo base_url('/espacerespo/creerpermissionhh');?>">Permission heure à heure</a>
                     </div>

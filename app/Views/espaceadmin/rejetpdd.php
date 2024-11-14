@@ -29,18 +29,15 @@ if (isset($lidconge)) {
                     ?>
                     <!---- <form> ----->
                     <div class="form-row">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-12">
                             <input type="hidden" class="form-control" id="IDpermission"
-                                   name="IDpermission" <?php if (isset($lidpdd)) {
-                                echo 'value="' . $item->IDpermission . '"';
-                            } ?> >
+                                name="IDpermission" value="<?= isset($lidpdd) ? $lidpdd : '' ?>">
+
                             <label for="datedepart">Motif du rejet</label>
                             <input type="text" class="form-control" id="motifrejet" name="motifrejet"
-                                   placeholder="motif rejet" required="required" <?php if (isset($lidpdd)) {
-                                echo 'value="' . $item->motifrejet . '"';
-                            } ?>>
+                                placeholder="motif rejet" required="required" 
+                                value="<?= isset($item) && isset($item->motifrejet) ? $item->motifrejet : '' ?>">
                         </div>
-                        <
                         <div class="form-group col-md-12 d-flex justify-content-center">
                             <button type="submit" name="go" value="go" class="btn btn-primary"
                                     style="height:100%">Valider formulaire

@@ -107,8 +107,8 @@ if(isset($lidpermissiondd)) {
               <label for="justificatif">Justificatif</label>
               <input type="file" class="form-control-file" id="justificatif" name="justificatif" required="required">
             </div>
-            <div class="form-group col-md-8">
-              <button type="submit" class="btn btn-primary" style="width:100%; height:100%;">Valider formulaire</button>
+            <div class="form-group col-md-12 d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary" style="height:100%;">Valider formulaire</button>
             </div>
           </div>
           

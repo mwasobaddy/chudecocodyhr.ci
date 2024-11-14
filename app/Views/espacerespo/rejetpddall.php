@@ -29,7 +29,7 @@ if (isset($lidconge)) {
                     ?>
                     <!---- <form> ----->
                     <div class="form-row">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-12">
                             <input type="hidden" class="form-control" id="IDpermission"
                                    name="IDpermission" >
                             <label for="datedepart">Motif du rejet</label>

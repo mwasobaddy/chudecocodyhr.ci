@@ -60,14 +60,19 @@
                         <a class="collapse-item" href="">Changement planning</a> -->
                         
                         <a class="collapse-item" href="<?php echo base_url('/espaceagent/creercongeannuel');?>">Planning Congés annuels</a>
-                         <?php
-						 if($_SESSION['genre']==1) {
-						 ?>
-                        <a class="collapse-item" href="<?php echo base_url('/espaceagent/creercongematernite');?>">Congés de maternité</a>
-                         
                         <?php
-						 }
-						 ?>
+                        // Add session and genre key validation
+                        if(session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }
+
+                        // Check if genre key exists and equals 1
+                        if(isset($_SESSION['genre']) && $_SESSION['genre'] == 1) {
+                        ?>
+                            <a class="collapse-item" href="<?php echo base_url('/espaceagent/creercongematernite');?>">Congés de maternité</a>
+                        <?php
+                        }
+                        ?>
                         <a class="collapse-item" href="<?php echo base_url('/espaceagent/creerpermissiondd');?>">Permission jour à jour</a>
                         <a class="collapse-item" href="<?php echo base_url('/espaceagent/creerpermissionhh');?>">Permission heure à heure</a>
                     </div>

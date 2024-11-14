@@ -99,7 +99,7 @@ echo ' <option value="'.$row->idagent.'">'.$row->matricule.' - '.$row->nom.'</op
               <label for="justificatif3">justificatif 3</label>
     <input type="file" class="form-control-file" id="justificatif3" name="justificatif3" <?php   if(isset($lidcongematernite)) {echo 'value="'.$congematernite->justificatif3.'"';} ?>>
             </div>
-             <div class="form-group col-md-3">
+             <div class="form-group col-md-12 d-flex justify-content-center">
               <button type="submit" class="btn btn-primary">Valider formulaire</button>          </div>
           </div>
       

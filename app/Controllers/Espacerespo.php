@@ -2624,76 +2624,79 @@ class Espacerespo extends Controller
 
 	public function validerca($num)
 	{
-		$db = \Config\Database::connect();
-		$dd = date('Y-m-d');
+		try {
+			$db = \Config\Database::connect();
+			$dd = date('Y-m-d');
+			$myid = $_SESSION['cnxid'];
+	
+			// First get the leave request details
+			$query = $db->query('SELECT * FROM congeannuel WHERE IDconge = ?', [$num]);
+			$row = $query->getRow();
+			
+			if (!$row) {
+				echo "<script>console.error('Leave request not found');</script>";
+				$_SESSION['toast'] = 'Leave request not found';
+				return redirect()->to(base_url('/espacerespo/validercongeannuel'));
+			}
+	
+			// Get agent details 
+			$query = $db->query('SELECT * FROM agent WHERE idagent = ?', [$row->Idagent]);
+			$roww = $query->getRow();
 
-		$myid = $_SESSION['cnxid'];
-		$query   = $db->query('SELECT * from congeannuel where IDconge=' . $num);
-		$row   = $query->getRow();
-		print_r($row);
-		$query   = $db->query('SELECT * from agent where idagent=' . $row->Idagent);
-		$roww   = $query->getRow();
-
-		$valid = '';
-		$myid = $_SESSION['cnxid'];
-
-		//echo $myid.'<br/>'.'SELECT * from agent where idagent='.$row->Idagent.'<br/>';
-		//print_r($roww);
-
-		if ($myid == $roww->idagent) {
-			$valid = $valid . "`validationagent` = '1', `etat` = 'VALIDATION AGENT'";
+			$valid = '';
+			$updateFields = [];
+	
+			// Determine validation type based on user role
+			if ($myid == $roww->Responsablen1) {
+				// Chef de service validation
+				$etat_text = ($row->validationsd == 1) ? 'VALIDATION RESPONSABLE N+1 ET N+2' : 'VALIDATION RESPONSABLE N+1';
+				$updateFields = [
+					'validationcs' => 1,
+					'datecs' => $dd,
+					'etat' => $etat_text
+				];
+				echo "<script>console.log('Processing Chef de service validation');</script>";
+			}
+			elseif ($myid == $roww->Responsablen2) {
+				// Sous-directeur validation
+				$etat_text = ($row->validationcs == 1) ? 'VALIDATION RESPONSABLE N+1 ET N+2' : 'VALIDATION RESPONSABLE N+2';
+				$updateFields = [
+					'validationsd' => 1, 
+					'datesd' => $dd,
+					'validationdg' => 1,
+					'datedg' => $dd,
+					'etat' => $etat_text
+				];
+				echo "<script>console.log('Processing Sous-directeur validation');</script>";
+			}
+			else{
+	
+				// If we have fields to update, perform the update
+				if (!empty($updateFields)) {
+					$builder = $db->table('congeannuel');
+					$builder->where('IDconge', $num);
+					$result = $builder->update($updateFields);
+		
+					if ($result) {
+						echo "<script>console.log('Leave request updated successfully');</script>";
+						$_SESSION['toast'] = 'Validation effectuée avec succès';
+					} else {
+						echo "<script>console.error('Failed to update leave request');</script>";
+						$_SESSION['toast'] = 'Erreur lors de la validation';
+					}
+				} else {
+					echo "<script>console.error('No validation permissions');</script>";
+					$_SESSION['toast'] = 'Vous n\'avez pas les droits pour valider cette demande';
+				}
+		
+				return redirect()->to(base_url('/espacerespo/validercongeannuel'));
+			}
+	
+		} catch (\Exception $e) {
+			echo "<script>console.error('Error: " . addslashes($e->getMessage()) . "');</script>";
+			$_SESSION['toast'] = 'Une erreur est survenue';
+			return redirect()->to(base_url('/espacerespo/validercongeannuel'));
 		}
-
-		if ($myid == $roww->Responsablen1 || empty($roww->Responsablen1)) {
-			if ($row->etat == "VALIDATION RESPONSABLE N+1 ET N+2") {
-				$etat_text = 'VALIDATION RESPONSABLE N+1 ET N+2';
-			} elseif ($row->etat == "VALIDATION RESPONSABLE N+2") {
-				$etat_text = 'VALIDATION RESPONSABLE N+1 ET N+2';
-			} else {
-				$etat_text = 'VALIDATION RESPONSABLE N+1';
-			}
-			if ($valid == '') {
-				$valid = $valid . "`validationcs` = '1', `datecs` = '$dd', `etat` = '$etat_text'";
-			} else {
-				$valid = $valid . ",`validationcs` = '1', `datecs` = '$dd', `etat` = '$etat_text'";
-			}
-		}
-
-		if ($myid == $roww->Responsablen2) {
-			if ($row->etat == "VALIDATION RESPONSABLE N+1 ET N+2") {
-				$etat_text = 'VALIDATION RESPONSABLE N+1 ET N+2';
-			} elseif ($row->etat == "VALIDATION RESPONSABLE N+1") {
-				$etat_text = 'VALIDATION RESPONSABLE N+1 ET N+2';
-			} else {
-				$etat_text = 'VALIDATION RESPONSABLE N+2';
-			}
-			if ($valid == '') {
-				$valid = $valid . " `validationsd` = '1', `datesd` = '$dd', `validationdg` = '1', `datedg` = '$dd', `etat` = '$etat_text'";
-			} else {
-				$valid = $valid . " ,`validationsd` = '1', `datesd` = '$dd', `validationdg` = '1', `datedg` = '$dd', `etat` = '$etat_text'";
-			}
-		}
-
-		if ($myid == $roww->Sousdrh || $myid == $_SESSION['sdrh2']) {
-			if ($valid == '') {
-				$valid = $valid . "`validationsdrh` = '1', `datesdrh` = '$dd', `etat` = 'VALIDÉ'";
-			} else {
-				$valid = $valid . ",`validationsdrh` = '1', `datesdrh` = '$dd', `etat` = 'VALIDÉ'";
-			}
-		}
-
-		$sql = "UPDATE `congeannuel` SET $valid WHERE (`IDconge` = '$num')";
-
-		//		echo "UPDATE `congeannuel` SET $valid WHERE (`IDconge` = '$num')";
-		/*	if($num != $row->IDagent) {
-			$sql = "UPDATE `congeannuel` SET `validationcs` = '1',`validationagent` = '1', `validationsdrh` = '1', `validationdg` = '1', `validationsd` = '1', `datecs` = '$dd', `datevalidation` = '$dd', `datesd` = '$dd', `datesdrh` = '$dd', `datedg` = '$dd', `etat` = 'VALIDÉ' WHERE (`IDconge` = '$num')";
-		} else {
-			$sql = "UPDATE `congeannuel` SET `validationcs` = '1', `validationsdrh` = '1', `validationdg` = '1', `validationsd` = '1', `datecs` = '$dd', `datesd` = '$dd', `datesdrh` = '$dd', `datedg` = '$dd', `etat` = 'VALIDÉ' WHERE (`IDconge` = '$num')";
-		}*/
-
-		$query   = $db->query($sql);
-
-		return redirect()->to(base_url('/espacerespo/validercongeannuel'));
 	}
 	public function validercaall($numar_str)
 	{

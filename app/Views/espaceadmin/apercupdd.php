@@ -12,7 +12,15 @@ $permissiondd = $query->getResultArray();
 <!-- Begin Page Content -->
 
 <div class="container-fluid"> 
-  
+  <?php if(isset($_SESSION['toast'])): ?>
+      <div class="alert alert-info alert-dismissible fade show" role="alert" id="toast">
+          <?= $_SESSION['toast']; ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <?php unset($_SESSION['toast']); ?>
+  <?php endif; ?>
   <!-- Page Heading  -->
   <h1 class="h3 mb-2 text-primary">Module employés > Liste des Permissions jour à jour</h1>
   <p class="mb-4">Traitez toute la liste d’autorisations quotidienne.</p>
