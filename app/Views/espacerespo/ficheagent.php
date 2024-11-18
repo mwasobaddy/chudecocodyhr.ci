@@ -375,18 +375,56 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
                 <select id="Responsablen1" name="Responsablen1" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                   <?php
-				  echo selectagent('sup',$row->Responsablen1); 
-				  ?>
+                    echo selectagent('sup',$row->Responsablen1); 
+                  ?>
                 </select>
+                <script>
+                  $(document).ready(function() {
+                      let dropdown = $('#Responsablen1');
+                      let options = dropdown.find('option:not(:first)').detach().toArray();
+                      
+                      options.sort((a, b) => {
+                          // Extract text after hyphen for comparison
+                          let textA = $(a).text().split('-')[1] || $(a).text();
+                          let textB = $(b).text().split('-')[1] || $(b).text();
+                          
+                          return textA.localeCompare(textB, undefined, {
+                              numeric: false,
+                              sensitivity: 'base'
+                          });
+                      });
+                      
+                      dropdown.append(options);
+                  });
+                </script>
               </div>
               <div class="form-group col-md-4">
                 <label for="Responsablen2">Responsable hiérarchique N+2</label>
                 <select id="Responsablen2" name="Responsablen2" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
-                    <?php
-				  echo selectagent('sup',$row->Responsablen2); 
-				  ?>
+                  <?php
+                    echo selectagent('sup',$row->Responsablen2); 
+                  ?>
                 </select>
+                <script>
+                  $(document).ready(function() {
+                      let dropdown = $('#Responsablen2');
+                      let options = dropdown.find('option:not(:first)').detach().toArray();
+                      
+                      options.sort((a, b) => {
+                          // Extract text after hyphen for comparison
+                          let textA = $(a).text().split('-')[1] || $(a).text();
+                          let textB = $(b).text().split('-')[1] || $(b).text();
+                          
+                          return textA.localeCompare(textB, undefined, {
+                              numeric: false,
+                              sensitivity: 'base'
+                          });
+                      });
+                      
+                      dropdown.append(options);
+                  });
+                </script>
               </div>
             </div>
             <div class="form-row">

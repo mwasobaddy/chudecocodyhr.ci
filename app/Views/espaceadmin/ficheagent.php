@@ -1,63 +1,53 @@
 <!-- Begin Page Content -->
-                <?php
 
-				//echo $this->router->fetch_method();
-				//print_r($this->view);
-				//print_r($this);
-				?>
+<?php
+  $db = \Config\Database::connect();
+  $query = $db->query('SELECT * from agent where idagent='.$idag);
+  $row   = $query->getRow();
 
-                 <?php
-				   $db = \Config\Database::connect();
-				  	$query = $db->query('SELECT * from agent where idagent='.$idag);
-					$row   = $query->getRow();
-
-					$query   = $db->query('SELECT * FROM genre');
-					$lgenre = $query->getResultArray();
+  $query   = $db->query('SELECT * FROM genre');
+  $lgenre = $query->getResultArray();
 
 
-			$query   = $db->query('SELECT * FROM agent');
-			$lagent = $query->getResultArray();
+  $query   = $db->query('SELECT * FROM agent');
+  $lagent = $query->getResultArray();
 
-			$query   = $db->query('SELECT * FROM contrat');
-			$lcontrat = $query->getResultArray();
-
-
-			$query   = $db->query('SELECT * FROM direction');
-			$ldirection = $query->getResultArray();
-
-			$query   = $db->query('SELECT * FROM droitaccess');
-			$ldroitaccess = $query->getResultArray();
-
-			$query   = $db->query('SELECT * FROM emploi');
-			$lemploi = $query->getResultArray();
-
-			$query   = $db->query('SELECT * FROM lafonction');
-			$lfonction = $query->getResultArray();
-
-			//print_r($lfonction);
-
-			$query   = $db->query('SELECT * FROM grade');
-			$lgrade = $query->getResultArray();
-
-			$query   = $db->query('SELECT * FROM role_agent');
-			$lroleagent = $query->getResultArray();
-
-			$query   = $db->query('SELECT * FROM role');
-			$lrole = $query->getResultArray();
-
-			$query   = $db->query('SELECT * FROM service');
-			$lservice = $query->getResultArray();
-
-			$query   = $db->query('SELECT * FROM civilite');
-			$lcivilite= $query->getResultArray();
-
-			$query   = $db->query('SELECT * FROM sousdirection');
-			$lsousdirection = $query->getResultArray();
+  $query   = $db->query('SELECT * FROM contrat');
+  $lcontrat = $query->getResultArray();
 
 
+  $query   = $db->query('SELECT * FROM direction');
+  $ldirection = $query->getResultArray();
 
+  $query   = $db->query('SELECT * FROM droitaccess');
+  $ldroitaccess = $query->getResultArray();
 
-					?>
+  $query   = $db->query('SELECT * FROM emploi');
+  $lemploi = $query->getResultArray();
+
+  $query   = $db->query('SELECT * FROM lafonction');
+  $lfonction = $query->getResultArray();
+
+  //print_r($lfonction);
+
+  $query   = $db->query('SELECT * FROM grade');
+  $lgrade = $query->getResultArray();
+
+  $query   = $db->query('SELECT * FROM role_agent');
+  $lroleagent = $query->getResultArray();
+
+  $query   = $db->query('SELECT * FROM role');
+  $lrole = $query->getResultArray();
+
+  $query   = $db->query('SELECT * FROM service');
+  $lservice = $query->getResultArray();
+
+  $query   = $db->query('SELECT * FROM civilite');
+  $lcivilite= $query->getResultArray();
+
+  $query   = $db->query('SELECT * FROM sousdirection');
+  $lsousdirection = $query->getResultArray();
+?>
 
 <div class="container-fluid">
 
@@ -458,18 +448,56 @@ echo form_open('espaceadmin/ficheagent/'.$idag, 'enctype="multipart/form-data"')
                 <select id="Responsablen1" name="Responsablen1" class="form-control">
                   <option value="">Choisir...</option>
                   <?php
-				  echo selectagent('sup',$row->Responsablen1);
-				  ?>
+                    echo selectagent('sup',$row->Responsablen1);
+                  ?>
                 </select>
+                <script>
+                  $(document).ready(function() {
+                      let dropdown = $('#Responsablen1');
+                      let options = dropdown.find('option:not(:first)').detach().toArray();
+                      
+                      options.sort((a, b) => {
+                          // Extract text after hyphen for comparison
+                          let textA = $(a).text().split('-')[1] || $(a).text();
+                          let textB = $(b).text().split('-')[1] || $(b).text();
+                          
+                          return textA.localeCompare(textB, undefined, {
+                              numeric: false,
+                              sensitivity: 'base'
+                          });
+                      });
+                      
+                      dropdown.append(options);
+                  });
+                </script>
               </div>
               <div class="form-group col-md-4">
                 <label for="Responsablen2">Responsable hiérarchique N+2</label>
                 <select id="Responsablen2" name="Responsablen2" class="form-control">
                   <option value="">Choisir...</option>
-                    <?php
-				  echo selectagent('sup',$row->Responsablen2);
-				  ?>
+                  <?php
+                    echo selectagent('sup',$row->Responsablen2);
+                  ?>
                 </select>
+                <script>
+                  $(document).ready(function() {
+                      let dropdown = $('#Responsablen2');
+                      let options = dropdown.find('option:not(:first)').detach().toArray();
+                      
+                      options.sort((a, b) => {
+                          // Extract text after hyphen for comparison
+                          let textA = $(a).text().split('-')[1] || $(a).text();
+                          let textB = $(b).text().split('-')[1] || $(b).text();
+                          
+                          return textA.localeCompare(textB, undefined, {
+                              numeric: false,
+                              sensitivity: 'base'
+                          });
+                      });
+                      
+                      dropdown.append(options);
+                  });
+                </script>
               </div>
             </div>
             <div class="form-row">
