@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-primary">Configuration du bonus</h1>
 
@@ -12,7 +11,11 @@
         <?= csrf_field() ?>
         <div class="form-row">
             <div class="form-group col-md-4">
+<<<<<<< HEAD
                 <label for="evaluation_period">Période</label>
+=======
+                <label for="evaluation_period">Période d'évaluation</label>
+>>>>>>> 3462374 ([modified]: entire bonus module)
                 <select id="evaluation_period" name="evaluation_period" class="form-control" required>
                     <option value="">Sélectionner la période</option>
                     <option value="3 months">3 Mois</option>
@@ -30,9 +33,36 @@
                     <option value="20">20%</option>
                 </select>
             </div>
+            <!-- Employee Selection Dropdown -->
             <div class="form-group col-md-4">
+<<<<<<< HEAD
                 <label for="evaluation_score_threshold">Note d'évaluation</label>
                 <input type="number" step="0.1" id="evaluation_score_threshold" name="evaluation_score_threshold" class="form-control" placeholder="e.g., 3.5" required>
+=======
+                <label for="employee_id">Employé</label>
+                <select id="employee_id" name="employee_id" class="form-control" required>
+                    <option value="">Sélectionner l'employé</option>
+                    <?php if (!empty($employees)): ?>
+                        <?php foreach ($employees as $employee): ?>
+                            <option value="<?= esc($employee['matricule']) ?>">
+                    <?= esc($employee['nom']) ?>
+                </option>
+                      <?php endforeach; ?>
+                    <?php else: ?>
+                        <option value="">Aucun employé disponible</option>
+                    <?php endif; ?>
+                </select>
+            </div>
+            <!-- Threshold Selection Dropdown -->
+            <div class="form-group col-md-4">
+                <label for="evaluation_score_threshold">Note d'évaluation</label>
+                <select id="evaluation_score_threshold" name="evaluation_score_threshold" class="form-control" required>
+                    <option value="">Sélectionner le seuil</option>
+                    <?php for ($i = 1; $i <= 5; $i += 0.5): ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                    <?php endfor; ?>
+                </select>
+>>>>>>> 3462374 ([modified]: entire bonus module)
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Sauvegarder la configuration</button>

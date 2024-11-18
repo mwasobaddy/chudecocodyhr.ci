@@ -7,6 +7,7 @@
     <?php else: ?>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
+<<<<<<< HEAD
                 <thead class="thead-light">
                     <tr>
                         <th>Matricule</th>
@@ -31,6 +32,32 @@
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
+=======
+            <thead class="thead-light">
+    <tr>
+        <th>Numéro d'employé</th>
+        <th>Nom complet</th>
+        <th>Titre du poste</th>
+        <th>Niveau</th>
+        <th>Score d'évaluation</th>
+        <th>Pourcentage de bonus</th>
+        <th>Bonus à payer</th>
+    </tr>
+</thead>
+<tbody>
+    <?php foreach ($evaluations as $evaluation): ?>
+        <tr>
+            <td><?= esc($evaluation['employee_number']) ?></td>
+            <td><?= esc($evaluation['full_name']) ?></td>
+            <td><?= esc($evaluation['job_title']) ?></td>
+            <td><?= esc($evaluation['grade']) ?></td>
+            <td><?= esc($evaluation['score']) ?></td>
+            <td><?= esc($evaluation['bonus_percentage']) ?>%</td>
+            <td><?= esc(number_format($evaluation['bonus_to_be_paid'], 2)) ?></td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
+>>>>>>> 3462374 ([modified]: entire bonus module)
             </table>
         </div>
     <?php endif; ?>
