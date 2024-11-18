@@ -53,7 +53,7 @@
                          <h6 class="collapse-header">Cessation de service:</h6>
                         <a class="collapse-item" href="<?php echo base_url('/espaceadmin/listagentdepartchu');?>">Départ du CHU</a>
                       <!--  <a class="collapse-item" href="<?php //echo base_url('/espaceadmin/listagentdepartdisponibilite');?>">Mise en disponibilité</a> -->
-                        <a class="collapse-item" href="<?php echo base_url('/espaceadmin/listagentdepartretraite');?>">Depart à la retraite</a>
+                        <a class="collapse-item" href="<?php echo base_url('/espaceadmin/listagentdepartretraite');?>">Départ à la retraite</a>
                          <a class="collapse-item" href="<?php echo base_url('/espaceadmin/listagentretraite');?>">Réintégrer retraité</a>
 
                  

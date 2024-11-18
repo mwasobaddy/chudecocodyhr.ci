@@ -36,7 +36,7 @@ echo view('toast');
 
               <th>Nom et prénoms</th>
               <th>Date naissance</th>
-              <th>L'âge</th>
+              <th>L'Age</th>
               <th>Genre</th>
               <th>Emploi</th>
               <th>Grade</th>
@@ -58,7 +58,7 @@ echo view('toast');
             <tr>
               <th>Nom et prénoms</th>
               <th>Date naissance</th>
-              <th>L'âge</th>
+              <th>L'Age</th>
               <th>Genre</th>
               <th>Emploi</th>
               <th>Grade</th>

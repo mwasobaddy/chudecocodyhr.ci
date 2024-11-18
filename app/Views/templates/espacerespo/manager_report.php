@@ -9,8 +9,8 @@
             <table class="table table-bordered table-hover">
                 <thead class="thead-light">
                     <tr>
-                        <th>Numéro d'employé</th>
-                        <th>Nom complet</th>
+                        <th>Matricule</th>
+                        <th>Nom et Prénoms</th>
                         <th>Titre du poste</th>
                         <th>Niveau</th>
                         <th>Score d'évaluation</th>

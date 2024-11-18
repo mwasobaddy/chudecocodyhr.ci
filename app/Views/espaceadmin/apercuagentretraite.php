@@ -14,7 +14,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-primary">Module employés > Depart à la retraite</h1>
+  <h1 class="h3 mb-2 text-primary">Module employés > Départ à la retraite</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier des départs à la retraite.</p>
    <?php
 if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {

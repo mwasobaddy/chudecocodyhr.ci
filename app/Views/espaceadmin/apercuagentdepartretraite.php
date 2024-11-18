@@ -14,7 +14,7 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-primary">Module employés > Depart à la retraite</h1>
+  <h1 class="h3 mb-2 text-primary">Module employés > Départ à la retraite</h1>
   <p class="mb-4">Manipulez toutes les données relatives au fichier des départs à la retraite.</p>
    <?php
 if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
@@ -82,7 +82,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
 											
 											} else {
 												echo '
-											'.anchor('espaceadmin/departretraite/'.$info['idagent'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-right" title="Depart à la retraite"></i></span>').'	';
+											'.anchor('espaceadmin/departretraite/'.$info['idagent'],'<span class="btn btn-info mb-2"><i class="m-0 fas fa-angle-double-right" title="Départ à la retraite"></i></span>').'	';
 											}
 											
 											

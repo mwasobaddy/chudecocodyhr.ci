@@ -455,21 +455,23 @@ public function getManagers()
 {
     return $this->db->table('agent')
         ->where('IDdroitaccess', 2) // Assuming 2 is for line managers
+        ->orderBy('nom', 'ASC') // Sort alphabetically by nom (name) field
         ->get()
         ->getResultArray();
 }
-    private function getEvaluationsForAgent($agent_id, $role) {
-        if ($role === 'line_manager') {
-            return $this->db->table('evaluations')
-                ->where('line_manager_n1_id', $agent_id)
-                ->orWhere('line_manager_n2_id', $agent_id)
-                ->get()->getResultArray();
-        }
 
+private function getEvaluationsForAgent($agent_id, $role) {
+    if ($role === 'line_manager') {
         return $this->db->table('evaluations')
-            ->where('employee_id', $agent_id)
+            ->where('line_manager_n1_id', $agent_id)
+            ->orWhere('line_manager_n2_id', $agent_id)
             ->get()->getResultArray();
     }
+
+    return $this->db->table('evaluations')
+        ->where('employee_id', $agent_id)
+        ->get()->getResultArray();
+}
     
    
 public function selfAppraisal($evaluation_id)

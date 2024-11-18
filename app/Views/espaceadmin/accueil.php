@@ -78,18 +78,26 @@ for($i=0;$i<6;$i++) {
             <div class="col-6 col-md-6 col-xl-3 my-3 pl-1">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Pris à ce jour</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                <?php
-                  $query1   = $db->query('SELECT * FROM congeannuel where validationagent = 1 and Idagent='.$_SESSION['cnxid']);
-                  $row1   = $query1->getRow();
-                  $TotalLeaves=$row1->duree;
-                  if($TotalLeaves>0){
+              <?php
+                // Existing query
+                $query1 = $db->query('SELECT * FROM congeannuel where validationagent = 1 and Idagent='.$_SESSION['cnxid']);
+                $row1 = $query1->getRow();
+
+                // Initialize default value
+                $TotalLeaves = 0;
+
+                // Only access duree if row exists
+                if ($row1) {
+                    $TotalLeaves = $row1->duree;
+                }
+
+                // Now $TotalLeaves can be safely used
+                if($TotalLeaves > 0) {
                     echo $TotalLeaves;
-                  }
-                  else{
+                } else {
                     echo "0";
-                  }
-                  
-                ?>
+                }
+              ?>
               </div>
                <div class="col-auto"> </div>
             </div>
@@ -462,26 +470,35 @@ echo '</tr>';
         </div>
         <!-- Card Body -->
         <div class="card-body" align="center">
-          <?php
-            //$db = \Config\Database::connect();
-            $query   = $db->query('SELECT * FROM congeannuel where validationagent = 1 and Idagent='.$_SESSION['cnxid']);
-            $row   = $query->getRow();
-            if($row->datedepart=='') {
+        <?php
+          // Get database connection
+          $db = \Config\Database::connect();
+
+          // Execute query
+          $query = $db->query('SELECT * FROM congeannuel where validationagent = 1 and Idagent='.$_SESSION['cnxid']);
+          $row = $query->getRow();
+
+          // Check if row exists first
+          if (!$row) {
               echo '<p class="w-50 btn" style="color: #fff; background-color: #ffb7b0; border-color: #e74a3b;">Aucun congé trouvé</p>';
-            }
-            else {
-              echo '<div style="display: flex; justify-content: center; gap: 30%; flex-wrap: wrap;">';
-                echo '<p>
-                        <span class="btn btn-success" style="font-weight: bold;">Départ</span>
-                        <span class="text-dark" style="font-weight: bold;"> : '.substr($row->datedepart, -2).' - '.substr($row->datedepart, 5,2).' - '.substr($row->datedepart, 0,4).'</span>
-                      </p>';
-                echo '<p>
-                        <span class="btn btn-danger" style="font-weight: bold;">Reprise</span>
-                        <span class="text-dark" style="font-weight: bold;"> : '.substr($row->datereprise, -2).' - '.substr($row->datereprise, 5,2).' - '.substr($row->datereprise, 0,4).'</span>
-                      </p>'; 
-              echo '</div>';
-            }             
-          ?>
+          } else {
+              // Only try to access properties if row exists
+              if (empty($row->datedepart)) {
+                  echo '<p class="w-50 btn" style="color: #fff; background-color: #ffb7b0; border-color: #e74a3b;">Aucun congé trouvé</p>';
+              } else {
+                  echo '<div style="display: flex; justify-content: center; gap: 30%; flex-wrap: wrap;">';
+                  echo '<p>
+                          <span class="btn btn-success" style="font-weight: bold;">Départ</span>
+                          <span class="text-dark" style="font-weight: bold;"> : '.substr($row->datedepart, -2).' - '.substr($row->datedepart, 5,2).' - '.substr($row->datedepart, 0,4).'</span>
+                        </p>';
+                  echo '<p>
+                          <span class="btn btn-danger" style="font-weight: bold;">Reprise</span>
+                          <span class="text-dark" style="font-weight: bold;"> : '.substr($row->datereprise, -2).' - '.substr($row->datereprise, 5,2).' - '.substr($row->datereprise, 0,4).'</span>
+                        </p>'; 
+                  echo '</div>';
+              }
+          }
+        ?>
         </div>
       </div>
     </div>

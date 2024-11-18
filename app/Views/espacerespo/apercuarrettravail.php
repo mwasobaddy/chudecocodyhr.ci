@@ -121,7 +121,7 @@
                     ';
                                             if($info['justificatif1']) {
                                                 $lieu = './agents/'.$agent->matricule.'/5-MALADIE/';
-                                                echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';
+                                                echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif"></i></span></a>';
                                             }
 										} else {
 									echo 'TERMINE'; 

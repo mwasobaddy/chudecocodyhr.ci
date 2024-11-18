@@ -149,7 +149,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Change Line Manager</h5>
+                <h5 class="modal-title">Changer le responsable hiérarchique</h5>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -160,12 +160,16 @@
                     <input type="hidden" name="manager_type" id="modalManagerType">
                     
                     <div class="form-group">
-                        <label>Sélectionnez Nouveau gestionnaire :</label>
+                        <label>Sélectionnez Nouveau Responsable Hiérarchique :</label>
                         <select name="new_manager_id" class="form-control" required>
-                            <?php foreach ($managers as $manager): ?>
-                                <option value="<?= $manager['idagent'] ?>">
-                                    <?= esc($manager['nom']) ?>
-                                </option>
+                            <?php 
+                                usort($managers, function($a, $b) {
+                                    return strcmp($a['nom'], $b['nom']);
+                                });
+                                foreach ($managers as $manager): ?>
+                                    <option value="<?= $manager['idagent'] ?>">
+                                        <?= esc($manager['nom']) ?>
+                                    </option>
                             <?php endforeach; ?>
                         </select>
                     </div>

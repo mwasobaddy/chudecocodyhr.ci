@@ -91,13 +91,13 @@
                 echo '</td><td>';
                 $lieu = './agents/'.$row->matricule.'/4-CONGES/';
                 if (!empty($info['justificatif1'])) {
-                  echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 1"></i></a>';	
+                  echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif 1"></i></span></a>';	
                 }
                 if (!empty($info['justificatif2'])) {
-                  echo '<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 2"></i></a>';	
+                  echo '<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif 2"></i></span></a>';	
                 }
                 if (!empty($info['justificatif3'])) {
-                  echo '<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 3"></i></a>';	
+                  echo '<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif 3"></i></span></a>';	
                 }
             
 

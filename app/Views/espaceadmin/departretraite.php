@@ -12,8 +12,8 @@
 <div class="container-fluid"> 
   
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-primary">Employés > Depart à la retraite</h1>
-  <p class="mb-4">Manipulez toutes les données relatives au Depart à la retraite.
+  <h1 class="h3 mb-2 text-primary">Employés > Départ à la retraite</h1>
+  <p class="mb-4">Manipulez toutes les données relatives au Départ à la retraite.
    
   </p>
    <?php
@@ -35,7 +35,7 @@ if (isset($_SESSION['toast']) && !empty($_SESSION['toast'])) {
       
       <div class="card shadow mb-4">
         <div class="card-header py-3 border-left-warning">
-          <h6 class="m-0 font-weight-bold text-primary">Fiche Depart à la retraite/h6>
+          <h6 class="m-0 font-weight-bold text-primary">Fiche Départ à la retraite/h6>
         </div>
         <div class="card-body">
           <?php

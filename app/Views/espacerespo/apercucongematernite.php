@@ -92,9 +92,9 @@ foreach ($results as $info)
 												echo '<a target="new" href="'.base_url('/espaceagent/pdfcongemagentdecret/'.$info['IDconge'].'').'"><img src="'.base_url('/img/okok.jpg').'" alt="TELECHARGER ACTE" style="width:30px; height:30px;"/></a><a target="new" href="'.base_url('/espaceagent/pdfcongemagentattestation/'.$info['IDconge'].'').'">&nbsp;&nbsp;<img src="'.base_url('/img/okok.jpg').'" alt="TELECHARGER ACTE" style="width:30px; height:30px;"/></a>';
                        
                         $lieu = './agents/'.$row->matricule.'/4-CONGES/';
-                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 1"></i></a>';	
-                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 2"></i></a>';	
-                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><i class="fas fa-file-download" title="Visualiser le justificatif 3"></i></a>';	
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif1']).'"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif 1"></i></span></a>';	
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif2']).'"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif 2"></i></span></a>';	
+                      echo '<a target="new" href="'.base_url($lieu.$info['justificatif3']).'"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif 3"></i></span></a>';	
                   
                     
                       } else { //pdfcongeagentpays

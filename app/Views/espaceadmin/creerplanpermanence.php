@@ -2,7 +2,21 @@
 
 
 <?php
+$planpermanence = (object)[
+  'publier' => 0,
+  'validationcs' => 0,
+  'validationsus' => 0,
+  'validationsd' => 0, 
+  'validationdsio' => 0,
+  'validationcctos' => 0,
+  'validationdms' => 0,
+  'validationdaf' => 0,
+  'validationdg' => 0
+];
 
+if(isset($lidplanpermanence)) {
+  $planpermanence = $query->getRow();
+}
 $db = \Config\Database::connect();
 $myid = $_SESSION['cnxid'];
 	$dd = date('Y');

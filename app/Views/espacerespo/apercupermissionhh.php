@@ -97,7 +97,7 @@ $permissionhh = $query->getResultArray();
                                                 echo '</td><td>';
                                                 if ($info['justificatif']) {
                                                     $lieu = './agents/' . $row->matricule . '/4-CONGES/';
-                                                    echo '<a target="new" href="' . base_url($lieu . $info['justificatif']) . '"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';
+                                                    echo '<a target="new" href="' . base_url($lieu . $info['justificatif']) . '"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif"></i></span</a>';
                                                 }
                                             }
 									echo '

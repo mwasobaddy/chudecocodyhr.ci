@@ -12,7 +12,7 @@
         <?= csrf_field() ?>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="evaluation_period">Période d'évaluation/label>
+                <label for="evaluation_period">Période</label>
                 <select id="evaluation_period" name="evaluation_period" class="form-control" required>
                     <option value="">Sélectionner la période</option>
                     <option value="3 months">3 Mois</option>
@@ -23,7 +23,7 @@
             <div class="form-group col-md-4">
                 <label for="bonus_percentage">Pourcentage de bonus</label>
                 <select id="bonus_percentage" name="bonus_percentage" class="form-control" required>
-                    <option value="">Sélectionner la période</option>
+                    <option value="">Sélectionner le bonus</option>
                     <option value="5">5%</option>
                     <option value="10">10%</option>
                     <option value="15">15%</option>
@@ -31,7 +31,7 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="evaluation_score_threshold">Seuil de la note d'évaluation</label>
+                <label for="evaluation_score_threshold">Note d'évaluation</label>
                 <input type="number" step="0.1" id="evaluation_score_threshold" name="evaluation_score_threshold" class="form-control" placeholder="e.g., 3.5" required>
             </div>
         </div>
@@ -44,12 +44,12 @@
         <table class="table table-bordered table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th>Numéro d'employé</th>
-                    <th>Nom complet</th>
+                    <th>Matricule</th>
+                    <th>Nom et Prénoms</th>
                     <th>Grade</th>
                     <th>Note d'évaluation</th>
                     <th>Pourcentage de bonus convenu</th>
-                    <th>Prime à verser</th>
+                    <th>Prime à payer</th>
                 </tr>
             </thead>
             <tbody>

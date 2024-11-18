@@ -113,7 +113,7 @@ $permissiondd = $query->getResultArray();
                                                             if ($info['validationcs'] == 1 && $info['validationsdrh'] == 1) {
                                                                 echo 'Modification impossible!';
                                                             } else echo anchor('espacerespo/validerpdd/' . $info['IDpermission'], '<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>') . '
-                                                                    ' . anchor('espacerespo/rejetpdd/' . $info['IDpermission'], '<i class="fas fa-times" title="Rejeter"></i>');
+                                                                    ' . anchor('espacerespo/rejetpdd/' . $info['IDpermission'], '<span class="btn btn-warning mb-2"><i class="m-0 fas fa-times" title="Rejeter"></i></span>');
                                                         }
                                                     }
                                                 }
@@ -123,7 +123,7 @@ $permissiondd = $query->getResultArray();
                                             echo '</td><td>';
                                             if($info['justificatif'])  {
                                                 $lieu = './agents/'.$row->matricule.'/4-CONGES/';
-                                                echo '&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif']).'"><i class="fas fa-file-download" title="Visualiser le justificatif"></i></a>';
+                                                echo '&nbsp;&nbsp;<a target="new" href="'.base_url($lieu.$info['justificatif']).'"><span class="btn btn-outline-dark mb-2"><i class="m-0 fas fa-file-download" title="Visualiser le justificatif"></i></span></a>';
                                             }
 
                                             echo '</td>
