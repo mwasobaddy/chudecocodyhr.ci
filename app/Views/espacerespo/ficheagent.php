@@ -1,68 +1,72 @@
 <!-- Begin Page Content -->
-                <?php
-				
-				//echo $this->router->fetch_method();
-				//print_r($this->view);
-				//print_r($this);
-				?>
-                
-                 <?php 
-				   $db = \Config\Database::connect();
-				  	$query = $db->query('SELECT * from agent where idagent='.$idag); 
-					$row   = $query->getRow();
-					
-          // print_r($row);
-          // exit;
 
-					$query   = $db->query('SELECT * FROM genre');
-					$lgenre = $query->getResultArray();
-					
+<?php
+  // At the top after database connection, add check for own profile vs employee
+  $db = \Config\Database::connect();
+  $session = session();
+  $myid = $session->get('cnxid'); // Current logged in user ID
 
-			$query   = $db->query('SELECT * FROM agent');
-			$lagent = $query->getResultArray();
-			
-			$query   = $db->query('SELECT * FROM contrat');
-			$lcontrat = $query->getResultArray();
-					
-			
-			$query   = $db->query('SELECT * FROM direction');
-			$ldirection = $query->getResultArray();
-			
-			$query   = $db->query('SELECT * FROM droitaccess');
-			$ldroitaccess = $query->getResultArray();
-		
-			$query   = $db->query('SELECT * FROM emploi');
-			$lemploi = $query->getResultArray();
-			
-			$query   = $db->query('SELECT * FROM lafonction');
-			$lfonction = $query->getResultArray();
+  // Determine if viewing own profile
+  $isOwnProfile = ($myid == $idag);
 
-      //  print_r($lfonction);
-      //  echo "<pre>".print_r($lfonction,true)."</pre>";
-          // exit;
-					
-			$query   = $db->query('SELECT * FROM grade');
-			$lgrade = $query->getResultArray();
-					
-			$query   = $db->query('SELECT * FROM role_agent');
-			$lroleagent = $query->getResultArray();
-					
-			$query   = $db->query('SELECT * FROM role');
-			$lrole = $query->getResultArray();
-					
-			$query   = $db->query('SELECT * FROM service');
-			$lservice = $query->getResultArray();
-					
-			$query   = $db->query('SELECT * FROM civilite');
-			$lcivilite= $query->getResultArray();
-			
-			$query   = $db->query('SELECT * FROM sousdirection');
-			$lsousdirection = $query->getResultArray();
-		
-					
-					
-					
-					?>
+  // Function to output readonly attribute
+  function makeReadonly($isOwnProfile) {
+      return (!$isOwnProfile) ? 'readonly' : '';
+  }
+
+
+  $query = $db->query('SELECT * from agent where idagent='.$idag); 
+  $row   = $query->getRow();
+
+  // print_r($row);
+  // exit;
+
+  $query   = $db->query('SELECT * FROM genre');
+  $lgenre = $query->getResultArray();
+
+
+  $query   = $db->query('SELECT * FROM agent');
+  $lagent = $query->getResultArray();
+  
+  $query   = $db->query('SELECT * FROM contrat');
+  $lcontrat = $query->getResultArray();
+      
+  
+  $query   = $db->query('SELECT * FROM direction');
+  $ldirection = $query->getResultArray();
+  
+  $query   = $db->query('SELECT * FROM droitaccess');
+  $ldroitaccess = $query->getResultArray();
+
+  $query   = $db->query('SELECT * FROM emploi');
+  $lemploi = $query->getResultArray();
+  
+  $query   = $db->query('SELECT * FROM lafonction');
+  $lfonction = $query->getResultArray();
+
+  //  print_r($lfonction);
+  //  echo "<pre>".print_r($lfonction,true)."</pre>";
+      // exit;
+      
+  $query   = $db->query('SELECT * FROM grade');
+  $lgrade = $query->getResultArray();
+      
+  $query   = $db->query('SELECT * FROM role_agent');
+  $lroleagent = $query->getResultArray();
+      
+  $query   = $db->query('SELECT * FROM role');
+  $lrole = $query->getResultArray();
+      
+  $query   = $db->query('SELECT * FROM service');
+  $lservice = $query->getResultArray();
+      
+  $query   = $db->query('SELECT * FROM civilite');
+  $lcivilite= $query->getResultArray();
+  
+  $query   = $db->query('SELECT * FROM sousdirection');
+  $lsousdirection = $query->getResultArray();
+  
+?>
  
 <div class="container-fluid"> 
   
@@ -114,23 +118,24 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               
               <div class="form-group col-md-6">
                 <label for="name">Nom et prénoms *</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $row->nom;  ?>"  placeholder="Nom et prenoms" required="required">
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $row->nom;  ?>"  placeholder="Nom et prenoms" required="required" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
               <div class="form-group col-md-2">
                 <label for="datenais">Date de naissance *</label>
-                <input type="date" class="form-control" id="datenais" name="datenais" value="<?php echo $row->datenais;  ?>"  placeholder="Date de naissance">
+                <input type="date" class="form-control" id="datenais" name="datenais" value="<?php echo $row->datenais;  ?>"  placeholder="Date de naissance" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
               
               <div class="form-group col-md-2" style="text-align:center">
-               <img class="img-profile rounded-circle" style="width:100px; height:100px"
-                                    src="<?php 
-									
-									if(isset($row->Photo) && file_exists('./agents/'.$row->matricule.'/'.$row->Photo)){
-										echo base_url('agents/'.$row->matricule.'/'.$row->Photo);
-									} else {
-									echo base_url('img/undraw_profile.svg');	
-									}
-									?>">
+              <img class="img-profile rounded-circle" style="width:100px; height:100px"
+                    src="<?php
+                            if(isset($row->Photo) && file_exists('./agents/'.$row->matricule.'/'.$row->Photo)){
+                              echo base_url('agents/'.$row->matricule.'/'.$row->Photo);
+                            } else {
+                              echo base_url('img/undraw_profile.svg');
+                            }
+                          ?>
+                    "
+              >
               </div>
        
               
@@ -140,22 +145,24 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               <div class="form-group col-md-3">
               <?php //echo $row->IDgenre; //echo 'genre ='; print_r($lgenre);  ?>
               <label for="IDgenre">Genre</label>
-                <select id="IDgenre" name="IDgenre"   class="form-control">
-                <option value="">Choisir...</option>
-     			<?php if (! empty($lgenre) && is_array($lgenre)) : ?>
-            		<?php foreach ($lgenre as $info): ?>
-                   <?php 
-                    if($info['IDgenre']==$row->IDgenre) {
-                     echo ' <option value="'.$info['IDgenre'].'" selected="selected">'.$info['libelle'].'</option>';				
-                    } else {
-            		 echo ' <option value="'.$info['IDgenre'].'">'.$info['libelle'].'</option>';						}?>
-            		<?php endforeach; ?>
-          		<?php endif ?>
+                <select id="IDgenre" name="IDgenre"   class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
+                  <option value="">Choisir...</option>
+                  <?php if (! empty($lgenre) && is_array($lgenre)) : ?>
+                    <?php foreach ($lgenre as $info): ?>
+                      <?php 
+                        if($info['IDgenre']==$row->IDgenre) {
+                        echo ' <option value="'.$info['IDgenre'].'" selected="selected">'.$info['libelle'].'</option>';				
+                        } else {
+                        echo ' <option value="'.$info['IDgenre'].'">'.$info['libelle'].'</option>';
+                        }
+                      ?>
+                    <?php endforeach; ?>
+                  <?php endif ?>
                 </select>
               </div>
               <div class="form-group col-md-3">
                  <label for="IDcivilite">Civilité</label>
-                <select id="IDcivilite"  name="IDcivilite" class="form-control">
+                <select id="IDcivilite"  name="IDcivilite" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                   <?php if (! empty($lcivilite) && is_array($lcivilite)) : ?>
             		<?php foreach ($lcivilite as $info): ?>
@@ -173,35 +180,35 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               </div>
               <div class="form-group col-md-6">
                 <label for="adresse">Adresse</label>
-                <input type="text" class="form-control" id="adresse" name="adresse" value="<?php echo $row->adresse;  ?>"  placeholder="Adresse postale ou Comune / quartier">
+                <input type="text" class="form-control" id="adresse" name="adresse" value="<?php echo $row->adresse;  ?>"  placeholder="Adresse postale ou Comune / quartier" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="mobile">Mobile *</label>
-                <input type="text" class="form-control" id="mobile" name="mobile" value="<?php echo $row->mobile;  ?>"  placeholder="+225070501070501" required="required">
+                <input type="text" class="form-control" id="mobile" name="mobile" value="<?php echo $row->mobile;  ?>"  placeholder="+225070501070501" required="required" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
               <div class="form-group col-md-4">
                 <label for="fixe">Fixe</label>
-                <input type="fixe" class="form-control" id="fixe" name="fixe" value="<?php echo isset($row->fixe);  ?>" placeholder="+225270501070501">
+                <input type="fixe" class="form-control" id="fixe" name="fixe" value="<?php echo isset($row->fixe);  ?>" placeholder="+225270501070501" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
               <div class="form-group col-md-4">
                 <label for="email">Courriel</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?php echo $row->email;  ?>" placeholder="Courriel / E-mail">
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo $row->email;  ?>" placeholder="Courriel / E-mail" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="psfp">Prise de service Fonction Publique *</label>
-                <input type="date" class="form-control" id="psfp" name="psfp" value="<?php echo $row->psfp;  ?>" placeholder="" required="required">
+                <input type="date" class="form-control" id="psfp" name="psfp" value="<?php echo $row->psfp;  ?>" placeholder="" required="required" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
               <div class="form-group col-md-4">
                 <label for="pschu">Prise de service CHU de COCODY *</label>
-                <input type="date" class="form-control" id="pschu" name="pschu" value="<?php echo $row->pschu;  ?>" placeholder="" required="required">
+                <input type="date" class="form-control" id="pschu" name="pschu" value="<?php echo $row->pschu;  ?>" placeholder="" required="required" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
               <div class="form-group col-md-4">
                 <label for="IDcontrat">Nature du contrat</label>
-                <select id="IDcontrat" name="IDcontrat" class="form-control">
+                <select id="IDcontrat" name="IDcontrat" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                   <?php if (! empty($lcontrat) && is_array($lcontrat)) : ?>
             		<?php foreach ($lcontrat as $info): ?>
@@ -224,7 +231,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="IDemploi">Emploi</label>
-                <select id="IDemploi" name="IDemploi"  class="form-control">
+                <select id="IDemploi" name="IDemploi"  class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                   <?php if (! empty($lemploi) && is_array($lemploi)) : ?>
             		<?php foreach ($lemploi as $info): ?>
@@ -242,7 +249,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               </div>
               <div class="form-group col-md-4">
                 <label for="IDlafonction">Fonction</label>
-                <select id="IDlafonction" name="IDlafonction" class="form-control">
+                <select id="IDlafonction" name="IDlafonction" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                     <?php if (!empty($lfonction) && is_array($lfonction)) : ?>
             		<?php foreach ($lfonction as $info): ?>
@@ -259,7 +266,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               </div>
               <div class="form-group col-md-4">
                 <label for="IDgrade">Grade</label>
-                <select id="IDgrade" name="IDgrade" class="form-control">
+                <select id="IDgrade" name="IDgrade" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                     <?php if (! empty($lgrade) && is_array($lgrade)) : ?>
             		<?php foreach ($lgrade as $info): ?>
@@ -280,7 +287,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="IDdirection">Direction</label>
-                <select id="IDdirection" name="IDdirection" class="form-control">
+                <select id="IDdirection" name="IDdirection" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                    <?php if (! empty($ldirection) && is_array($ldirection)) : ?>
             		<?php foreach ($ldirection as $info): ?>
@@ -301,7 +308,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               </div>
               <div class="form-group col-md-4">
                 <label for="IDsousdirection">Sous-Direction</label>
-                <select id="IDsousdirection" name="IDsousdirection" class="form-control">
+                <select id="IDsousdirection" name="IDsousdirection" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                     <?php if (! empty($lsousdirection) && is_array($lsousdirection)) : ?>
             		<?php foreach ($lsousdirection as $info): ?>
@@ -322,7 +329,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               </div>
               <div class="form-group col-md-4">
                 <label for="IDservice">Service</label>
-                <select id="IDservice" name="IDservice" class="form-control">
+                <select id="IDservice" name="IDservice" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                     <?php if (! empty($lservice) && is_array($lservice)) : ?>
             		<?php foreach ($lservice as $info): ?>
@@ -345,7 +352,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="IDdroitaccess">Droit d'accès</label>
-                <select id="IDdroitaccess" name="IDdroitaccess" class="form-control">
+                <select id="IDdroitaccess" name="IDdroitaccess" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                     <?php if (! empty($ldroitaccess) && is_array($ldroitaccess)) : ?>
             		<?php foreach ($ldroitaccess as $info): ?>
@@ -365,7 +372,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               </div>
               <div class="form-group col-md-4">
                 <label for="Responsablen1">Responsable hiérarchique N+1</label>
-                <select id="Responsablen1" name="Responsablen1" class="form-control">
+                <select id="Responsablen1" name="Responsablen1" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                   <?php
 				  echo selectagent('sup',$row->Responsablen1); 
@@ -374,7 +381,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               </div>
               <div class="form-group col-md-4">
                 <label for="Responsablen2">Responsable hiérarchique N+2</label>
-                <select id="Responsablen2" name="Responsablen2" class="form-control">
+                <select id="Responsablen2" name="Responsablen2" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   <option value="">Choisir...</option>
                     <?php
 				  echo selectagent('sup',$row->Responsablen2); 
@@ -385,7 +392,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="Sousdrh">Sous-DRH</label>
-                <select id="Sousdrh" name="Sousdrh" class="form-control">
+                <select id="Sousdrh" name="Sousdrh" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                   
                     <?php
 				  echo selectagent('sousdirecteurrh',''); 
@@ -394,7 +401,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               </div>
               <div class="form-group col-md-4">
                 <label for="Directeurgeneral">Directeur Général</label>
-                <select id="Directeurgeneral" name="Directeurgeneral" class="form-control">
+                <select id="Directeurgeneral" name="Directeurgeneral" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                  
                    <?php
 				  echo selectagent('dg',''); 
@@ -405,7 +412,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
                    
                      <div class="form-group col-md-4">
                <label for="photo">Photo (avatar)</label>
-    <input type="file" id="photo" name="photo" style="width:100%; height:100%">
+    <input type="file" id="photo" name="photo" style="width:100%; height:100%" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>        
               
             </div>
@@ -414,7 +421,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               <div class="form-group col-md-12">
                 
                <label for="Observations">Observations</label>
-    <textarea class="form-control" id="Observations" name="Observations" rows="2" value="<?php echo $row->Observations;  ?>" style="width:100%"></textarea>
+    <textarea class="form-control" id="Observations" name="Observations" rows="2" value="<?php echo $row->Observations;  ?>" style="width:100%" <?php echo makeReadonly($isOwnProfile); ?>></textarea>
               </div>
               
             </div>
@@ -424,7 +431,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               
                                   
                    <label for="actif">Statut agent</label>
-                <select id="actif" name="actif" class="form-control">
+                <select id="actif" name="actif" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                  <!--- <option value="">Choisir...</option> -->
                   <option value="1" <?php echo ($row->actif==1)?('selected'):('');  ?>>Agent actif</option>
                   <option value="0" <?php echo ($row->actif==0)?('selected'):('');  ?>>Agent inactif</option>
@@ -436,7 +443,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
                
                 <label for="position">Position</label>
                 
-                <select id="position" name="position" class="form-control">
+                <select id="position" name="position" class="form-control" <?php echo makeReadonly($isOwnProfile); ?>>
                 <option <?php echo ($row->position=='EN ACTIVITE')?('selected'):('');  ?>>EN ACTIVITE</option>
 
                 <option <?php echo ($row->position=='DETACHEMENT')?('selected'):('');  ?>>DETACHEMENT</option>
@@ -449,7 +456,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
               
               <div class="form-group col-md-4">
                <label for="motifdisponibilite">Motif position</label>
-                <input type="text" class="form-control" id="motifdisponibilite" name="motifdisponibilite" value="<?php echo $row->motifdisponibilite;  ?>" placeholder="Motif position">
+                <input type="text" class="form-control" id="motifdisponibilite" name="motifdisponibilite" value="<?php echo $row->motifdisponibilite;  ?>" placeholder="Motif position" <?php echo makeReadonly($isOwnProfile); ?>>
               </div>
             </div>
             
@@ -457,7 +464,11 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
              <div class="form-row">
 
               <div class="form-group col-md-12 d-flex justify-content-center">
-               <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">Valider formulaire</button>
+                <?php if($isOwnProfile): ?>
+                  <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">
+                      Valider formulaire
+                  </button>
+                <?php endif; ?>
               </div>
               </div>
           </form>
@@ -475,9 +486,7 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
         <div class="card-header py-3 border-left-warning">
           <h6 class="m-0 font-weight-bold text-primary">Liste des documents</h6>
         </div>
-        <div class="card-body"> 
-        
-             
+        <div class="card-body">
           <?php
             $dir    = 'agents/'.$row->matricule.'/';
             //echo $dir;
@@ -493,9 +502,6 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
                 }
               }
             }
-                  
-                  
-
             //print_r($files1);
             echo '
               <table style="width:100%" border="1">

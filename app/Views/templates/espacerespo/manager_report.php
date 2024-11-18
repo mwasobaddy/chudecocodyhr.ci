@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-primary">Rapport sur les primes des gestionnaires</h1>
+    <h1 class="h3 mb-4 text-primary">Rapport sur les primes des mes collaborateurs</h1>
 
     <?php if (empty($evaluations)): ?>
         <div class="alert alert-info">Il n'y a pas encore d'évaluations notées pour votre équipe.</div>

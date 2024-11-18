@@ -2,6 +2,29 @@
 
 
 <?php
+// Add at top of file, before other code
+$planpermanence = (object)[
+  'IDplanpermanence' => '',
+  'libelle' => '',
+  'lit' => '',
+  'IDmois' => '',
+  'IDservice' => '',
+  'publier' => 0,
+  'validationcs' => 0,
+  'validationsus' => 0, 
+  'validationsd' => 0,
+  'validationdsio' => 0,
+  'validationcctos' => 0,
+  'validationdms' => 0,
+  'validationdaf' => 0,
+  'validationdg' => 0
+];
+
+// Existing code for loading from DB if editing
+if(isset($lidplanpermanence)) {
+  $query = $db->query("SELECT * from planpermanence where IDplanpermanence=$lidplanpermanence");
+  $planpermanence = $query->getRow();
+}
 
 $db = \Config\Database::connect();
 $myid = $_SESSION['cnxid'];

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Team Evaluations - Line Manager</title>
+    <title>Évaluations de l'équipe - Responsable hiérarchique</title>
     <!-- Bootstrap CSS -->
     <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!-- Custom styles -->
@@ -14,13 +14,13 @@
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-primary">Team Evaluations</h1>
+            <h1 class="h3 mb-0 text-primary">Evaluation de mes collaborateurs</h1>
         </div>
 
         <!-- Pending Evaluations Section -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 border-left-warning">
-                <h6 class="m-0 font-weight-bold text-primary">Pending Evaluations</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Evaluation en attente</h6>
             </div>
             <div class="card-body">
                 <?php if (!empty($pending_evaluations)): ?>
@@ -33,12 +33,12 @@
                                             <?= esc($evaluation['employee_name']); ?>
                                         </h6>
                                         <div class="dropdown no-arrow">
-                                            <span class="badge badge-warning">Pending</span>
+                                            <span class="badge badge-warning">En attente</span>
                                         </div>
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3">
-                                            <small class="text-muted">Started: </small>
+                                            <small class="text-muted">Commencé: </small>
                                             <p class="mb-0"><?= date('d M Y', strtotime($evaluation['started_at'])); ?></p>
                                         </div>
                                         <hr>
@@ -54,7 +54,7 @@
                                             <a href="<?= base_url('espacerespo/evaluation/objective-evaluation/' . $evaluation['idevaluation']); ?>" 
                                                class="btn btn-success btn-sm flex-fill mr-1">
                                                 <i class="fas fa-check-circle fa-sm"></i>
-                                                <span class="d-none d-md-inline ml-1">Validate</span>
+                                                <span class="d-none d-md-inline ml-1">Valider</span>
                                             </a>
                                             
                                             <!-- Sign Off -->
@@ -63,7 +63,7 @@
                                                     data-toggle="modal" 
                                                     data-target="#signOffModal<?= $evaluation['idevaluation'] ?>">
                                                 <i class="fas fa-signature fa-sm"></i>
-                                                <span class="d-none d-md-inline ml-1">Sign</span>
+                                                <span class="d-none d-md-inline ml-1">Signe</span>
                                             </button>
                                         </div>
                                     </div>
@@ -75,14 +75,14 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Sign Off Evaluation</h5>
+                                            <h5 class="modal-title">Signer l'évaluation</h5>
                                             <button type="button" class="close" data-dismiss="modal">
                                                 <span>&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p><strong>Line Manager Acknowledgement:</strong></p>
-                                            <p>I confirm that I have conducted a thorough performance review with <?= esc($evaluation['employee_name']) ?>.</p>
+                                            <p><strong>Accusé de réception du supérieur hiérarchique:</strong></p>
+                                            <p>Je confirme que j'ai procédé à un examen approfondi des performances avec <?= esc($evaluation['employee_name']) ?>.</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
