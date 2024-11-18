@@ -2622,7 +2622,7 @@ class Espacerespo extends Controller
 		echo view('templates/espacerespo/pied');
 	}
 
-	public function validerca($num)
+	public function validerca($num) 
 	{
 		try {
 			$db = \Config\Database::connect();
@@ -2634,16 +2634,14 @@ class Espacerespo extends Controller
 			$row = $query->getRow();
 			
 			if (!$row) {
-				echo "<script>console.error('Leave request not found');</script>";
 				$_SESSION['toast'] = 'Leave request not found';
-				return redirect()->to(base_url('/espacerespo/validercongeannuel'));
+				return redirect()->to(base_url('/espacerespo/validercongeannuel')); 
 			}
 	
 			// Get agent details 
 			$query = $db->query('SELECT * FROM agent WHERE idagent = ?', [$row->Idagent]);
 			$roww = $query->getRow();
-
-			$valid = '';
+	
 			$updateFields = [];
 	
 			// Determine validation type based on user role
@@ -2655,45 +2653,33 @@ class Espacerespo extends Controller
 					'datecs' => $dd,
 					'etat' => $etat_text
 				];
-				echo "<script>console.log('Processing Chef de service validation');</script>";
 			}
 			elseif ($myid == $roww->Responsablen2) {
-				// Sous-directeur validation
+				// Sous-directeur validation  
 				$etat_text = ($row->validationcs == 1) ? 'VALIDATION RESPONSABLE N+1 ET N+2' : 'VALIDATION RESPONSABLE N+2';
 				$updateFields = [
-					'validationsd' => 1, 
-					'datesd' => $dd,
+					'validationsd' => 1,
+					'datesd' => $dd, 
 					'validationdg' => 1,
 					'datedg' => $dd,
 					'etat' => $etat_text
 				];
-				echo "<script>console.log('Processing Sous-directeur validation');</script>";
 			}
-			else{
 	
-				// If we have fields to update, perform the update
-				if (!empty($updateFields)) {
-					$builder = $db->table('congeannuel');
-					$builder->where('IDconge', $num);
-					$result = $builder->update($updateFields);
-		
-					if ($result) {
-						echo "<script>console.log('Leave request updated successfully');</script>";
-						$_SESSION['toast'] = 'Validation effectuée avec succès';
-					} else {
-						echo "<script>console.error('Failed to update leave request');</script>";
-						$_SESSION['toast'] = 'Erreur lors de la validation';
-					}
-				} else {
-					echo "<script>console.error('No validation permissions');</script>";
-					$_SESSION['toast'] = 'Vous n\'avez pas les droits pour valider cette demande';
-				}
-		
-				return redirect()->to(base_url('/espacerespo/validercongeannuel'));
+			// If we have fields to update, perform the update
+			if (!empty($updateFields)) {
+				$builder = $db->table('congeannuel');
+				$builder->where('IDconge', $num);
+				$builder->update($updateFields);
+				$_SESSION['toast'] = 'Validation effectuée avec succès';
+			} else {
+				$_SESSION['toast'] = 'Vous n\'avez pas les droits pour valider cette demande';
 			}
+	
+			// Always redirect back
+			return redirect()->to(base_url('/espacerespo/validercongeannuel'));
 	
 		} catch (\Exception $e) {
-			echo "<script>console.error('Error: " . addslashes($e->getMessage()) . "');</script>";
 			$_SESSION['toast'] = 'Une erreur est survenue';
 			return redirect()->to(base_url('/espacerespo/validercongeannuel'));
 		}
