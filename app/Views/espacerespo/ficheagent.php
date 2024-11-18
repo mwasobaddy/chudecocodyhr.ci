@@ -11,7 +11,7 @@
 
   // Function to output readonly attribute
   function makeReadonly($isOwnProfile) {
-      return (!$isOwnProfile) ? 'readonly' : '';
+      return (!$isOwnProfile) ? 'readonly' : 'readonly';
   }
 
 
@@ -462,15 +462,15 @@ echo form_open('espacerespo/ficheagent/'.$idag, 'enctype="multipart/form-data"')
             
             
              <div class="form-row">
-
               <div class="form-group col-md-12 d-flex justify-content-center">
                 <?php if($isOwnProfile): ?>
-                  <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">
+                  <!-- incase we need to submit the agent profile id -->
+                  <!-- <button type="submit" name="go" value="go" class="btn btn-primary" style="height: 100%;">
                       Valider formulaire
-                  </button>
+                  </button> -->
                 <?php endif; ?>
               </div>
-              </div>
+            </div>
           </form>
           
           <!---- ///////////////////////////////////////////////// -----> 
