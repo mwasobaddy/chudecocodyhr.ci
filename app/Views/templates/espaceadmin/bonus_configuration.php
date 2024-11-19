@@ -60,7 +60,7 @@
     </form>
 
     <!-- Bonus Report -->
-    <h2 class="mt-5">De mes collaborateurs</h2>
+    <h2 class="mt-5">Rapport sur les bonus</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="thead-light">
