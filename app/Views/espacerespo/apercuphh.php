@@ -1,7 +1,8 @@
 <?php
 $db = \Config\Database::connect();
 $myid = $_SESSION['cnxid'];
-$query   = $db->query('SELECT * from permissionhh where IDagent in(SELECT idagent FROM agent where idagent='.$myid.' or agent.Responsablen1='.$myid.' or agent.Responsablen2='.$myid.' or agent.Sousdrh='.$myid.') and (validationcs is null or validationsus is null or validationsdrh is null or validationcs=0 or validationsus=0 or validationsdrh=0)');
+$query   = $db->query('SELECT * from permissionhh where IDagent in(SELECT idagent FROM agent where idagent='.$myid.' or idagent="1959" or idagent="1954" or agent.Responsablen1='.$myid.' or agent.Responsablen2='.$myid.' or agent.Sousdrh='.$myid.') and (validationcs is null or validationsus is null or validationsdrh is null or validationcs=0 or validationsus=0 or validationsdrh=0)');
+$isSpecialUser = ($myid == '1959' || $myid == '1954');
 $permissionhh = $query->getResultArray();
 ?>
 
@@ -105,8 +106,16 @@ $permissionhh = $query->getResultArray();
                                                         } else {
                                                             if ($info['validationcs'] == 1 && $info['validationsdrh'] == 1) {
                                                                 echo 'Modification impossible!';
-                                                            } else echo anchor('espacerespo/validerphh/' . $info['IDpermission'], '<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>') . '
+                                                            } 
+                                                            else {
+                                                              if ($isSpecialUser) {
+                                                                echo anchor('espacerespo/validerphh/' . $info['IDpermission'], '<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>') . '
                                                                     ' . anchor('espacerespo/rejetphh/' . $info['IDpermission'], '<span class="btn btn-warning mb-2"><i class="m-0 fas fa-times" title="Rejeter"></i></span>');
+                                                              }
+                                                              else{
+                                                                echo'Vous ne pouvez pas valider';
+                                                              }
+                                                            }
                                                         }
                                                     }
                                                 }

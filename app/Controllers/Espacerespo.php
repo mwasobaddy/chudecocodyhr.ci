@@ -1055,6 +1055,7 @@ class Espacerespo extends Controller
 		if ($agenta->idagent == $_SESSION['cnxid']) {
 
 			if ($congea->horspays == 1 || $congea->horspays == '1') {
+				$data = ['name' => 'kelvin'];
 				echo view('/espaceagent/pdfcongecshp', $data);
 			} else {
 				echo view('/espaceagent/pdfcongecs', $data);

@@ -7,10 +7,10 @@
     <?php if (!isset($current_evaluation)): ?>
         <div class="card shadow mb-4">
             <div class="card-body text-center">
-                <h4 class="mb-3">Start Your Evaluation</h4>
+                <h4 class="mb-3">Commencez votre évaluation</h4>
                 <form action="<?= base_url('espaceagent/evaluation/start') ?>" method="POST">
                     <button type="submit" class="btn btn-primary btn-lg">
-                        <i class="fas fa-play mr-2"></i> Begin Evaluation
+                        <i class="fas fa-play mr-2"></i> Commencer l'évaluation
                     </button>
                 </form>
             </div>
@@ -29,18 +29,18 @@
                             <div class="card mb-4 objective-card" id="detailedCard_<?= $objective['idobjective'] ?>" 
                                  <?= ($objective['agreement'] == 'Yes') ? 'style="display:none;"' : '' ?>>
                                 <div class="card-header">
-                                    <h5 class="mb-0">Objective: <?= esc($objective['title']) ?></h5>
+                                    <h5 class="mb-0">Objectif: <?= esc($objective['title']) ?></h5>
                                 </div>
                                 <div class="card-body">
                                     <p><strong>Description:</strong> <?= nl2br(esc($objective['description'])) ?></p>
-                                    <p><strong>Specific Goals:</strong> <?= nl2br(esc($objective['specific_goals'])) ?></p>
-                                    <p><strong>Key Actions:</strong> <?= nl2br(esc($objective['key_actions'])) ?></p>
-                                    <p><strong>Resources Required:</strong> <?= nl2br(esc($objective['resources_required'])) ?></p>
-                                    <p><strong>Timeline:</strong> <?= date('d M Y', strtotime($objective['start_date'])) ?> - <?= date('d M Y', strtotime($objective['end_date'])) ?></p>
-                                    <p><strong>Success Metrics:</strong> <?= nl2br(esc($objective['success_metrics'])) ?></p>
-                                    <p><strong>Potential Challenges:</strong> <?= nl2br(esc($objective['potential_challenges'])) ?></p>
-                                    <p><strong>Support Needed:</strong> <?= nl2br(esc($objective['support_needed'])) ?></p>
-                                    <p><strong>Weight:</strong> <?= esc($objective['weight']) ?>%</p>
+                                    <p><strong>Objectifs spécifiques:</strong> <?= nl2br(esc($objective['specific_goals'])) ?></p>
+                                    <p><strong>Actions clés:</strong> <?= nl2br(esc($objective['key_actions'])) ?></p>
+                                    <p><strong>Ressources nécessaires:</strong> <?= nl2br(esc($objective['resources_required'])) ?></p>
+                                    <p><strong>Chronologie:</strong> <?= date('d M Y', strtotime($objective['start_date'])) ?> - <?= date('d M Y', strtotime($objective['end_date'])) ?></p>
+                                    <p><strong>Mesures de réussite:</strong> <?= nl2br(esc($objective['success_metrics'])) ?></p>
+                                    <p><strong>Défis potentiels:</strong> <?= nl2br(esc($objective['potential_challenges'])) ?></p>
+                                    <p><strong>Soutien nécessaire:</strong> <?= nl2br(esc($objective['support_needed'])) ?></p>
+                                    <p><strong>Poids:</strong> <?= esc($objective['weight']) ?>%</p>
 
                                     <form action="<?= base_url('espaceagent/evaluation/agree-objective') ?>" 
                                           method="POST" 
@@ -48,21 +48,21 @@
                                           data-objective-id="<?= $objective['idobjective'] ?>">
                                         <input type="hidden" name="objective_id" value="<?= $objective['idobjective'] ?>">
                                         <div class="form-group">
-                                            <label><strong>Do you agree with this objective?</strong></label>
+                                            <label><strong>Êtes-vous d'accord avec cet objectif ?</strong></label>
                                             <select name="agreement" class="form-control agreement-select" required>
-                                                <option value="" <?= empty($objective['agreement']) ? 'selected' : '' ?>>Select</option>
-                                                <option value="Yes" <?= ($objective['agreement'] == 'Yes') ? 'selected' : '' ?>>Yes</option>
-                                                <option value="No" <?= ($objective['agreement'] == 'No') ? 'selected' : '' ?>>No</option>
+                                                <option value="" <?= empty($objective['agreement']) ? 'selected' : '' ?>>Sélectionner</option>
+                                                <option value="Yes" <?= ($objective['agreement'] == 'Yes') ? 'selected' : '' ?>>Oui</option>
+                                                <option value="No" <?= ($objective['agreement'] == 'No') ? 'selected' : '' ?>>Non</option>
                                             </select>
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label><strong>Comments:</strong></label>
+                                            <label><strong>Commentaires:</strong></label>
                                             <textarea name="comments" class="form-control" rows="3"><?= esc($objective['employee_comments']) ?></textarea>
                                         </div>
 
 
-                                        <button type="submit" class="btn btn-primary">Submit Response</button>
+                                        <button type="submit" class="btn btn-primary">Soumettre une réponse</button>
                                         <?php
                                             $allObjectivesAgreed = true;
                                             foreach ($objectives as $objective) {
@@ -78,7 +78,7 @@
                                             if ($allObjectivesAgreed && !$selfAppraisalSubmitted): ?>
                                                 <div class="text-center mb-4">
                                                     <a href="<?= base_url('espaceagent/evaluation/self-appraisal/' . $current_evaluation['idevaluation']) ?>" class="btn btn-primary">
-                                                        <i class="fas fa-star-half-alt"></i> Proceed to Self-Appraisal
+                                                        <i class="fas fa-star-half-alt"></i> Procéder à l'auto-évaluation
                                                     </a>
                                                 </div>
                                             <?php endif; ?>
@@ -93,19 +93,19 @@
                                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
                                     <h6 class="m-0 font-weight-bold text-success">
                                         <?= esc($objective['title']) ?>
-                                        <span class="badge badge-success ml-2">Agreed</span>
+                                        <span class="badge badge-success ml-2">D'accord</span>
                                     </h6>
                                     <div class="btn-group">
                                         <button type="button" 
                                                 class="btn btn-sm btn-primary mr-2"
                                                 onclick="toggleObjectiveDetails(<?= $objective['idobjective'] ?>)">
-                                            <i class="fas fa-eye"></i> View
+                                            <i class="fas fa-eye"></i>
                                         </button>
                                         <button type="button" 
                                                 class="btn btn-sm btn-info"
                                                 data-toggle="modal" 
                                                 data-target="#signOffModal_<?= $objective['idobjective'] ?>">
-                                            <i class="fas fa-signature"></i> Sign
+                                            <i class="fas fa-signature"></i> Signe
                                         </button>
                                     </div>
                                 </div>
@@ -116,24 +116,24 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Sign Off Objective</h5>
+                                            <h5 class="modal-title">Objectif de la signature</h5>
                                             <button type="button" class="close" data-dismiss="modal">
                                                 <span>&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p><strong>Objective:</strong> <?= esc($objective['title']) ?></p>
+                                            <p><strong>Objectif:</strong> <?= esc($objective['title']) ?></p>
                                             <p>
                                                 <strong>Reconnaissance du collaborateur::</strong><br>
-                                                I acknowledge that I have reviewed and agreed to this objective.
+                                                Je reconnais avoir pris connaissance de cet objectif et l'avoir accepté.
                                             </p>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                             <form action="<?= base_url('espaceagent/evaluation/submit-sign-off') ?>" method="POST">
                                                 <input type="hidden" name="evaluation_id" value="<?= $current_evaluation['idevaluation'] ?>">
                                                 <input type="hidden" name="objective_id" value="<?= $objective['idobjective'] ?>">
-                                                <button type="submit" class="btn btn-primary">Sign Off</button>
+                                                <button type="submit" class="btn btn-primary">Signer</button>
                                             </form>
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@
                 </p>
                 
                 <?php if (isset($signOff) && $signOff['employee_signed']): ?>
-                    <p><strong>Signed by:</strong> <?= esc($signOff['employee_signature']) ?> on <?= date('d-m-Y H:i:s', strtotime($signOff['employee_signed_at'])) ?></p>
+                    <p><strong>Signé par:</strong> <?= esc($signOff['employee_signature']) ?> sur <?= date('d-m-Y H:i:s', strtotime($signOff['employee_signed_at'])) ?></p>
                 <?php else: ?>
                     <form action="<?= base_url('espaceagent/evaluation/submit-sign-off') ?>" method="POST">
                         <input type="hidden" name="evaluation_id" value="<?= $current_evaluation['idevaluation'] ?>">

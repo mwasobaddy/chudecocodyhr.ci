@@ -17,7 +17,7 @@
 DE L'HYGIENE PUBLIQUE ET DE LA COUVERTURE MALADIE UNIVERSELLE<br>
                     
                 </h3>
-                <a href="#"><img src="<?php echo base_url('/img/logo.png');?>"></a>
+                <a href="#"><img src="<?php echo base_url('/img/CHU-logo.png');?>"></a>
                 <h3>CENTRE HOSPITALIER ET<br>
                     UNIVERSITAIRE DE COCODY
                 </h3>

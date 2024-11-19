@@ -143,7 +143,7 @@ class EvaluationController extends Controller {
             ->select('evaluations.*, agent.nom as employee_name')
             ->join('agent', 'agent.idagent = evaluations.employee_id')
             ->where('line_manager_n1_id', $manager_id)
-            ->where('status', 'Started')
+            ->where('status', 'Commencé')
             ->get()
             ->getResultArray();
     }
@@ -153,7 +153,7 @@ class EvaluationController extends Controller {
             ->select('evaluations.*, agent.nom as employee_name')
             ->join('agent', 'agent.idagent = evaluations.employee_id')
             ->where('line_manager_n1_id', $manager_id)
-            ->where('status', 'Completed')
+            ->where('status', 'Terminé')
             ->get()
             ->getResultArray();
     }
@@ -191,7 +191,7 @@ class EvaluationController extends Controller {
             'employee_id' => $employee_id,
             'line_manager_n1_id' => $agent['Responsablen1'],
             'line_manager_n2_id' => $agent['Responsablen2'],
-            'status' => 'Started',
+            'status' => 'Commencé',
             'started_at' => date('Y-m-d H:i:s')
         ];
 
@@ -374,7 +374,7 @@ class EvaluationController extends Controller {
             $this->db->table('evaluations')
                 ->where('idevaluation', $evaluation_id)
                 ->update([
-                    'status' => 'Completed',
+                    'status' => 'Terminé',
                     'completed_at' => date('Y-m-d H:i:s'),
                 ]);
         }
@@ -861,7 +861,7 @@ private function calculateEvaluationScore($evaluation_id)
             $this->db->table('evaluations')
                 ->where('idevaluation', $evaluation_id)
                 ->update([
-                    'status' => 'Completed',
+                    'status' => 'Terminé',
                     'completed_at' => date('Y-m-d H:i:s')
                 ]);
         }

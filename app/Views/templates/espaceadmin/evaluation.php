@@ -34,7 +34,7 @@
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 En attente</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= count(array_filter($evaluations, fn($e) => $e['status'] === 'Started')) ?>
+                                <?= count(array_filter($evaluations, fn($e) => $e['status'] === 'Commencé')) ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -54,7 +54,7 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Terminé</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= count(array_filter($evaluations, fn($e) => $e['status'] === 'Completed')) ?>
+                                <?= count(array_filter($evaluations, fn($e) => $e['status'] === 'Terminé')) ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -110,8 +110,8 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <span class="badge badge-<?= $eval['status'] === 'Completed' ? 'success' : 
-                                        ($eval['status'] === 'Started' ? 'warning' : 'info') ?>">
+                                    <span class="badge badge-<?= $eval['status'] === 'Terminé' ? 'success' : 
+                                        ($eval['status'] === 'Commencé' ? 'warning' : 'info') ?>">
                                         <?= esc($eval['status']) ?>
                                     </span>
                                 </td>
@@ -121,7 +121,7 @@
                                     <button class="btn btn-success btn-sm" 
                                             data-toggle="modal" 
                                             data-target="#viewDetailsModal_<?= $eval['idevaluation'] ?>">
-                                        <i class="fas fa-eye"></i> View
+                                        <i class="fas fa-eye"></i>
                                     </button>
                                 </td>
                             </tr>

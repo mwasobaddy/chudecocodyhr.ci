@@ -1,7 +1,7 @@
 <!-- app/Views/templates/espacerespo/objective_evaluation.php -->
 
 <div class="container-fluid">
-    <h1 class="h3 mb-4 text-primary">Objectives Evaluation</h1>
+    <h1 class="h3 mb-4 text-primary">Évaluation des objectifs</h1>
 
     <?php if (session()->getFlashdata('success')): ?>
         <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
@@ -21,7 +21,7 @@
                 ?>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h5>Objective: <?= esc($objective['title'] ?? 'Untitled') ?></h5>
+                        <h5>Objectif: <?= esc($objective['title'] ?? 'Untitled') ?></h5>
                     </div>
                     <div class="card-body">
                         <!-- Core Details -->
@@ -31,46 +31,46 @@
 
                         <!-- Goals and Actions -->
                         <?php if (!empty($objective['specific_goals'])): ?>
-                            <p><strong>Specific Goals:</strong> <?= esc($objective['specific_goals']) ?></p>
+                            <p><strong>Objectifs spécifiques:</strong> <?= esc($objective['specific_goals']) ?></p>
                         <?php endif; ?>
 
                         <?php if (!empty($objective['key_actions'])): ?>
-                            <p><strong>Key Actions:</strong> <?= esc($objective['key_actions']) ?></p>
+                            <p><strong>Actions clés:</strong> <?= esc($objective['key_actions']) ?></p>
                         <?php endif; ?>
 
                         <!-- Resources and Timeline -->
                         <?php if (!empty($objective['resources_required'])): ?>
-                            <p><strong>Resources Required:</strong> <?= esc($objective['resources_required']) ?></p>
+                            <p><strong>Ressources nécessaires:</strong> <?= esc($objective['resources_required']) ?></p>
                         <?php endif; ?>
 
                         <?php if (!empty($objective['timeline'])): ?>
-                            <p><strong>Timeline:</strong> <?= esc($objective['timeline']) ?></p>
+                            <p><strong>Chronologie:</strong> <?= esc($objective['timeline']) ?></p>
                         <?php endif; ?>
 
                         <!-- Success Metrics and Challenges -->
                         <?php if (!empty($objective['success_metrics'])): ?>
-                            <p><strong>Success Metrics:</strong> <?= esc($objective['success_metrics']) ?></p>
+                            <p><strong>Mesures de réussite:</strong> <?= esc($objective['success_metrics']) ?></p>
                         <?php endif; ?>
 
                         <?php if (!empty($objective['potential_challenges'])): ?>
-                            <p><strong>Potential Challenges:</strong> <?= esc($objective['potential_challenges']) ?></p>
+                            <p><strong>Défis potentiels:</strong> <?= esc($objective['potential_challenges']) ?></p>
                         <?php endif; ?>
 
                         <!-- Support and Agreement -->
                         <?php if (!empty($objective['support_needed'])): ?>
-                            <p><strong>Support Needed:</strong> <?= esc($objective['support_needed']) ?></p>
+                            <p><strong>Soutien nécessaire:</strong> <?= esc($objective['support_needed']) ?></p>
                         <?php endif; ?>
 
                         <?php if (!empty($objective['weight'])): ?>
-                            <p><strong>Weight:</strong> <?= esc($objective['weight']) ?>%</p>
+                            <p><strong>Poids:</strong> <?= esc($objective['weight']) ?>%</p>
                         <?php endif; ?>
 
                         <?php if (!empty($objective['agreement'])): ?>
-                            <p><strong>Agreement:</strong> <?= esc($objective['agreement']) ?></p>
+                            <p><strong>Accord:</strong> <?= esc($objective['agreement']) ?></p>
                         <?php endif; ?>
 
                         <?php if (!empty($objective['employee_comments'])): ?>
-                            <p><strong>Employee Comments:</strong> <?= esc($objective['employee_comments']) ?></p>
+                            <p><strong>Commentaires des employés:</strong> <?= esc($objective['employee_comments']) ?></p>
                         <?php endif; ?>
 
                         <!-- Self Appraisal Section -->
@@ -89,7 +89,7 @@
 
                         <?php if ($selfAppraisal && isset($selfAppraisal['self_score'])): ?>
                             <div class="border p-3 mt-3">
-                                <h5>Employee Self-Appraisal</h5>
+                                <h5>L'auto-évaluation des employés</h5>
                                 <p>
                                     <strong>Self Rating:</strong> 
                                     <?= esc($selfAppraisal['self_score']) ?>/5
@@ -102,18 +102,18 @@
                                 <?php endif; ?>
                             </div>
                         <?php else: ?>
-                            <p class="text-muted">No self-appraisal submitted yet.</p>
+                            <p class="text-muted">Aucune auto-évaluation n'a encore été soumise.</p>
                         <?php endif; ?>
 
                         <!-- Manager Evaluation -->
                         <div class="form-group mt-4">
-                            <label><strong>Manager Score (≤ <?= $objective['weight'] ?? 0 ?>%):</strong></label>
+                            <label><strong>Score du gestionnaire (≤ <?= $objective['weight'] ?? 0 ?>%):</strong></label>
                             <input type="number" name="manager_scores[]" class="form-control"
                                    max="<?= $objective['weight'] ?? 100 ?>" min="0" required
                                    value="<?= $objectiveEvaluation ? esc($objectiveEvaluation['manager_score']) : '' ?>">
                         </div>
                         <div class="form-group">
-                            <label><strong>Line Manager Comments:</strong></label>
+                            <label><strong>Commentaires du responsable hiérarchique:</strong></label>
                             <textarea name="comments[]" class="form-control" rows="3"
                                     ><?= $objectiveEvaluation ? esc($objectiveEvaluation['comments']) : '' ?></textarea>
                         </div>
@@ -122,13 +122,13 @@
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <div class="alert alert-info">No objectives found for evaluation.</div>
+            <div class="alert alert-info">Aucun objectif n'a été trouvé pour l'évaluation.</div>
         <?php endif; ?>
 
         <!-- Action Buttons -->
         <div class="mb-4">
-            <button type="submit" name="action" value="Save" class="btn btn-secondary">Save Draft</button>
-            <button type="submit" name="action" value="Save and Share" class="btn btn-primary">Save and Share</button>
+            <button type="submit" name="action" value="Save" class="btn btn-secondary">Sauvegarder le projet</button>
+            <button type="submit" name="action" value="Save and Share" class="btn btn-primary">Sauvegarder et partager</button>
         </div>
     </form>
 </div>
