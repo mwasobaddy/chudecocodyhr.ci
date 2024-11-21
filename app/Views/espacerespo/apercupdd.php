@@ -120,7 +120,8 @@ $permissiondd = $query->getResultArray();
                                                                     ' . anchor('espacerespo/rejetpdd/' . $info['IDpermission'], '<span class="btn btn-warning mb-2"><i class="m-0 fas fa-times" title="Rejeter"></i></span>');
                                                               }
                                                               else{
-                                                                echo'Vous ne pouvez pas valider';
+                                                                echo anchor('espacerespo/validerpdd/' . $info['IDpermission'], '<span class="btn btn-success mb-2"><i class="m-0 fas fa-check-double" title="Valider"></i></span>') . '
+                                                                    ' . anchor('espacerespo/rejetpdd/' . $info['IDpermission'], '<span class="btn btn-warning mb-2"><i class="m-0 fas fa-times" title="Rejeter"></i></span>');
                                                               }
                                                             }
                                                         }

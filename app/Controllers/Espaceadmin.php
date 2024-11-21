@@ -3929,7 +3929,7 @@ class Espaceadmin extends Controller
 			$updateData['etat'] = $etatText;
 		}
 
-		if ($myid == $agentRow->Sousdrh || $myid == $_SESSION['sdrh2']) {
+		if ($myid == $agentRow->Sousdrh || $myid == $_SESSION['sdrh2'] || $myid == '1959' || $myid == '1954') {
 			$updateData = [
 				'validationcs' => '1',
 				'validationagent' => '1',
